@@ -1,0 +1,39 @@
+.welcome-text-heading{
+  font-weight: 400;
+}
+
+.welcome-text-subheading{
+  font-weight: 300;
+}
+
+.page-link{
+  color:#212121 !important;
+}
+
+.page-item.active .page-link:active{
+  color:white !important;
+}
+
+.page-link:focus{
+  color:white !important;
+}
+
+.page-link:hover{
+  color:white !important;
+}
+
+body.v-light .paging_simple_numbers .pagination .paginate_button.active a,
+body.v-light .paging_simple_numbers .pagination .paginate_button:hover a {
+  color:  white !important;
+  background: #212121 !important;
+  border: #212121 !important;
+}
+
+.copyright p a{
+  color: black !important;
+}
+
+.c-flex-wrap{
+  display: flex !important;
+  flex:wrap !important;
+}

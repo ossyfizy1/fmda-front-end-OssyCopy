@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>FMDA</title>
+  <!-- Favicon icon -->
+  <link rel="icon" type="image/png" sizes="16x16" href="../../img/fmdalogo.png">
+  <link href="../../new_assets/css/style.css" rel="stylesheet">
+  <link href="../../new_assets/plugins/tables/css/datatable/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <link href="../../new_assets/css/mycss.css" rel="stylesheet">
+  <script src="../../new_assets/js/modernizr-3.6.0.min.js"></script>
+</head>
+
+<body class="v-light vertical-nav fix-header fix-sidebar">
+  <div id="preloader">
+    <div class="loader">
+      <svg class="circular" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" /></svg>
+    </div>
+  </div>
+  <div id="main-wrapper">
+    <!-- header -->
+    <%- include('../includes/sub-sections/dashboard-header.ejs')%>
+    <!-- #/ header -->
+
+    <!-- sidebar -->
+    <%- include('../includes/sub-sections/dashboard-sidebar.ejs', {})%>
+    <!-- #/ sidebar -->
+    <!-- content body -->
+    <div class="content-body">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="" id="horz-layout-colored-controls">Update Event</h2>
+                    </div>
+                    <div class="card-content collpase show">
+                        <div class="card-body">
+                            <form id="userForm2" style="height: 500px; overflow-y: scroll;">
+                                
+                                <h4 class="form-section" align="center" style="margin-top: 60px;"> Current Event Details </h4>
+                                <hr>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row col-md-9 mx-5">
+                                            <label for="treasurerEmail"> Fee Type </label>
+                                            <select id="feeTypeSelectionID" name="feeTypeSelection" class="form-control">
+                                                <option value='' >Select Option</option>
+                                                <option value='free' >Free </option>
+                                                <option value='flatFee' >Flat fee </option>
+                                                <option value='custom' >Custom </option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                    <!-- jquery & ajax link -->
+                                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js "></script>
+
+                                    <!-- hide customFeeTypeSelection -->
+                                    <script>
+                                        $(document).ready(function(){
+                                            // hide
+                                            $("#customFeeTypeSelectionType").hide();
+                                            $("#paidEventSection").hide();
+                                            // $("#paidEventSectionTypes").hide();
+                                            $("#paidEventSectionTypes1").hide();
+                                            $("#paidEventSectionTypes2").hide();
+                                            $("#paidEventSectionTypes3").hide();
+                                            $("#paidEventSectionTypes4").hide();
+                                            $("#flatfee").hide();
+                                            $("#flatfeeType").hide();
+                                            $("#discountType").hide();
+                                            $("#discountTypeOption").hide();
+                                            $("#discountTypeSelection").hide();
+                                            $("#discountPercentage").hide();
+                                            // $("#discountPercentageSelection").hide();
+                                            $("#discountPercentageSelection1").hide();
+                                            $("#discountPercentageSelection2").hide();
+                                            $("#discountPercentageSelection3").hide();
+                                            $("#discountPercentageSelection4").hide();
+                                            $("#maxParticipantField").hide();
+                                            $("#pointSelection").hide();
+                                            $("#pointSelectionHeader").hide();
+                                            // $("#pointSelectionField").hide();
+                                            $("#pointSelectionField1").hide();
+                                            $("#pointSelectionField2").hide();
+                                            $("#pointSelectionField3").hide();
+                                            $("#pointSelectionField4").hide();
+                                            
+
+                                            // on select feeTypeSelectionID
+                                            $("#feeTypeSelectionID").change(function(){
+                                                // console.log("selection was made");
+                                                var selectedOption = $("#feeTypeSelectionID").val();
+                                                // alert(selectedOption + " Event");
+
+                                                // show
+                                                if (selectedOption == "free") {
+                                                    // alert(selectedOption + " Event");
+                                                    $("#customFeeTypeSelectionType").hide();
+                                                    $("#paidEventSection").hide();
+                                                    $("#paidEventSectionTypes").hide();
+                                                    $("#flatfee").hide();
+                                                    $("#flatfeeType").hide();
+                                                    $("#discountType").hide();
+                                                    $("#discountTypeOption").hide();
+                                                    $("#discountTypeSelection").hide();
+                                                    $("#discountPercentage").hide();
+                                                    $("#discountPercentageSelection").hide();
+                                                } else if (selectedOption == "custom"){
+                                                    // alert(selectedOption + " Event");
+                                                    $("#customFeeTypeSelectionType").show();
+                                                    $("#paidEventSection").hide();
+                                                    $("#paidEventSectionTypes").hide();
+                                                    $("#flatfee").hide();
+                                                    $("#flatfeeType").hide();
+                                                    $("#discountType").show();
+                                                    $("#discountTypeOption").show();
+                                                    $("#discountTypeSelection").hide();
+                                                    $("#discountPercentage").hide();
+                                                    $("#discountPercentageSelection").hide();
+                                                } else  if (selectedOption == "flatFee"){
+                                                    // alert(selectedOption + " Event");
+                                                    $("#customFeeTypeSelectionType").hide();
+                                                    $("#paidEventSection").hide();
+                                                    $("#paidEventSectionTypes").hide();
+                                                    $("#flatfee").show();
+                                                    $("#flatfeeType").show();
+                                                    $("#discountType").hide();
+                                                    $("#discountTypeOption").hide();
+                                                    $("#discountTypeSelection").hide();
+                                                    $("#discountPercentage").hide();
+                                                    $("#discountPercentageSelection").hide();
+                                                }
+
+
+                                            });
+
+
+
+
+                                            // on select discountTypeSelectionOption
+                                            $("#discountTypeSelectionOption").change(function(){
+                                                var discountSelectionOption = $("#discountTypeSelectionOption").val();
+                                                if (discountSelectionOption == "true") {
+                                                    $("#discountTypeSelection").show();
+                                                } else if (discountSelectionOption == "false"){
+                                                    $("#discountTypeSelection").hide();
+                                                }
+
+                                            });
+                                            
+
+
+
+
+                                            // on select maxParticipant
+                                            $("#hasMaxPaticipants").change(function(){
+                                                var hasMaxPaticipants = $("#hasMaxPaticipants").val();
+                                                // alert(selectedOption + " Event");
+                                                if (hasMaxPaticipants == "true") {
+                                                    // alert(hasMaxPaticipants);
+                                                    $("#maxParticipantField").show();
+                                                } else if (hasMaxPaticipants == "false"){
+                                                    // alert(hasMaxPaticipants);
+                                                    $("#maxParticipantField").hide();
+                                                    $("#maxParticipantField").hide();
+                                                }
+
+                                            });
+
+
+
+
+
+                                            // on select points
+                                            $("#hasPoints").change(function(){
+                                                var hasPoints = $("#hasPoints").val();
+                                                    // alert(hasPoints + " Event");
+                                                if (hasPoints == "true") {
+                                                    // alert(hasPoints);
+                                                    $("#pointSelection").show();
+                                                    $("#pointSelectionHeader").hide();
+                                                    $("#pointSelectionField").hide();
+                                                } else if (hasPoints == "false"){
+                                                    // alert(hasPoints);
+                                                    $("#pointSelection").hide();
+                                                    $("#pointSelectionHeader").hide();
+                                                    $("#pointSelectionField").hide();
+                                                }
+
+                                            });
+                                            
+
+
+
+
+                                        });
+                                    </script>
+                                    
+
+                                    <div class="col-md-6" id="customFeeTypeSelectionType">
+                                        <div class="form-group row col-md-9 mx-auto">
+                                            <label for="organisationName1">
+                                                Custom Fee:
+                                            </label>
+                                        </div>
+                                        <div class="form-group row col-md-9 mx-auto">
+                                            <label for="organisationName1">
+                                                    <input type="checkbox" name="associate" value="associate" id="associateCustomCheckBox" onclick="associateCustomCB()">Associate
+                                            </label>
+                                        </div>
+                                        <div class="form-group row col-md-9 mx-auto">
+                                            <label for="organisationName1">
+                                                    <input type="checkbox" name="corporate" value="corporate" id="corporateCustomCheckBox" onclick="corporateCustomCB()">Corporate
+                                            </label>
+                                        </div>
+                                        <div class="form-group row col-md-9 mx-auto">
+                                            <label for="organisationName1">
+                                                    <input type="checkbox" name="fellow" value="fellow" id="fellowCustomCheckBox" onclick="fellowCustomCB()">Fellow
+                                            </label>
+                                        </div>
+                                        <div class="form-group row col-md-9 mx-auto">
+                                            <label for="organisationName1">
+                                                    <input type="checkbox" name="member" value="member" id="memberCustomCheckBox" onclick="memberCustomCB()">Member
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                        <script>
+
+                            // associateCustomCB fee type
+                            function associateCustomCB() {
+                                // Get the checkbox
+                                var associateCustomCheckBoxValue = $("#associateCustomCheckBox").val();
+                                var associateCustomCheckBox = document.getElementById("associateCustomCheckBox");
+                                console.log(associateCustomCheckBoxValue);
+                                if (associateCustomCheckBox.checked == true){
+                                    // alert("show associate");
+                                    // $("#paidEventSection").show();
+                                    $("#paidEventSectionTypes").show();
+                                    $("#paidEventSectionTypes").children("#paidEventSectionTypes1").show();
+
+
+                                } else if(!associateCustomCheckBox.checked){
+                                    // alert("hide associate");
+                                    $("#paidEventSectionTypes").children("#paidEventSectionTypes1").hide();
+                                }
+                            } 
+                            
+                            
+
+
+                            // corporateCustomCB fee type
+                            function corporateCustomCB() {
+                                // Get the checkbox
+                                var corporateCustomCheckBoxValue = $("#corporateCustomCheckBox").val();
+                                var corporateCustomCheckBox = document.getElementById("corporateCustomCheckBox");
+                                console.log(corporateCustomCheckBoxValue);
+                                if (corporateCustomCheckBox.checked == true){
+                                    // alert("show Corporate");
+                                    // $("#paidEventSection").show();
+                                    $("#paidEventSectionTypes").show();
+                                    $("#paidEventSectionTypes").children("#paidEventSectionTypes2").show();
+                                } else if(!corporateCustomCheckBox.checked){
+                                    // alert("hide Corporate");
+                                    $("#paidEventSectionTypes").children("#paidEventSectionTypes2").hide();
+                                }
+                            } 
+
+
+
+
+                            // fellowCustomCB fee type
+                            function fellowCustomCB() {
+                                // Get the checkbox
+                                var fellowCustomCheckBoxValue = $("#fellowCustomCheckBox").val();
+                                var fellowCustomCheckBox = document.getElementById("fellowCustomCheckBox");
+                                console.log(fellowCustomCheckBoxValue);
+                                if (fellowCustomCheckBox.checked == true){
+                                    // alert("show fellow");
+                                    // $("#paidEventSection").show();
+                                    $("#paidEventSectionTypes").show();
+                                    $("#paidEventSectionTypes").children("#paidEventSectionTypes3").show();
+                                } else if(!fellowCustomCheckBox.checked){
+                                    // alert("hide fellow");
+                                    $("#paidEventSectionTypes").children("#paidEventSectionTypes3").hide();
+                                }
+                            } 
+
+
+
+
+
+
+                            // memberCustomCB fee type
+                            function memberCustomCB() {
+                                // Get the checkbox
+                                var memberCustomCheckBoxValue = $("#memberCustomCheckBox").val();
+                                var memberCustomBox = document.getElementById("memberCustomCheckBox");
+                                console.log(memberCustomCheckBoxValue);
+                                if (memberCustomCheckBox.checked == true){
+                                    // alert("show Member");
+                                    // $("#paidEventSection").show();
+                                    $("#paidEventSectionTypes").show();
+                                    $("#paidEventSectionTypes").children("#paidEventSectionTypes4").show();
+                                } else if(!memberCustomCheckBox.checked){
+                                    // alert("hide Member");
+                                    $("#paidEventSectionTypes").children("#paidEventSectionTypes4").hide();
+                                }
+                            } 
+
+
+
+
+
+                            // discountAssociateCustom
+                            function discountAssociateCustomCB() {
+                                // Get the checkbox
+                                var discountAssociateCustomCheckBoxValue = $("#discountAssociateCustomCheckBox").val();
+                                var discountAssociateCustomCheckBox = document.getElementById("discountAssociateCustomCheckBox");
+                                console.log(discountAssociateCustomCheckBoxValue);
+                                if (discountAssociateCustomCheckBox.checked == true){
+                                    // alert("show associateDiscount");
+                                    $("#discountPercentageSelection").show();
+                                    $("#discountPercentageSelection").children("#discountPercentageSelection1").show();
+                                } else if(!discountAssociateCustomCheckBox.checked){
+                                    // alert("hide associateDiscount");
+                                    $("#discountPercentageSelection").children("#discountPercentageSelection1").hide();
+                                }
+                            } 
+
+
+
+                            // discountCorporateCustomCB
+                            function discountCorporateCustomCB() {
+                                // Get the checkbox
+                                var discountCorporateCustomCheckBoxValue = $("#discountCorporateCustomCheckBox").val();
+                                var discountCorporateCustomCheckBox = document.getElementById("discountCorporateCustomCheckBox");
+                                console.log(discountCorporateCustomCheckBoxValue);
+                                if (discountCorporateCustomCheckBox.checked == true){
+                                    // alert("show corporateDiscount");
+                                    $("#discountPercentageSelection").show();
+                                    $("#discountPercentageSelection").children("#discountPercentageSelection2").show();
+                                } else if(!discountCorporateCustomCheckBox.checked){
+                                    // alert("hide corporateDiscount");
+                                    $("#discountPercentageSelection").children("#discountPercentageSelection2").hide();
+                                }
+                            }
+
+
+
+
+                            // discountFellowCustomCB
+                            function discountFellowCustomCB() {
+                                // Get the checkbox
+                                var discountFellowCustomCheckBoxValue = $("#discountFellowCustomCheckBox").val();
+                                var discountFellowCustomCheckBox = document.getElementById("discountFellowCustomCheckBox");
+                                console.log(discountFellowCustomCheckBoxValue);
+                                if (discountFellowCustomCheckBox.checked == true){
+                                    // alert("show fellowDiscount");
+                                    $("#discountPercentageSelection").show();
+                                    $("#discountPercentageSelection").children("#discountPercentageSelection3").show();
+                                } else if(!discountFellowCustomCheckBox.checked){
+                                    // alert("hide fellowDiscount");
+                                    $("#discountPercentageSelection").children("#discountPercentageSelection3").hide();
+                                }
+                            }
+
+
+
+
+
+                            // discountMemberCustomCB
+                            function discountMemberCustomCB() {
+                                // Get the checkbox
+                                var discountMemberCustomCheckBoxValue = $("#discountMemberCustomCheckBox").val();
+                                var discountMemberCustomCheckBox = document.getElementById("discountMemberCustomCheckBox");
+                                console.log(discountMemberCustomCheckBoxValue);
+                                if (discountMemberCustomCheckBox.checked == true){
+                                    // alert("show fellowDiscount");
+                                    $("#discountPercentageSelection").show();
+                                    $("#discountPercentageSelection").children("#discountPercentageSelection4").show();
+                                } else if(!discountMemberCustomCheckBox.checked){
+                                    // alert("hide fellowDiscount");
+                                    $("#discountPercentageSelection").children("#discountPercentageSelection4").hide();
+                                }
+                            }
+
+
+
+
+
+
+                            // pointsAssociateCustomCB
+                            function pointsAssociateCustomCB() {
+                                // Get the checkbox
+                                var pointsAssociateCustomCheckBoxValue = $("#pointsAssociateCustomCheckBox").val();
+                                var pointsAssociateCustomCheckBox = document.getElementById("pointsAssociateCustomCheckBox");
+                                console.log(pointsAssociateCustomCheckBoxValue);
+                                if (pointsAssociateCustomCheckBox.checked == true){
+                                    // alert("show fellowDiscount");
+                                    $("#pointSelectionField").show();
+                                    $("#pointSelectionField").children("#pointSelectionField1").show();
+                                } else if(!pointsAssociateCustomCheckBox.checked){
+                                    // alert("hide fellowDiscount");
+                                    $("#pointSelectionField").children("#pointSelectionField1").hide();
+                                }
+                            }
+
+
+                            // pointsCorporateCustomCB
+                            function pointsCorporateCustomCB() {
+                                // Get the checkbox
+                                var pointsCorporateCustomCheckBoxValue = $("#pointsCorporateCustomCheckBox").val();
+                                var pointsCorporateCustomCheckBox = document.getElementById("pointsCorporateCustomCheckBox");
+                                console.log(pointsCorporateCustomCheckBoxValue);
+                                if (pointsCorporateCustomCheckBox.checked == true){
+                                    // alert("show fellowDiscount");
+                                    $("#pointSelectionField").show();
+                                    $("#pointSelectionField").children("#pointSelectionField2").show();
+                                } else if(!pointsCorporateCustomCheckBox.checked){
+                                    // alert("hide fellowDiscount");
+                                    $("#pointSelectionField").children("#pointSelectionField2").hide();
+                                }
+                            }
+
+
+
+                            // pointsFellowCustomCB
+                            function pointsFellowCustomCB() {
+                                // Get the checkbox
+                                var pointsFellowCustomCheckBoxValue = $("#pointsFellowCustomCheckBox").val();
+                                var pointsFellowCustomCheckBox = document.getElementById("pointsFellowCustomCheckBox");
+                                console.log(pointsFellowCustomCheckBoxValue);
+                                if (pointsFellowCustomCheckBox.checked == true){
+                                    // alert("show fellowDiscount");
+                                    $("#pointSelectionField").show();
+                                    $("#pointSelectionField").children("#pointSelectionField3").show();
+                                } else if(!pointsFellowCustomCheckBox.checked){
+                                    // alert("hide fellowDiscount");
+                                    $("#pointSelectionField").children("#pointSelectionField3").hide();
+                                }
+                            }
+
+
+
+
+
+                            // pointsMemberCustomCB
+                            function pointsMemberCustomCB() {
+                                // Get the checkbox
+                                var pointsMemberCustomCheckBoxValue = $("#pointsMemberCustomCheckBox").val();
+                                var pointsMemberCustomCheckBox = document.getElementById("pointsMemberCustomCheckBox");
+                                console.log(pointsMemberCustomCheckBoxValue);
+                                if (pointsMemberCustomCheckBox.checked == true){
+                                    // alert("show fellowDiscount");
+                                    $("#pointSelectionField").show();
+                                    $("#pointSelectionField").children("#pointSelectionField4").show();
+                                } else if(!pointsMemberCustomCheckBox.checked){
+                                    // alert("hide fellowDiscount");
+                                    $("#pointSelectionField").children("#pointSelectionField4").hide();
+                                }
+                            }
+
+
+
+
+                        </script>
+
+
+
+                                <h4 id="paidEventSection" class="form-section" align="center" style="margin-top: 40px;"> Set Fee For Paid Event </h4>
+
+                                <div class="row" id="paidEventSectionTypes">
+                                    <div class="col-md-6" id="paidEventSectionTypes1">
+                                        <div class="form-group row col-md-9 mx-auto">
+                                            <label for="organisationName1">Associate</label>
+                                            <input id="amountForAssocaite" type="text" class="form-control" value="" name="Associate" placeholder="Enter Amount">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" id="paidEventSectionTypes2">
+                                        <div class="form-group row col-md-9 mx-auto">
+                                            <label for="organisationName1">Corporate</label>
+                                            <input id="amountForCorporate" type="text" class="form-control" value="" name="Corporate" placeholder="Enter Amount">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" id="paidEventSectionTypes3">
+                                        <div class="form-group row col-md-9 mx-auto">
+                                            <label for="organisationName1">Fellow</label>
+                                            <input id="amountForFellow" type="text" class="form-control" value="" name="Fellow" placeholder="Enter Amount">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" id="paidEventSectionTypes4">
+                                        <div class="form-group row col-md-9 mx-auto">
+                                            <label for="organisationName1">Member</label>
+                                            <input id="amountForMember" type="text" class="form-control" value="" name="Member" placeholder="Enter Amount">
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <h4 id="flatfee" class="form-section" align="center" style="margin-top: 40px;"> Flat Fee Event </h4>
+
+                                <div class="row" id="flatfeeType">
+                                    <div class="col-md-6">
+                                        <div class="form-group row col-md-9 mx-auto">
+                                            <label for="organisationName1">Flat Fee</label>
+                                            <input type="text" id="flatFeeAmount" class="form-control" value="" name="flatFee" placeholder="Enter Amount">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                
+
+                                <h4 id="discountType" class="form-section" align="center" style="margin-top: 40px;"> Discount </h4>
+
+                                <div class="row" id="discountTypeOption">
+                                    <div class="col-md-6">
+                                        <div class="form-group row col-md-9 mx-5">
+                                            <label for="treasurerEmail"> Discount Type </label>
+                                            <select id="discountTypeSelectionOption" name="hasDiscount" class="form-control">
+                                                <option value='' >Select Option</option>
+                                                <option value='true' >true </option>
+                                                <option value='false' >false </option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6" id="discountTypeSelection">
+                                        <div class="form-group row col-md-9 mx-auto">
+                                            <label for="organisationName1">
+                                                Attach Discount To:
+                                            </label>
+                                        </div>
+                                        <div class="form-group row col-md-9 mx-auto">
+                                            <label for="organisationName1">
+                                                    <input type="checkbox" id="discountAssociateCustomCheckBox" name="associateDiscount" value="associateDiscount" onclick="discountAssociateCustomCB()">Associate
+                                            </label>
+                                        </div>
+                                        <div class="form-group row col-md-9 mx-auto">
+                                            <label for="organisationName1">
+                                                    <input type="checkbox" id="discountCorporateCustomCheckBox" name="corporateDiscount" value="corporateDiscount" onclick="discountCorporateCustomCB()">Corporate
+                                            </label>
+                                        </div>
+                                        <div class="form-group row col-md-9 mx-auto">
+                                            <label for="organisationName1">
+                                                    <input type="checkbox" id="discountFellowCustomCheckBox" name="fellowDiscount" value="fellowDiscount" onclick="discountFellowCustomCB()">Fellow
+                                            </label>
+                                        </div>
+                                        <div class="form-group row col-md-9 mx-auto">
+                                            <label for="organisationName1">
+                                                    <input type="checkbox" id="discountMemberCustomCheckBox" name="memberDiscount" value="memberDiscount" onclick="discountMemberCustomCB()">Member
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <h4 id="discountPercentage" class="form-section" align="center" style="margin-top: 40px;"> Discount % </h4>
+
+                                <div class="row" id="discountPercentageSelection">
+                                    <div class="col-md-6" id="discountPercentageSelection1">
+                                        <div class="form-group row col-md-9 mx-auto">
+                                            <label for="organisationName1">Associate</label>
+                                            <input id="discountForAssociate" type="text" class="form-control" value="" name="associate" placeholder="Enter Discount %">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" id="discountPercentageSelection2">
+                                        <div class="form-group row col-md-9 mx-auto">
+                                            <label for="organisationName1">Corporate</label>
+                                            <input id="discountForCorporate" type="text" class="form-control" value="" name="corporate" placeholder="Enter Discount %">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" id="discountPercentageSelection3">
+                                        <div class="form-group row col-md-9 mx-auto">
+                                            <label for="organisationName1">Fellow</label>
+                                            <input id="discountForFellow" type="text" class="form-control" value="" name="fellow" placeholder="Enter Discount %">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" id="discountPercentageSelection4">
+                                        <div class="form-group row col-md-9 mx-auto">
+                                            <label for="organisationName1">Member</label>
+                                            <input id="discountForMember" type="text" class="form-control" value="" name="member" placeholder="Enter Discount %">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <h4 class="form-section" align="center" style="margin-top: 40px;"> Max Participant </h4>
+                                <hr>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row col-md-9 mx-auto">
+                                            <label>has Max Paticipants</label>
+                                            <select id="hasMaxPaticipants" name="hasMaxPaticipants" class="form-control">
+                                                <option value='' >Select Option</option>
+                                                <option value='true' >true </option>
+                                                <option value='false' >false </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" id="maxParticipantField">
+                                        <div class="form-group row col-md-9 mx-auto">
+                                            <label for="organisationName1">max Number Of Paticipants</label>
+                                            <input id="maxNumberOfPaticipants" type="text" class="form-control" value="" name="maxNumberOfPaticipants" placeholder="Enter Number of Participants">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <h4 class="form-section" align="center" style="margin-top: 40px;"> Attendee Confirmation </h4>
+                                <hr>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row col-md-9 mx-auto">
+                                            <label>Attendee Confirmation</label>
+                                            <select id="requiresAttendeeConfirmation" name="requiresAttendeeConfirmation" class="form-control">
+                                                <option value='' >Select Option</option>
+                                                <option value='true' >true </option>
+                                                <option value='false' >false </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <h4 class="form-section" align="center" style="margin-top: 40px;"> Points </h4>
+                                <hr>
+
+                                <div class="row" id="pointType">
+                                    <div class="col-md-6">
+                                        <div class="form-group row col-md-9 mx-auto">
+                                            <label>Point</label>
+                                            <select id="hasPoints" name="hasPoints" class="form-control">
+                                                <option value='' >Select Option</option>
+                                                <option value='true' >true </option>
+                                                <option value='false' >false </option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6" id="pointSelection">
+                                        <div class="form-group row col-md-9 mx-auto">
+                                            <label for="organisationName1">
+                                                Attach Points To:
+                                            </label>
+                                        </div>
+                                        <div class="form-group row col-md-9 mx-auto">
+                                            <label for="organisationName1">
+                                                    <input type="checkbox" id="pointsAssociateCustomCheckBox" name="associatePoints" value="associatePoints" onclick="pointsAssociateCustomCB()">Associate
+                                            </label>
+                                        </div>
+                                        <div class="form-group row col-md-9 mx-auto">
+                                            <label for="organisationName1">
+                                                    <input type="checkbox" id="pointsCorporateCustomCheckBox" name="corporatePoints" value="corporatePoints" onclick="pointsCorporateCustomCB()">Corporate
+                                            </label>
+                                        </div>
+                                        <div class="form-group row col-md-9 mx-auto">
+                                            <label for="organisationName1">
+                                                    <input type="checkbox" id="pointsFellowCustomCheckBox" name="fellowPoints" value="fellowPoints" onclick="pointsFellowCustomCB()">Fellow
+                                            </label>
+                                        </div>
+                                        <div class="form-group row col-md-9 mx-auto">
+                                            <label for="organisationName1">
+                                                    <input type="checkbox" id="pointsMemberCustomCheckBox"  name="memberPoints" value="memberPoints" onclick="pointsMemberCustomCB()">Member
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+
+                                <h4 id="pointSelectionHeader" class="form-section" align="center" style="margin-top: 40px;"> Points Obtainable </h4>
+
+                                <div class="row" id="pointSelectionField">
+                                    <div class="col-md-6" id="pointSelectionField1">
+                                        <div class="form-group row col-md-9 mx-auto">
+                                            <label for="organisationName1">Associate</label>
+                                            <input id="pointsForAssociate" type="text" class="form-control" value="" name="corporate" placeholder="Enter Points Obtainable">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" id="pointSelectionField2">
+                                        <div class="form-group row col-md-9 mx-auto">
+                                            <label for="organisationName1">Corporate</label>
+                                            <input id="pointsForCorporate" type="text" class="form-control" value="" name="associate" placeholder="Enter Points Obtainable">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" id="pointSelectionField3">
+                                        <div class="form-group row col-md-9 mx-auto">
+                                            <label for="organisationName1">Fellow</label>
+                                            <input id="pointsForFellow" type="text" class="form-control" value="" name="fellow" placeholder="Enter Points Obtainable">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" id="pointSelectionField4">
+                                        <div class="form-group row col-md-9 mx-auto">
+                                            <label for="organisationName1">member</label>
+                                            <input id="pointsForMember" type="text" class="form-control" value="" name="headOfficeAddress" placeholder="Enter Points Obtainable">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                
+
+                                <!-- Submit button  -->
+                                <div class="row" style="margin-top: 100px;">
+                                    <div class="col-md-12">
+                                        <div class="form-group row col-md-9 mx-5">
+                                            <button id="response2" type="submit" class="btn btn-primary">
+                                                Update Event
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
+                            <!-- Form end  -->
+
+
+                            <!-- ajax link -->
+                            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+                            <script>
+                                $(document).ready(function(){
+
+                                    $('#userForm2').submit(function(){
+                                        
+                                        // var title = $("#title").val();
+                                        // var images = $("#images").val();
+                                        // var startDate = $("#startDate").val();
+                                        // var endDate = $("#endDate").val();
+                                        // var eventTime = $("#eventTime").val();
+                                        // var venue = $("#venue").val();
+                                        // var participantCategory = $("#participantCategory").val();
+                                        // var description = $("#description").val();
+
+                                        // console.log(title, images, startDate, endDate, eventTime, venue, participantCategory, description);
+
+                                        
+                                        var feeTypeSelectionID = $("#feeTypeSelectionID").val();
+
+                                        if (feeTypeSelectionID == "free") {
+                                            
+                                            var event_type = "Free";
+                                            var isFree = true;
+                                            // console.log(feeTypeSelectionID);
+
+                                        } 
+                                        else 
+                                        {
+                                            var event_type = "Paid";
+                                            
+                                            if (feeTypeSelectionID == "flatFee") {
+                                                
+                                                var isFree = false;
+                                                var flatFee = $("#flatFeeAmount").val();
+
+                                                // console.log(feeTypeSelectionID);
+                                                // console.log(flatFee);
+
+                                            } 
+                                            else if(feeTypeSelectionID == "custom"){
+                                                
+                                                var isFree = false;
+                                                // console.log(feeTypeSelectionID);
+
+                                                // get custom fees for all categories
+                                                var custom_amount_categories = [
+                                                                                    {
+                                                                                        "name": "corporate",
+                                                                                        "amount": parseInt($("#amountForCorporate").val())
+                                                                                    },
+                                                                                    {
+                                                                                        "name": "fellow",
+                                                                                        "amount": parseInt($("#amountForFellow").val())
+                                                                                    },
+                                                                                    {
+                                                                                        "name": "associate",
+                                                                                        "amount": parseInt($("#amountForAssocaite").val())
+                                                                                    },
+                                                                                    {
+                                                                                        "name" : "member",
+                                                                                        "amount" : parseInt($("#amountForMember").val())
+                                                                                    }
+                                                                                ];
+                                                // console.log(custom_amount_categories);
+
+
+
+                                                // discountTypeSelectionOption
+                                                var discountTypeSelectionOption = $("#discountTypeSelectionOption").val();
+                                                // console.log(discountTypeSelectionOption);
+
+                                                if (discountTypeSelectionOption == "true") {
+                                                    // console.log("discount: ", discountTypeSelectionOption);
+
+                                                    // get values for discounts amount for various categories
+                                                    var discounts_amount_categories = [
+                                                                                        {
+                                                                                            "discountName": "corporate",
+                                                                                            "percentage": parseInt($("#discountForCorporate").val())
+                                                                                        },
+                                                                                        {
+                                                                                            "discountName": "associate",
+                                                                                            "percentage": parseInt($("#discountForAssociate").val())
+                                                                                        },
+                                                                                        {
+                                                                                            "discountName": "fellow",
+                                                                                            "percentage": parseInt($("#discountForFellow").val())
+                                                                                        },
+                                                                                        {
+                                                                                            "discountName": "member",
+                                                                                            "percentage": parseInt($("#discountForMember").val())
+                                                                                        }
+                                                                                    ];
+                                                    // console.log(discounts_amount_categories);
+
+                                                }
+
+
+
+                                            }
+
+                                        };
+
+                                        
+                                        // hasMaxPaticipants
+                                        var hasMaxPaticipants = $("#hasMaxPaticipants").val();
+
+                                        if (hasMaxPaticipants == "true") {
+                                            // console.log("hasMaxPaticipants: ", hasMaxPaticipants);
+
+                                            // get the value amount
+                                            var maxNumberOfPaticipants = $("#maxNumberOfPaticipants").val();
+                                            // console.log("maxNumberOfPaticipants: ", maxNumberOfPaticipants);
+
+                                        };
+
+
+                                        // requiresAttendeeConfirmation
+                                        var requiresAttendeeConfirmation = $("#requiresAttendeeConfirmation").val();
+                                        // console.log("requiresAttendeeConfirmation: ", requiresAttendeeConfirmation);
+
+
+                                        // hasPoints
+                                        var hasPoints = $("#hasPoints").val();
+
+                                        if (hasPoints == "true") {
+                                            // console.log("hasPoints: ", hasPoints);
+
+                                            var obtainablePoints = [
+                                                                    {
+                                                                        "pointName": "corporate",
+                                                                        "pointValue": parseInt($("#pointsForCorporate").val())
+                                                                    },
+                                                                    {
+                                                                        "pointName": "associate",
+                                                                        "pointValue": parseInt($("#pointsForAssociate").val())
+                                                                    },
+                                                                    {
+                                                                        "pointName": "fellow",
+                                                                        "pointValue": parseInt($("#pointsForFellow").val())
+                                                                    },
+                                                                    {
+                                                                        "pointName": "member",
+                                                                        "pointValue": parseInt($("#pointsForMember").val())
+                                                                    }
+                                                                ];
+                                                                
+                                            // console.log(obtainablePoints);
+
+
+                                        };
+
+
+
+                                        
+                                        // prepare the data
+                                        var our_variables = {
+                                                                // "title" : title,
+                                                                // "images" : images,
+                                                                // "startDate" : startDate,
+                                                                // "endDate" : endDate,
+                                                                // "eventTime" : eventTime,
+                                                                // "venue" : venue,
+                                                                "type": event_type,
+                                                                // "description": description,
+                                                                // "participantCategory": participantCategory,
+                                                                "isFree": isFree,
+                                                                "feeType": feeTypeSelectionID,
+                                                                "customFee": JSON.stringify(custom_amount_categories),
+                                                                "flatFee": flatFee,
+                                                                "hasDiscount": discountTypeSelectionOption,
+                                                                "hasMaxPaticipants": hasMaxPaticipants,
+                                                                "maxNumberOfPaticipants": maxNumberOfPaticipants,
+                                                                "requiresAttendeeConfirmation": requiresAttendeeConfirmation,
+                                                                "hasPoints": hasPoints,
+                                                                "obtainablePoints": JSON.stringify(obtainablePoints),
+                                                                "discounts": JSON.stringify(discounts_amount_categories)
+                                                            };
+
+                                        
+
+                                        console.log(our_variables);
+
+                                    
+                                        // do an ajax call to pass the values & also the form will submit to pass the pictures
+                                        $.ajax({
+                                            type: 'POST',
+                                            url: '/admin/events/detailsUpdate', 
+                                            data: our_variables  // This will send the form data to the php page
+                                        })
+                                        .done(function(data){
+                                                
+                                            // show the response
+                                            $('#response2').html(data);
+                                            console.log(data);
+                                                
+                                        })
+                                        .fail(function() {
+                                            
+                                            // just in case posting your form failed
+                                            alert( "Posting failed." );
+                                                
+                                        });
+                                    
+                                        // to prevent refreshing the whole page page
+                                        return false;
+
+
+                                    });
+
+                                })
+                            </script>
+
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+      
+    </div>
+    <!-- #/ content body -->
+    <!-- footer -->
+    <%- include('../includes/sub-sections/dashboard-footer.ejs', {})%>   
+    <!-- #/ footer -->
+  </div>
+  <!-- Common JS -->
+  <script src="../../new_assets/plugins/common/common.min.js"></script>
+  <script src="../../new_assets/plugins/tables/js/jquery.dataTables.min.js"></script>
+  <script src="../../new_assets/plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
+  <script src="../../new_assets/plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
+  <!-- Custom script -->
+  <script src="../../new_assets/js/custom.min.js"></script>
+  <!-- Custom dashboard script -->
+  <script src="../../new_assets/js/dashboard-1.js"></script>
+</body>
+
+</html>

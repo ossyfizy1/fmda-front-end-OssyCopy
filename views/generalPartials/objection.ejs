@@ -1,0 +1,71 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-content collpase show">
+                <div class="card-body">
+                    <div class="card-text">
+                        <p> Make Your Objections </p>
+                        <hr>
+                    </div>
+
+
+                    <!-- Form -->
+                    <form id="userForm2" >
+                        <div class="form-body">
+                            <textarea name="objection" rows="4" cols="100" placeholder="write up here"></textarea> 
+                        </div>
+
+                        <button style="margin-top: 10px;" id="response2" class="btn btn-primary" name="submit" type="submit">Submit</button>
+                    </form>
+
+                    
+
+
+                    <!-- ajax link -->
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+                    <script>
+                        $(document).ready(function(){
+
+                            $('#userForm2').submit(function(){
+                                
+                                // show that something is loading
+                                $('#response2').html("<b>processing please wait...</b>");
+                                // $('#response2').html("<b><img src='../assets/img/preloader3.gif' width='20px' /></b>");
+                                    
+                                /*
+                                    * 'post_receiver.php' - where you will pass the form data
+                                    * $(this).serialize() - to easily read form data
+                                    * function(data){... - data contains the response from post_receiver.php
+                                    */
+                                $.ajax({
+                                    type: 'POST',
+                                    url: '/general_objection_post', 
+                                    data: $(this).serialize()  // This will send the form data to the php page
+                                })
+                                .done(function(data){
+                                        
+                                    // show the response
+                                    $('#response2').html(data);
+                                    $("#buttonResponse").hide();
+                                        
+                                })
+                                .fail(function() {
+                                    
+                                    // just in case posting your form failed
+                                    alert( "Posting failed." );
+                                        
+                                });
+                            
+                                // to prevent refreshing the whole page page
+                                return false;
+                            
+                            });
+                        });
+                    </script>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

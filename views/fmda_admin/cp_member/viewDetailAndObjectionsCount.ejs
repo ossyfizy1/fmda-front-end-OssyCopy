@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>FMDA</title>
+  <!-- Favicon icon -->
+  <link rel="icon" type="image/png" sizes="16x16" href="../../img/fmdalogo.png">
+  <link href="../../new_assets/css/style.css" rel="stylesheet">
+  <link href="../../new_assets/plugins/tables/css/datatable/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <link href="../../new_assets/css/mycss.css" rel="stylesheet">
+  <script src="../../new_assets/js/modernizr-3.6.0.min.js"></script>
+</head>
+
+<body class="v-light vertical-nav fix-header fix-sidebar">
+  <div id="preloader">
+    <div class="loader">
+      <svg class="circular" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" /></svg>
+    </div>
+  </div>
+  <div id="main-wrapper">
+    <!-- header -->
+    <%- include('../includes/sub-sections/dashboard-header.ejs')%>
+    <!-- #/ header -->
+
+    <!-- sidebar -->
+    <%- include('../includes/sub-sections/dashboard-sidebar.ejs', {})%>
+    <!-- #/ sidebar -->
+    <!-- content body -->
+    <div class="content-body">
+
+        <section id="material-datatables">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card mb-0">
+                        <div class="card-header">
+                            <h4 class="card-title">Corporate Member Objection Details %></h4>
+                        </div>
+                        <div class="card-content collapse show">
+                            <div class="card-body">
+
+                                <!-- Table Content: Start -->
+                                <table class="table table-hover table-striped white">
+
+                                    <!-- Table Head  -->
+                                    <thead>
+                                        <tr>
+                                            <th>Corporate member details</th>
+                                        </tr>
+                                    </thead>
+                                
+                                    <!-- Table Body  -->
+                                    <tbody>
+                                        <!-- Organisation name -->
+                                        <tr>
+                                            <td> Organisation name </td>
+                                            <td>
+                                                <%= data[0].organisationName %>
+                                            </td>
+                                        </tr>
+                                        <!-- 1. Contact person name -->
+                                        <tr>
+                                            <td> Contact person name </td>
+                                            <td>
+                                                <%= data[0].contactPersonName %>
+                                            </td>
+                                        </tr>
+                                
+                                        <!-- 2. Contact person email -->
+                                        <tr>
+                                            <td> Contact person email </td>
+                                            <td>
+                                                <%= data[0].contactOfficialEmail %>
+                                            </td>
+                                        </tr>
+                                
+                                        <!-- 3. Contact person address -->
+                                        <tr>
+                                            <td> Contact person address </td>
+                                            <td>
+                                                <%= data[0].contactPersonAddress %>
+                                            </td>
+                                        </tr>
+                                
+                                        <!-- 4. Contact person mobile number -->
+                                        <tr>
+                                            <td> Contact mobile number </td>
+                                            <td>
+                                                <%= data[0].contactPersonMobileNumber %>
+                                            </td>
+                                        </tr>
+                                        <!-- 9. Objections -->
+                                        <tr>
+                                            <td>  Objections </td>
+                                            <td>
+                                                <span class="badge badge-<%= data[0].objections.length === 0 ? 'success' : 'danger' %>">
+                                                    <%= data[0].objections.length %>
+                                                </span>
+                                
+                                                <% if ( data[0].objections.length !== 0 ) { %>
+                                                  <!-- Objections modal button -->
+                                                  <a href="/admin/corporate_member/viewObjectionsMade?id=<%= data[0].id %>" class="btn btn-info btn-sm ml-1"> view objections</a>
+
+                                                  <!-- call modal popup -->
+                                                  <!-- <button class="btn btn-info btn-sm ml-1"
+                                                  data-toggle="modal" data-target="#objectionsModal"> 
+                                                    view objections
+                                                  </button> -->
+                                                <% } %>
+                                
+                                                <!-- Objections Modal -->
+                                                <div style="margin-top: 50px;" class="modal fade text-left" id="objectionsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
+                                                 aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title" id="myModalLabel1">Objections</h4>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <% data[0].objections.forEach(item => { %>
+                                                                <div class="modal-body">
+                                                                    <h6>Date posted : <%= item.datePosted %> </h6>
+                                                                    <h6>Member ID : <%= item.memberId %> </h6>
+                                                                    <p>Reasons : <%= item.reasons %> </p>
+                                                                </div>
+                                                                <hr>
+                                                            <% }) %>
+                                                            
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <!-- <tr>
+                                            <td>Push objection for review</td>
+                                            <td>
+                                                <% //data[0].objections.forEach(item => { %>
+                                                    <div class="modal-body">
+                                                        <h6>Objection stated that : <%= //item.reasons %> </h6>
+                                                        <h6>Objected by  Member-ID : <%= //item.memberId %> </h6>
+                                                        <h6>Date posted : <%= //item.datePosted %> </h6>
+                                                        <a href="/admin/corporate_member/push_for_review?member_id=<%=//item.memberId %>&reason=<%=//item.reasons %> " class="btn btn-darken-2 btn-primary" name='pushForReview' value='approve'>Push For Review</a>
+                                                    </div>
+                                                    <hr>
+                                                <% //}) %>
+                                            </td>
+                                        </tr> -->
+                                    </tbody>
+                                </table>
+                                <!-- Table Content: End -->
+
+                                <!-- Form Start -->
+                                <form class="form form-horizontal row-separator">
+                                    <div class="form-body">
+                                        <!-- <h4 class="form-section">Comment</h4> -->
+                                        <!-- Verifier comment -->
+                                        <div class="form-group row mx-auto last">
+                                            <label class="col-md-3 label-control" for="approvalComment"><h4 class="form-section">Comment</h4></label>
+                                            <div class="col-md-9">
+                                                <textarea id="approverComment" rows="5" class="form-control" name="approverComment" placeholder="Add Comment"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Submit button  -->
+                                    <div class="form-actions text-right">
+                                        <button class="btn btn-success btn-sm ml-1" onclick="approveRequest('<%=data[0].id%>','<%= data[0].contactOfficialEmail %>')">approve</button>
+                                        <button class="btn btn-danger btn-sm ml-1" onclick="rejectRequest('<%=data[0].id%>','<%= data[0].contactOfficialEmail %>')">reject</button>
+                                    </div>
+
+                                </form>
+                                <!-- Form end  -->
+
+                                <!-- ajax link -->
+                                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+                                <script>
+                                    function approveRequest(id, email){
+                                    //   alert("approve clicked " + id);
+                                      
+                                    //   $("#theID").val(id);
+                                    //   $("#userId").val(email);
+                                    //   $("#actionToPerform").val("approve");
+
+                                        $.ajax({
+                                            type: 'POST',
+                                            url: '/admin/corporate_member/approveTheCorporateRequestAjax', 
+                                            data: {
+                                                    theID: id,
+                                                    userId: email,
+                                                    action: 'approve',
+                                                    approverComment: $("#approverComment").val()
+                                                }
+                                        })
+                                        .done(function(data){
+                                            console.log(data);   
+                                            alert(data);
+                                            window.location.href = "/admin/corporate_member/approval_request";                                                                                       
+                                        })
+                                        .fail(function() {
+                                            
+                                            // just in case posting your form failed
+                                            alert( "Posting failed." );
+                                                
+                                        });
+                                    
+                                        // to prevent refreshing the whole page page
+                                        return false;
+
+                                    }
+                                  </script> 
+
+    
+                                  <!-- ajax link -->
+                                  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+                                  <script>
+                                    function rejectRequest(id, email){
+                                    //   alert("reject clicked " + id);
+                                      
+                                      //   $("#theID").val(id);
+                                      //   $("#userId").val(email);
+                                      //   $("#actionToPerform").val("approve");
+  
+                                          $.ajax({
+                                              type: 'POST',
+                                              url: '/admin/corporate_member/approveTheCorporateRequestAjax', 
+                                              data: {
+                                                      theID: id,
+                                                      userId: email,
+                                                      action: 'reject',
+                                                      approverComment: $("#approverComment").val()
+                                                  }
+                                          })
+                                          .done(function(data){
+                                              console.log(data);   
+                                              alert(data);
+                                              window.location.href = "/admin/corporate_member/approval_request";                                                                                       
+                                          })
+                                          .fail(function() {
+                                              
+                                              // just in case posting your form failed
+                                              alert( "Posting failed." );
+                                                  
+                                          });
+                                      
+                                          // to prevent refreshing the whole page page
+                                          return false;
+                                    }
+                                </script>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+      
+    </div>
+    <!-- #/ content body -->
+    <!-- footer -->
+    <%- include('../includes/sub-sections/dashboard-footer.ejs', {})%>   
+    <!-- #/ footer -->
+  </div>
+  <!-- Common JS -->
+  <script src="../../new_assets/plugins/common/common.min.js"></script>
+  <script src="../../new_assets/plugins/tables/js/jquery.dataTables.min.js"></script>
+  <script src="../../new_assets/plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
+  <script src="../../new_assets/plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
+  <!-- Custom script -->
+  <script src="../../new_assets/js/custom.min.js"></script>
+  <!-- Custom dashboard script -->
+  <script src="../../new_assets/js/dashboard-1.js"></script>
+</body>
+
+</html>

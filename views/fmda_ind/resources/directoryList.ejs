@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- BEGIN: Head-->
+<%- include('../ind_includes/head.ejs')%>
+
+<body class="v-light vertical-nav fix-header fix-sidebar">
+    <div id="preloader">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10"/></svg>
+        </div>
+    </div>
+    <div id="main-wrapper">
+        <!-- header -->
+        <%- include('../ind_includes/header.ejs')%>
+        <!-- #/ header -->
+        <!-- sidebar -->
+        <%- include('../ind_includes/sidebar.ejs')%>
+        <!-- #/ sidebar -->
+        <!-- content body -->
+        <div class="content-body">
+            <!-- #/ container -->
+            <div class="container-fluid">
+                <div class="row page-titles">
+                    <div class="col p-0">
+                        <h4>Directory List</h4>
+                    </div>
+                    <div class="col p-0">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">Table</a>
+                            </li>
+                            <li class="breadcrumb-item active">Datatable</li>
+                        </ol>
+                    </div>
+                </div>
+                <!-- row -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table style=" border-collapse:collapse!important;background:" class="table thead-custom zero-configuration">
+                                        <thead style="color:#fff;">
+                                            <tr style=" border-collapse:collapse!important; background: #212121; color:#fff;">
+                                                <th class="d-none">s/n</th>
+                                                <th>Directory Name</th>
+                                                <th>Directory Details & Resource</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% 
+                                                data.forEach((item, i) => { 
+                                            %>
+                                                <tr>
+                                                        <td class="d-none" > <%= i %> </td>
+                                                        <td><i class="fa fa-folder"></i> <%= item.directoryName%></td>
+                                                        <td> <a href="/ind_member_resource?id=<%=item.id%>" id='<%= item.id %>' class="btn btn-sm btn-primary"> View Directory</a></td>
+                                                </tr>
+                                            <% 
+                                                }); 
+                                            %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #/ container -->
+        </div>
+        <!-- #/ content body -->
+        <!-- footer -->
+        <!-- BEGIN: Footer-->
+        <%- include('../ind_includes/footer.ejs')%>
+    </div>
+    <!-- Common JS -->
+    <script src="new_assets/plugins/common/common.min.js"></script>
+    <!-- Custom script -->
+    <script src="new_assets/js/custom.min.js"></script>
+    <script src="new_assets/plugins/tables/js/jquery.dataTables.min.js"></script>
+    <script src="new_assets/plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
+    <script src="new_assets/plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
+</body>
+
+</html>

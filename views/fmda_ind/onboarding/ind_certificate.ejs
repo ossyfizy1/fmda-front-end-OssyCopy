@@ -1,0 +1,110 @@
+<!DOCTYPE html> 
+<html>
+    <style>
+        .img-container {
+          text-align: center;
+          display: block;
+        }
+
+        .center {
+        text-align: center;
+        position: absolute center;
+        right: 0px;
+        width: 800px;
+        border: 3px solid black;
+        }
+    </style>
+
+    <!-- /* to convert html to pdf */ -->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.3/jspdf.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+
+    <script>
+        function getPDF(){
+
+        var HTML_Width = $(".canvas_div_pdf").width();
+        var HTML_Height = $(".canvas_div_pdf").height();
+        var top_left_margin = 15;
+        var PDF_Width = HTML_Width+(top_left_margin*2);
+        var PDF_Height = (PDF_Width*1.5)+(top_left_margin*2);
+        var canvas_image_width = HTML_Width;
+        var canvas_image_height = HTML_Height;
+        
+        var totalPDFPages = Math.ceil(HTML_Height/PDF_Height)-1;
+        
+        
+        html2canvas($(".canvas_div_pdf")[0],{allowTaint:true}).then(function(canvas) {
+        canvas.getContext('2d');
+        
+        console.log(canvas.height+"  "+canvas.width);
+        
+        
+        var imgData = canvas.toDataURL("image/jpeg", 1.0);
+        var pdf = new jsPDF('p', 'pt',  [PDF_Width, PDF_Height]);
+            pdf.addImage(imgData, 'JPG', top_left_margin, top_left_margin,canvas_image_width,canvas_image_height);
+        
+        
+        for (var i = 1; i <= totalPDFPages; i++) { 
+        pdf.addPage(PDF_Width, PDF_Height);
+        pdf.addImage(imgData, 'JPG', top_left_margin, -(PDF_Height*i)+(top_left_margin*4),canvas_image_width,canvas_image_height);
+        }
+        
+            pdf.save("HTML-Document.pdf");
+                });
+        };
+    </script>
+
+    <body> 
+        
+        <button onclick="getPDF()" id="downloadbtn"><b>Click to Download HTML as PDF</b></button>
+
+        <!-- add "canvas_div_pdf" as class property -->
+        <div class="center canvas_div_pdf">
+        <img src="img/fmdalogo.png" height="100px" width="100px">
+            <p style="margin-top:0in;margin-right:0in;margin-bottom:10.0pt;margin-left:0in;line-height:normal;font-size:15px;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;text-align:center;">
+                <br>&nbsp;<span style="font-size:27px;font-family:&quot;Cooper Black&quot;,&quot;serif&quot;;">Financial Markets Dealers Association (FMDA)</span></p>
+            <p style="margin-top:0in;margin-right:0in;margin-bottom:10.0pt;margin-left:0in;line-height:normal;font-size:15px;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;text-align:center;"><strong><span style="font-size:32px;font-family:&quot;Old English Text MT&quot;;">
+                    <br>&nbsp;
+                </span></strong><strong><span style="font-size:37px;font-family:&quot;Old English Text MT&quot;;">Certificate of Membership</span></strong></p>
+            <p style="margin-top:0in;margin-right:0in;margin-bottom:10.0pt;margin-left:0in;line-height:115%;font-size:15px;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;text-align:center;"><strong><span style="font-size:32px;line-height:115%;font-family:&quot;Old English Text MT&quot;;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></strong><strong><span style="font-size:12px;line-height:115%;">&nbsp; 
+                    <br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                </span></strong><strong><span style="font-size:19px;line-height:115%;background:#D9D9D9;">FMDA ID: <%= memberCompleteDetails.lookupMember.member.memberUUID %></span></strong></p>
+            <p style="margin-top:0in;margin-right:0in;margin-bottom:10.0pt;margin-left:0in;line-height:115%;font-size:15px;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;text-align:center;text-indent:.5in;"><span style="font-size:24px;line-height:115%;font-family:&quot;Tw Cen MT Condensed&quot;,&quot;sans-serif&quot;;">
+                <br>&nbsp;This is to certify that
+                </span></p>
+            <p style="margin-top:0in;margin-right:0in;margin-bottom:10.0pt;margin-left:0in;line-height:115%;font-size:15px;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;text-align:center;"><strong><span style="font-size:48px;line-height:115%;font-family:&quot;Edwardian Script ITC&quot;;"><%= memberCompleteDetails.lookupMember.member.firstName %> <%= memberCompleteDetails.lookupMember.member.lastName %> </span></strong></p>
+            <p style="margin-top:0in;margin-right:0in;margin-bottom:10.0pt;margin-left:0in;line-height:115%;font-size:15px;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;text-align:center;"><span style="font-size:24px;line-height:115%;font-family:&quot;Tw Cen MT Condensed&quot;,&quot;sans-serif&quot;;">has been admitted as a Member
+                <br>&nbsp;of the Association
+                </span></p>
+            <p style="margin-top:0in;margin-right:0in;margin-bottom:10.0pt;margin-left:0in;line-height:115%;font-size:15px;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;text-align:center;"><span style="font-size:24px;line-height:115%;font-family:&quot;Tw Cen MT Condensed&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+            <p style="margin-top:0in;margin-right:0in;margin-bottom:10.0pt;margin-left:0in;line-height:115%;font-size:15px;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;text-align:center;"><span style="font-size:24px;line-height:115%;font-family:&quot;Tw Cen MT Condensed&quot;,&quot;sans-serif&quot;;">Given under the common seal of the 
+                <br>&nbsp;Financial Markets Dealers Association
+                </span></p>
+            <p style="margin-top:0in;margin-right:0in;margin-bottom:10.0pt;margin-left:0in;line-height:115%;font-size:15px;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;text-align:center;"><span style="font-size:24px;line-height:115%;font-family:&quot;Tw Cen MT Condensed&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+            <p style="margin-top:0in;margin-right:0in;margin-bottom:10.0pt;margin-left:0in;line-height:115%;font-size:15px;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;text-align:center;"><span style="font-size:19px;line-height:115%;">Executive Secretary</span></p>
+            <p style="margin-top:0in;margin-right:0in;margin-bottom:10.0pt;margin-left:0in;line-height:115%;font-size:15px;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;text-align:center;"><span style="font-size:24px;line-height:115%;">&nbsp;</span></p>
+            <p style="margin-top:0in;margin-right:0in;margin-bottom:10.0pt;margin-left:0in;line-height:115%;font-size:15px;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;text-align:center;"><span style="font-size:24px;line-height:115%;">&nbsp;</span><span style="font-size:19px;line-height:115%;">President</span></p>
+            <p style="margin-top:0in;margin-right:0in;margin-bottom:10.0pt;margin-left:0in;line-height:115%;font-size:15px;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;text-align:center;"><span style="font-size:24px;line-height:115%;">&nbsp;</span></p>
+            <p style="margin-top:0in;margin-right:0in;margin-bottom:10.0pt;margin-left:0in;line-height:115%;font-size:15px;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;text-align:center;"><strong><span style="font-size:21px;line-height:115%;font-family:&quot;Tw Cen MT Condensed&quot;,&quot;sans-serif&quot;;"> <%= memberCompleteDetails.lookupMember.member.dateVerified %>
+                    <br>&nbsp;
+                </span></strong><span style="font-size:16px;line-height:115%;font-family:&quot;Tw Cen MT Condensed&quot;,&quot;sans-serif&quot;;">Date Issued</span></p>
+            <p style="margin-top:0in;margin-right:0in;margin-bottom:10.0pt;margin-left:0in;line-height:115%;font-size:15px;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;text-align:center;"><strong><span style="font-size:13px;line-height:115%;font-family:&quot;Garamond&quot;,&quot;serif&quot;;">&nbsp;</span></strong></p>
+            <p style="margin-top:0in;margin-right:0in;margin-bottom:10.0pt;margin-left:.5in;line-height:115%;font-size:15px;font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;text-align:center;"><strong><span style="font-size:13px;line-height:115%;font-family:&quot;Garamond&quot;,&quot;serif&quot;;">This certificate remains the property of FMDA
+                    <br> 
+                    <br> 
+                    <% 
+                        if(memberCompleteDetails.lookupMember.member.certificateNumber){
+                    %> 
+                    <br>&nbsp;Certificate No: <%= memberCompleteDetails.lookupMember.member.certificateNumber %>
+                    <% 
+                        }
+                    %> 
+                </span></strong>
+            </p>
+        </div>
+    </body> 
+
+</html>
+
+

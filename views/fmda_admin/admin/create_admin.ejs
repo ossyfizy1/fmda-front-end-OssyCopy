@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>FMDA</title>
+  <!-- Favicon icon -->
+  <link rel="icon" type="image/png" sizes="16x16" href="../../img/fmdalogo.png">
+  <link href="../../new_assets/css/style.css" rel="stylesheet">
+  <link href="../../new_assets/plugins/tables/css/datatable/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <link href="../../new_assets/css/mycss.css" rel="stylesheet">
+  <script src="../../new_assets/js/modernizr-3.6.0.min.js"></script>
+</head>
+
+<body class="v-light vertical-nav fix-header fix-sidebar">
+  <div id="preloader">
+    <div class="loader">
+      <svg class="circular" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" /></svg>
+    </div>
+  </div>
+  <div id="main-wrapper">
+    <!-- header -->
+    <%- include('../includes/sub-sections/dashboard-header.ejs')%>
+    <!-- #/ header -->
+
+    <!-- sidebar -->
+    <%- include('../includes/sub-sections/dashboard-sidebar.ejs', {})%>
+    <!-- #/ sidebar -->
+    <!-- content body -->
+    <div class="content-body">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="" id="horz-layout-colored-controls">Create New FMDA Admin</h2>
+                        <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+                    </div>
+                    <div class="card-content collpase show">
+                        <div class="card-body">
+                            <div class="card-text">
+                                <p>Fill the form to create a new FMDA admin, assign roles and persmissions.</p>
+                            </div>
+                            <form class="form form-horizontal n" action="/admin/create_admin" method="POST">
+                                <div class="form-body">
+
+                                    <!-- form section : About user  -->
+                                    <h4 class="form-section" style="margin-top: 50px;"> About User</h4>
+                                    <hr>
+                                    <!-- form row  -->
+                                    <div class="row">
+
+                                        <!-- 1. First Name  -->
+                                        <div class="col-md-6">
+                                            <div class="form-group col-md-9 mx-auto">
+                                                <label for="firstName">First Name</label>                                                                
+                                                <input type="text" id="firstName" required class="form-control border-primary" placeholder="Type First Name" name="firstName">                                                                    
+                                            </div>
+                                        </div>
+
+                                        <!-- 2. last Name -->
+                                        <div class="col-md-6">
+                                            <div class="form-group col-md-9 mx-auto">
+                                                <label for="lastName">Last Name</label>                                                                
+                                                <input type="text" id="lastName" required class="form-control border-primary" placeholder="Type Last Name" name="lastName">                                                                   
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- form row  -->
+                                    <div class="row">
+
+                                        <!-- 3. User Name  -->
+                                        <div class="col-md-6">
+                                            <div class="form-group col-md-9 mx-auto">
+                                                <label for="userName">Username</label>
+                                                
+                                                <input type="text" id="userName" required class="form-control border-primary" placeholder="User Name" name="userName">
+                                                
+                                            </div>
+                                        </div>
+
+                                        <!-- 4. Gender  -->
+                                        <div class="col-md-6">
+                                            <div class="form-group col-md-9 mx-auto">
+                                                <label for="gender">Gender</label>
+
+                                                <select id="gender" name="gender" required class="form-control">
+                                                    <option value="none" selected="" disabled="">Select gender</option>
+                                                    <% gender.forEach((item) => { %>
+                                                        <option value="<%= item.name %>"><%= item.name %></option>
+                                                    <% }); %>
+                                                </select>
+                                                    
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <!-- form row  -->
+                                    <div class="row">
+
+
+                                        <!-- Check that both password fields match -->
+                                        <script>
+                                            const passwordF = document.querySelector('#password');
+                                            const confirmPasswordF = document.querySelector('#confirmPassword');
+
+                                            // check whether the passwords in both fields match
+                                            const validate = () => {
+                                                if ( passwordF.value != confirmPasswordF.value ) {
+                                                    confirmPasswordF.setCustomValidity(`Passwords don't match`);
+                                                } else {
+                                                    confirmPasswordF.setCustomValidity('');
+                                                }
+                                            }
+                                            passwordF.addEventListener('change', validate); // activate when the main field is changed and cursor removed
+                                            confirmPasswordF.addEventListener('keyup', validate); // activate when the confrim field's value is edited                                                       
+                                        </script>
+
+                                    </div>
+
+                                    <!-- form row  -->
+                                    <div class="row">
+
+                                        <!-- 6. Profile Photo  -->
+                                        <div class="col-md-6">
+                                            <div class="form-group col-md-9 mx-auto">
+
+                                                <label for="profilePhoto">Profile Photo</label>
+                                                
+                                                <input type="file" id="profilePhoto" required class="form-control border-primary" placeholder="Profile Photo" name="profilePhoto">
+                                                
+                                            </div>
+                                        </div>
+
+                                        <!-- 7. Address  -->
+                                        <div class="col-md-6">
+                                            <div class="col-md-9 mx-auto form-group">
+
+                                                <label for="address">Address</label>
+                                                
+                                                <textarea id="address" rows="3" required class="form-control border-primary" name="address" placeholder="Enter Full Residential Address"></textarea>
+                                                
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <!-- form section : Contact Info -->
+                                    <h4 class="form-section" style="margin-top: 50px;"> Contact Information</h4>
+                                    <hr>
+
+                                    <!-- form row  -->
+                                    <div class="row">
+
+                                        <!-- 8. Official Email -->
+                                        <div class="col-md-6">
+                                            <div class="form-group col-md-9 mx-auto">
+
+                                                <label for="officialEmail">Official Email</label>
+                                                
+                                                <input class="form-control border-primary" required type="email" name="officialEmail" placeholder="Official Email" id="officialEmail">
+                                               
+                                            </div>
+                                        </div>
+
+                                        <!-- 9. Phone Number -->
+                                        <div class="col-md-6">
+                                            <div class="form-group col-md-9 mx-auto">
+
+                                                <label for="phoneNumber">Phone Number</label>
+                                                
+                                                <input class="form-control border-primary" required type="tel" name="phoneNumber" placeholder="Phone Number" id="phoneNumber">
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- form row  -->
+                                    <div class="row">
+
+                                        <!-- 10. Department -->
+                                        <div class="col-md-6">
+                                            <div class="form-group col-md-9 mx-auto">
+                                                <label for="department">Department</label>
+                                                
+                                                    
+                                                    <select id="department" required name="department" class="form-control">
+                                                        <option value="none" selected="" disabled="">Select Department</option>  
+                                                        <% departments.forEach((item) => { %>
+                                                            <option value="<%= item.name %>"><%= item.name %></option>
+                                                        <% }); %>                                                            
+                                                    </select>
+                                                
+                                            </div>
+                                        </div>
+
+                                        <!-- 11. Admin Role -->
+                                        <div class="col-md-6">
+                                            <div class="form-group col-md-9 mx-auto">
+                                                <label for="roles">Type</label>
+                                                
+                                                    <select id="roles" name="typeId" required class="form-control">
+                                                        <option value="none" selected="" disabled="">Select Admin Type</option>
+                                                        <% lookUpRoles.forEach((item) => { %>
+                                                            <option id="<%= item.id %>" value="<%= item.id %>"><%= item.name %></option>
+                                                        <% }); %>
+                                                    </select>
+                                                
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <!-- form row  -->
+                                    <div class="row">
+
+                                        <!-- Capabilities -->
+                                        <div class="col-md-6">
+                                            <div class="form-group col-md-9 mx-auto">
+                                                <div class="col-md-9 font-medium-2"></div>
+                                                    <label>Select admin capabilities</label>
+                                                </div>
+                                                <div class="col-md-9 mx-auto select-div">
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <!-- Submit Form -->
+                                <div class="form-actions text-right mr-2" style="margin-bottom: 30px;">
+                                    <button type="submit" class="btn btn-primary"> Create Admin </button>
+                                </div>
+
+                            </form>
+                            <!-- Form End  -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      
+    </div>
+    <!-- #/ content body -->
+    <!-- footer -->
+    <%- include('../includes/sub-sections/dashboard-footer.ejs', {})%>   
+    <!-- #/ footer -->
+  </div>
+  <!-- Common JS -->
+  <script src="../../new_assets/plugins/common/common.min.js"></script>
+  <script src="../../new_assets/plugins/tables/js/jquery.dataTables.min.js"></script>
+  <script src="../../new_assets/plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
+  <script src="../../new_assets/plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
+  <!-- Custom script -->
+  <script src="../../new_assets/js/custom.min.js"></script>
+  <!-- Custom dashboard script -->
+  <script src="../../new_assets/js/dashboard-1.js"></script>
+
+
+  <!-- BEGIN: Scripts-->
+  <%- include('../includes/sub-sections/dashboard-scripts.ejs', {})%>
+  <script>
+      const roles = document.querySelector('#roles');
+      const capabilities = document.querySelector('.select2-selection__rendered');
+      roles.addEventListener('change', async(e) => {
+          const capabilitiesList = document.querySelector('.select-div');
+          capabilitiesList.innerHTML = '';
+          // send a query to get list of capabilities
+          const options = {
+              method: 'POST',
+              body: JSON.stringify({
+                  id: e.target.value
+              }),
+              headers: {
+                  'Accept': 'text/html',
+                  'Content-Type': 'application/json'
+              },
+          }
+          const response = await fetch('/admin/get_apabilities_list', options);
+          let data = await response.text();
+          capabilitiesList.innerHTML = data;
+      });
+  </script>
+  <!-- END: Scripts-->
+
+</body>
+
+</html>

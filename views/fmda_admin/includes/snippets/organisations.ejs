@@ -1,0 +1,6 @@
+<!-- render list of organisations  -->
+<option value="other" >Other</option> 
+<% let filteredOrganisations = data.filter(item => item.membershipId === "" && item.organisationName !== "Others");
+    filteredOrganisations.forEach((item) => { %>
+    <option value="<%= item.organisationName %>"><%= item.organisationName %></option>
+<% }); %>

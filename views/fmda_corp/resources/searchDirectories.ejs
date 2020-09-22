@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+<!-- BEGIN: Head-->
+<%- include('../corp_includes/head.ejs')%>
+
+    <head>
+        <!-- BEGIN: Vendor CSS-->
+        <link rel="stylesheet" type="text/css" href="../app-assets/vendors/css/material-vendors.min.css">
+        <link rel="stylesheet" type="text/css" href="../app-assets/vendors/css/tables/datatable/datatables.min.css">
+        <!-- END: Vendor CSS-->
+    </head>
+    <!-- END: Head-->
+
+    <!-- BEGIN: Body-->
+
+    <body class="vertical-layout vertical-content-menu material-vertical-layout material-layout 2-columns   fixed-navbar" data-open="click" data-menu="vertical-content-menu" data-col="2-columns">
+
+        <!-- BEGIN: Header-->
+        <%- include('../corp_includes/header.ejs')%>
+            <!-- END: Header-->
+
+            <!-- BEGIN: Content-->
+            <div class="app-content content">
+                <div class="content-header row">
+                </div>
+                <div class="content-wrapper">
+
+                    <!-- BEGIN: Side bar-->
+                    <%- include('../corp_includes/sidebar.ejs', {})%>
+                        <!-- END: Side bar-->
+
+                        <div class="content-body">
+
+                                <section id="material-datatables">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="card mb-0">
+                                                    <div class="card-header">
+                                                        <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+                                                        <div class="heading-elements">
+                                                            <ul class="list-inline mb-0">
+                                                                <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
+                                                                <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
+                                                                <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+                                                                <li><a data-action="close"><i class="ft-x"></i></a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    
+
+
+                                                    <div class="card-content collapse show">
+                                                        <div class="card-body">
+                                                    
+                                                    
+                                                <form id="userForm" method="POST" action="/corp_member_directories">
+                                                    <div class="form-body">
+                    
+                                                        <h3 class="form-section" align="center"> Search For Member </h3>
+                                                        
+                                                        <div class = "row">
+                                                            <div class="col-md-6">
+                                                                <div class="form-group row col-md-9 mx-auto">
+                                                                    <label for="organisationName1">Enter ID</label>
+                                                                    <input type="text" id="id" required class="form-control"  name="id" placeholder="Enter ID" required>
+                                                                </div>
+                                                            </div>
+                    
+                                                            
+                                                        </div>
+                                                        
+                                                        <!-- Submit button  -->
+                                                        <div class="row" style="margin-top: 50px;">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group row col-md-9 mx-5">
+                                                                    <button id="response2" class="btn btn-primary">
+                                                                        Search For Member
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                    
+                                                </form>
+                                                    
+                                                        </div>
+                                                    </div>
+
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                </section>
+                        </div>
+
+                </div>
+            </div>
+            <!-- END: Content-->
+
+            <!-- BEGIN: Footer-->
+            <%- include('../corp_includes/footer.ejs', {})%>
+            <!-- END: Footer-->
+            
+            <!-- BEGIN: Scripts-->
+            <%- include('../corp_includes/scripts.ejs', {})%>
+            <script src="../app-assets/vendors/js/tables/datatable/datatables.min.js"></script>
+            <script src="../app-assets/js/scripts/pages/material-app.min.js"></script>
+            <script src="../app-assets/js/scripts/tables/material-datatable.min.js"></script>
+            
+            <!-- END: Scripts-->
+
+    </body>
+    <!-- END: Body-->
+
+</html>

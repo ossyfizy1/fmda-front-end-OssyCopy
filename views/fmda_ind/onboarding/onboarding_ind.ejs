@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Individual Member Registration">
+  <meta name="author" content="Softworks">
+
+  <link rel="stylesheet" type="text/css" href="../new_assets/scss/register.min.css">
+  <link rel="stylesheet" type="text/css" href="../new_assets/plugins/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="../new_assets/icons/font-awesome/css/font-awesome.min.css">
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
+
+  <title>FMDA- Individual Member Registration</title>
+
+</head>
+
+<body>
+    <div class="col-md-12" style="margin-top: 20px;">
+
+        <section id="number-tabs">
+            <!-- <a class="btn btn-primary" href="/confirmatory_update" style="margin-bottom: 30px; color: white;"> < go back</a></go> -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        
+                
+                        <div class="card-content collapse show">
+                            <div class="card-body">
+
+                                
+                                
+                                <h2 style="background-color: black; color: white;">Personal Information</h2> 
+                                <hr>
+                                
+                                
+                                <%- //include('onboarding_includes/header.ejs')%>
+                                <hr>                                
+
+                                <!-- first step -->
+                                <form action="/ind_personalInformation<%= action === 'update' ? '?action=update': '' ; %>" method="post" class="form-horizontal" enctype="multipart/form-data">
+                                <fieldset id="ourFieldset1">
+                                        <div class="row">
+
+                                            <%= //JSON.stringify(member) %>
+
+                                        <!-- 1. Profile photo  -->
+                                            <div class="col-md-12">
+
+                                                
+                                                <img src="<%= member.profilePhoto %>" width="150px" height="150px" alt="profile photo" class="img">
+                                                <div class="form-group">
+                                                    <label for="firstName1">Passport Upload (JPG, PNG, JPEG) :</label>
+
+                                                    <!-- only make it a required field during initial registration -->
+                                                    <input <%= action === 'update' ? '': 'required' ; %>
+                                                    name="profilePhoto" type="file" id="profilePhoto" placeholder="profile photo" >
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                            <hr>
+                                            </div>
+
+                                            <!-- 2. First name  -->
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="firstName1">First Name :</label>
+                                                    <input name="firstName" type="text" class="form-control" id="firstName1" placeholder="First Name" value="<%= member.firstName %>" required>
+                                                </div>
+                                            </div>
+
+                                            <!-- 3. Last name  -->
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="lastName1">Last Name :</label>
+                                                    <input name="lastName" type="text" class="form-control" id="lastName1" placeholder="Last Name" value="<%= member.lastName %>" required>
+                                                </div>
+                                            </div>
+
+                                            <!-- 4. Gender -->
+                                            <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="lastName1">Gender :</label>
+                                                <select required name="gender" id="gender" class="form-control">
+                                                    <option value="">Select gender</option>
+                                                    <!-- Pre-select form based on the previously selected gender -->
+                                                    <option value="male" <%= member.gender === 'male' ? 'selected' : '' ; %> >Male</option>
+                                                    <option value="female" <%= member.gender === 'female' ? 'selected' : '' ; %> >Female</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <!-- 5. Address -->
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="address">Address :</label>
+                                                <input required name="address" type="text" class="form-control" id="address" value="<%= member.address %>" placeholder="Your Address">
+                                            </div>
+                                        </div>
+
+                                        <!-- designation -->
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="address">Designation :</label>
+                                                <input required name="designation" type="text" class="form-control" id="designation" value="<%= member.designation %>" placeholder="Your Designation">
+                                            </div>
+                                        </div>
+
+
+                                        <!-- Office Number -->
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="phoneNumber1"> Office Number :</label>
+                                                <input name="officeNumber" type="tel" class="form-control" id="telephone" placeholder="Office Number" required value="<%= member.officeNumber %>" >
+                                            </div>
+                                        </div>
+
+                                        <!-- 6. Email address (not submitted)-->
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="email">Email Address :</label>
+                                                <input name="personalEmail" type="email" class="form-control dark" id="email" value="<%= userID_email %>" disabled >
+                                            </div>
+                                        </div>
+                                        </div>
+
+                                        <div class="row" style="margin-top: 30px">
+
+                                        <!-- 7. Current organisation -->
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="Address1"> Current Organisation :</label>
+                                                    <select name="currentOrganisation" id="orgTypeGotten" class="form-control" required onchange="OrgIdToGet()">
+                                                        <option value="" disabled selected >Select from list:</option>
+                                                        <% 
+                                                            var orgList = orgList_for_ind
+                                                            for(i = 0; i < orgList.length; i++)
+                                                                {
+                                                        %>
+                                                        <option value="<%= orgList[i].organisationName %>" <%= member.currentOrganisation === orgList[i].organisationName ? 'selected' : '' ; %> > <%= orgList[i].organisationName %> </option>
+                                                        <% 
+                                                                } 
+                                                        %> 
+                                                    </select>
+
+                                                <!-- jquery & ajax link -->
+                                                <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js "></script> 
+
+                                                <!-- on page load hide this field, only show if member selects Others under Current Organisation-->
+                                                <script>
+                                                    $(document).ready(function(){
+                                                        $("#proposedOrgName").hide();
+                                                    });
+                                                </script>
+
+
+                                                <!-- function when selection is made under Current Organisation -->
+                                                <script>
+                                                    function OrgIdToGet() 
+                                                    {
+
+                                                        // upon industry category selection, always empty the dropdown selection with id = "industryTypeDisplay" for industry type dropdown
+                                                        $("#orgIDGotten").empty();
+            
+                                                        var mySelection = $("#orgTypeGotten").val();
+                                                        // alert( mySelection + " was clicked");
+
+                                                        // if Others was selected, display another field for member to input their organization name
+                                                        if (mySelection === "Others") {
+                                                        $("#proposedOrgName").show();
+                                                        }
+                                                        else if(mySelection != "Others"){
+                                                        $("#proposedOrgName").hide();
+                                                        $("#proposedOrgNameInputted").val(""); // empty it
+                                                        }
+
+            
+                                                        // ajax request to get organization ID by my selection
+                                                        $.ajax({
+                                                                type: 'POST',
+                                                                url: '/ind_get_organization_ID_by_my_selection', 
+                                                                data: {"mySelection" : mySelection}  // This will send the form data to the php page
+                                                                })
+                                                                .done(function(data){
+                                                                    
+                                                                // show the response
+                                                                // $('#response').html(data);
+                                                                // alert(data.response);
+        
+                                                                var grtOrgIdByMySelectionGotten = data.response
+                                                                
+                                                                // set the ID
+                                                                $("#orgIDGotten").val(grtOrgIdByMySelectionGotten);
+                                                                    
+                                                                    
+                                                                })
+                                                                .fail(function() {
+                                                                    // just in case posting your form failed
+                                                                    alert( "Posting failed." );
+                                                                    
+                                                                });
+                
+                                                    }
+                                                </script>
+                                                </div>
+                                            </div>
+
+                                            <!-- 8. Proposed Organization Name (hidden) -->
+                                            <div class="col-md-4" id="proposedOrgName">
+                                                <div class="form-group">
+                                                    <label for="emailAddress1"> Proposed Organization Name :</label>
+                                                    <input name="proposedOrganisationName" type="text" class="form-control" id="proposedOrgNameInputted" placeholder="Organization Name">
+                                                </div>
+                                            </div>
+
+                                            <!-- 9. Organisation id (hidden) -->
+                                            <div class="col-md-4" style="visibility: hidden; display:none;">
+                                                <div class="form-group">
+                                                    <label for="Address1"> Current Organisation ID :</label>
+                                                    <input name="currentOrganisationId" type="text" class="form-control" id="orgIDGotten" value="<%= member.currentOrganisationId %>" placeholder="Current Organisation" required readonly>
+                                                </div>
+                                            </div>
+
+                                            <!-- 10. Treasury experience -->
+                                            <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="yearsOfTreasuryExperience"> Years of Treasury Experience :</label>
+                                                <select name="yearsOfTreasuryExperience" id="yearsOfTreasuryExperience" class="form-control" required >
+                                                <option selected disabled >Select from list:</option>
+                                                <% for(i = 0; i < years_of_experience.length; i++) {
+                                                    if (years_of_experience[i] === '') continue 
+                                                %>
+                                                <option value="<%= years_of_experience[i] %>" <%= member.yearsOfTreasuryExperience === years_of_experience[i] ? 'selected' : '' ; %> ><%= years_of_experience[i] %></option>
+                                                <% } %> 
+                                                </select>
+                                            </div>
+                                            </div>
+
+                                            <!-- 11. Post NYSC experience -->
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="yearsOfPostNyscExperience"> Years of Work Experience (Post NYSC) :</label>
+                                                    <select name="yearsOfPostNyscExperience" id="yearsOfPostNyscExperience" class="form-control" required >
+                                                    <option selected disabled >Select from list: </option>
+                                                    <option value="0 - 2 years" <%= member.yearsOfPostNyscExperience === '0 - 2 years' ? 'selected' : '' ; %> >0 - 2 years</option>
+                                                    <option value="2 - 4 years" <%= member.yearsOfPostNyscExperience === '2 - 4 years' ? 'selected' : '' ; %> >2 - 4 years</option>
+                                                    <option value="4 - 6 years" <%= member.yearsOfPostNyscExperience === '4 - 6 years' ? 'selected' : '' ; %> >4 - 6 years</option>
+                                                    <option value="6 years and above  " <%= member.yearsOfPostNyscExperience === '6 years and above' ? 'selected' : '' ; %> >6 years and above</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                
+                                            <!-- 12. Mobile Number -->
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="phoneNumber1"> Mobile Number :</label>
+                                                    <input name="mobileNumber" type="tel" class="form-control" id="telephone"  value="<%= member.mobileNumber %>" placeholder="Mobile Number" required >
+                                                </div>
+                                            </div>
+
+                                            <!-- 12. Date of Birth -->
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="date1"> Date of Birth :</label>
+                                                    <input name="dateOfBirth" type="date" class="form-control" id="dateOfBirth" value="<%= member.dateOfBirth %>" required>
+                                                </div>
+                                            </div>
+
+                                            <!-- 12. City -->
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="location1">Select City :</label>
+                                                    <select class="c-select form-control" id="location1" name="state" required>
+                                                        <option disabled selected >Select City</option>
+                                                        <option value="Abuja" <%= member.state === 'Abuja' ? 'selected' : '' ; %> >Abuja</option>
+                                                        <option value="Lagos" <%= member.state === 'Lagos' ? 'selected' : '' ; %> >Lagos</option>
+                                                        <option value="Port-Harcourt"  <%= member.state === 'Port-Harcourt' ? 'selected' : '' ; %> >Port-Harcourt</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- <button id='goToStep2' type="button" class="btn btn-primary">Next</button> -->
+                                        <input type="submit" id="nextOrUpdateButton" name="submit" 
+                                        value="<%= action === 'update' ? 'update': 'next' ; %>"
+                                        class="btn btn-primary" onclick="validateAllFields()" 
+                                        />
+                                        <!-- next step -->
+
+
+                                        <a href="/ind_professionalInformation" id="click_to_continue_from_where_u_left_off" class="btn btn-primary" style="float: right;">click to continue from where u left off</a>
+
+                                        <!--check if designation is set and action != update then show the forward button-->
+                                        <script>
+                                            var get_designation = $("#designation").val();
+                                            if(get_designation != "" && '<%= action%>' !="update" ){
+
+                                                // hide
+                                                $("#click_to_continue_from_where_u_left_off").show();
+
+                                                // nextOrUpdateButton
+                                                $("#nextOrUpdateButton").hide();
+                                            }else{
+                                                // show
+                                                $("#click_to_continue_from_where_u_left_off").hide();
+                                            }
+                                        </script>
+
+                                        
+
+                                    </fieldset>
+                                </form>
+                                <!-- end of first step 1-->
+
+
+                                <!-- validate telephone number -->
+                                <!-- check phone number -->
+                                <script>
+                                    // phone number validation was requested to be removed
+                                    
+                                    // function compareNumber() {
+                                    //     var telephone = $("#telephone").val();
+                                    //     // console.log(telephone.length);
+                                    //     console.log(typeof telephone);
+                                    //     console.log(parseInt(telephone.length));
+                                    //     console.log(typeof parseInt(telephone))
+
+                                    //     if ( parseInt(telephone.length) > 11){
+                                    //         alert("Phone number must not be greater than 11 digits");
+                                    //         $("#telephone").val("");
+                                    //     }
+                                    //     else if ( parseInt(telephone.length) < 11) {
+                                    //         alert("Phone number must not be less than 11 digits");
+                                    //         $("#telephone").val("");
+                                    //     }
+                                    // }
+                                </script>
+
+
+                                <!-- for the fancy sweet alert box -->
+                                <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+                                <script>
+                                function validateAllFields() {
+                                    var orgTypeGotten = $("#orgTypeGotten").val();
+                                    if(orgTypeGotten == ''){
+
+                                        // using sweet alert tutorial at https://sweetalert.js.org/
+                                        // swal(
+                                        //         {
+                                        //             title: "info!",
+                                        //             text: "kindly fill all fields...",
+                                        //             icon: "info",
+                                        //         },
+                                                
+                                        //     );
+
+                                        swal("kindly fill all fields!", {
+                                                buttons: false,
+                                                timer: 2000,  // disappears after 2 seconds
+                                            });
+
+
+                                        
+                                    }
+                                }
+                                </script>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BEGIN: Scripts-->
+        <%- include('onboarding_includes/scripts.ejs')%>
+        <!-- END: Scripts-->
+    
+    </div>
+
+  <script src="../new_assets/js/register-form.js"></script>
+
+</body>
+
+</html>

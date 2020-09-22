@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>FMDA</title>
+  <!-- Favicon icon -->
+  <link rel="icon" type="image/png" sizes="16x16" href="../../img/fmdalogo.png">
+  <link href="../../new_assets/css/style.css" rel="stylesheet">
+  <link href="../../new_assets/plugins/tables/css/datatable/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <link href="../../new_assets/css/mycss.css" rel="stylesheet">
+  <script src="../../new_assets/js/modernizr-3.6.0.min.js"></script>
+</head>
+
+<body class="v-light vertical-nav fix-header fix-sidebar">
+  <div id="preloader">
+    <div class="loader">
+      <svg class="circular" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" /></svg>
+    </div>
+  </div>
+  <div id="main-wrapper">
+    <!-- header -->
+    <%- include('../includes/sub-sections/dashboard-header.ejs')%>
+    <!-- #/ header -->
+
+    <!-- sidebar -->
+    <%- include('../includes/sub-sections/dashboard-sidebar.ejs', {})%>
+    <!-- #/ sidebar -->
+    <!-- content body -->
+    <div class="content-body">
+
+        <section id="material-datatables">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card mb-0">
+                        <div class="card-header">
+                            <h4 class="card-title">Objection Details %></h4>
+                        </div>
+                        <div class="card-content collapse show">
+                            <div class="card-body">
+
+                                
+                             
+
+
+                                <table class="table table-hover zero-configuration dataTable table-striped white">
+                                
+                                    <!-- Table Head  -->
+                                    <thead>
+                                        <tr>
+                                            <!-- <th>Member Name</th> -->
+                                            <th>Member ID</th>
+                                            <th>Date Objected</th>
+                                            <th>Objection Details</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+
+
+                                    <%= //JSON.stringify(data) %> 
+
+                                    <script>
+                                        // store in sessionStorage and pull & filter from there
+                                        sessionStorage.setItem("reviews", '<%= JSON.stringify(data) %>');
+                                    </script>
+    
+                                    <!-- Table Body  -->
+                                    <tbody>
+                                       
+    
+                                        <%  
+                                            data.forEach(item => {
+                                        %>
+                                            <tr>
+                                                <!--<td><%= //item.memberId %></td>-->
+                                                <td><%= item.memberId %></td>                                                                        
+                                                <td><%= item.datePosted %></td>
+                                                <td><%= item.reasons %></td>
+                                                <td> 
+                                                    <% if(item.review.length == 0) {%>
+                                                    <a href="/admin/corporate_member/push_for_review?member_id=<%= item.memberId %>&reason=<%= item.reasons %>&contactOfficialEmail=<%=contactOfficialEmail %>" class="btn btn-darken-2 btn-primary" name='pushForReview' value='approve'>Push For Review</a>
+                                                    <% } else { %>
+                                                    <a href="" data-toggle="modal" data-target="#objectionsModal" class="btn btn-darken-2 btn-primary" onclick="reviewDetails('<%=item.reasons%>')"> View Review</a>
+                                                    <% } %>
+                                                </td>
+                                            </tr>
+                                        <% 
+                                            }); 
+                                        %>
+    
+    
+                                    </tbody>
+                                  </table>
+
+
+
+                                  <script>
+                                    function reviewDetails(reasons){
+                                        // alert("review email: "+ reasons);
+                                        // get the reviews in sessionStorage & filter from there
+                                        var data = sessionStorage.getItem("reviews", '<%= JSON.stringify(data) %>');
+
+                                        var theData = JSON.parse(data.replace(/&#34;/g,'"'));
+
+                                        theData.forEach(element => {
+                                            
+                                            if (element.reasons == reasons) {
+                                                // alert("alert matched");
+
+                                                var listOfReviews = element.review;
+
+                                                var theDivStructure = "<div class='table table-striped'>";
+                                                for (var i = 0; i < listOfReviews.length; i++) {
+                                                    
+                                                    theDivStructure+="<div>";
+                                                        theDivStructure+="<p> Comment: "+listOfReviews[i].reasons+" </p>";
+                                                        theDivStructure+="<p>Reviewed By: "+listOfReviews[i].memberId+" </p>";
+                                                        theDivStructure+="<p>Date Reviewed: "+listOfReviews[i].datePosted+" </p>";
+                                                    theDivStructure+="</dvi>";
+
+                                                }
+                                                theDivStructure+="</div>";
+
+                                                // display record
+                                                $("#listOfReviews").html(theDivStructure);
+
+                                            };
+
+                                        });
+
+                                    }  
+                                  </script>
+
+
+                                  <!--Object review popup-->
+                                  <div style="margin-top: 50px;" class="modal fade text-left" id="objectionsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
+                                                 aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title" id="myModalLabel1">Objection Reviews</h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+
+                                                <div id="listOfReviews"></div>
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+      
+    </div>
+    <!-- #/ content body -->
+    <!-- footer -->
+    <%- include('../includes/sub-sections/dashboard-footer.ejs', {})%>   
+    <!-- #/ footer -->
+  </div>
+  <!-- Common JS -->
+  <script src="../../new_assets/plugins/common/common.min.js"></script>
+  <script src="../../new_assets/plugins/tables/js/jquery.dataTables.min.js"></script>
+  <script src="../../new_assets/plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
+  <script src="../../new_assets/plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
+  <!-- Custom script -->
+  <script src="../../new_assets/js/custom.min.js"></script>
+  <!-- Custom dashboard script -->
+  <script src="../../new_assets/js/dashboard-1.js"></script>
+</body>
+
+</html>

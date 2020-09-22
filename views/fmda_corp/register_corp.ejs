@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Individual Member Registration">
+  <meta name="author" content="Softworks">
+
+  <link rel="stylesheet" type="text/css" href="new_assets/scss/register.min.css">
+  <link rel="stylesheet" type="text/css" href="new_assets/plugins/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="new_assets/icons/font-awesome/css/font-awesome.min.css">
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
+
+  
+
+
+  <!-- for Jquery dialog popup -->
+  <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+  
+
+  <!-- style to hide the modal title close button -->
+  <!-- <style>
+      .ui-dialog-titlebar-close {display: none }
+  </style> -->
+
+
+  <title>FMDA- Corporate Registration</title>
+
+</head>
+
+<body>
+
+    
+   <!-- on page load show jquery dialog & hide this field, only show if member selects Others under Current Organisation-->
+    <!-- <script>
+        $( function() {
+            // $("#proposedOrgName").hide();
+
+            $( "#dialog" )
+            .dialog({
+                    width: "100%", height: 1000, title: "How to be a member",
+                    buttons: [
+                                    {
+                                    text: "proceed to registration",
+                                    // icon: "ui-icon-heart",
+                                    click: function() {
+                                        $( this ).dialog( "close" );
+                                    }
+                                
+                                    // Uncommenting the following line would hide the text,
+                                    // resulting in the label being used as a tooltip
+                                    //showText: false
+                                    },
+                                    {
+                                    text: "Cancel",
+                                    // icon: "ui-icon-heart",
+                                    click: function() {
+                                        // $( this ).dialog( "close" );
+                                        window.location.href = "/";
+                                    }
+                                
+                                    // Uncommenting the following line would hide the text,
+                                    // resulting in the label being used as a tooltip
+                                    //showText: false
+                                    }
+                                ]
+        });
+
+            // put into sessionStorage Organisaztion list
+            sessionStorage.setItem("orgList", '<%= //JSON.stringify(organisations) %>');
+            // console.log(sessionStorage.getItem("orgList"));
+        } );
+    </script>   -->
+
+    
+
+
+<!-- Jquery dialog popup -->
+<!-- <div id="dialog" title="Basic dialog" style="background-color: gray; color: white;">
+    <p>Prospective Corporate member is expected to forward with an official seal of the organization on the application letter accompanied with the following documents:</p>
+    <p>
+        1. Certificate of Incorporation <br>
+        2. Memorandum and Articles of Association <br>
+        3. List of Bankers <br>
+        4. Reference letter from at least one of Bankers confirming company as its customer <br>
+        5.Approval from the Regulators for Trading/Investment Activities <br>
+        6. Corporate Brochure <br>
+        7. A non refundable cheque or draft of N100,000.00 only (one hundred thousand naira) being application fee in favour of Financial Markets Dealers Association <br>
+    </p>
+</div> -->
+
+
+  <div class="col-md-12" style="margin-top: 20px;"> 
+
+  <!--content here-->
+
+  <section id="number-tabs">
+    <!-- <a class="btn btn-primary" href="/confirmatory_update" style="margin-bottom: 30px; color: white;"> < go back</a></go> -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+
+                
+                
+        
+                <div class="card-content collapse show">
+                    <div class="card-body">
+
+
+                         
+
+                        
+                            
+                        
+                        
+                        <h2 style="background-color: black; color: white;">Corporate Registration</h2> 
+                        <hr>                              
+
+                        <!-- first step -->
+                        <form action="/register_corperate" method="post" class="form-horizontal" enctype="multipart/form-data">
+                            <fieldset id="ourFieldset1">
+                                <div class="row">
+
+
+                                    <!-- hide this part, no longer needed -->
+                                    <div class="col-md-4" style="visibility: hidden; display: none;">
+                                        <div class="form-group">
+                                            <!-- <input type="text" class="form-control" id="user-name" placeholder="Organization Name" name="organisationName" required> -->
+                                            <select class="form-control" id="orgTypeGotten" name="organisationName" onchange="OrgIdToGet()">
+                                                <option value="">Organization:</option>
+                                                <% 
+                                                    var oType = organisations
+                                                    for(i = 0; i < oType.length; i++)
+                                                        {
+                                                            
+                                                %>                                                
+                                                <option value="<%= oType[i].organisationName %>"><%= oType[i].organisationName %></option>
+                                                <% 
+                                                        } 
+                                                %>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                    
+
+
+                                    <!-- function when selection is made under Current Organisation -->
+                                    <script>
+                                        function OrgIdToGet() 
+                                        {
+            
+                                            var mySelection = $("#orgTypeGotten").val();
+                                            // alert( mySelection + " was clicked");
+
+                                            console.log($("#orgIDFromSelection").text());
+
+                                            // if Others was selected, display another field for member to input their organization name
+                                            if (mySelection === "Others") {
+                                                $("#proposedOrgName").show();
+                                                $("#orgIDSelectedFromList").val("");
+                                            }
+                                            else if(mySelection != "Others"){
+                                                $("#proposedOrgName").hide();
+                                                $("#proposedOrgNameInputted").val(""); // empty it
+
+
+                                                var the_orgList = sessionStorage.getItem("orgList");
+
+                                                // convert the &#34; in the object array to ""
+                                                var the_org_list_from_session = JSON.parse(the_orgList.replace(/&#34;/g,'"'));
+
+                                                // console.log(the_org_list_from_session);
+
+                                                the_org_list_from_session.forEach(element => {
+                                                    
+                                                    if (element.organisationName == mySelection) {
+                                                        // alert("match found");
+                                                        $("#orgIDSelectedFromList").val(element.id);
+                                                    }
+                                                });
+                                            }
+
+
+                                        }
+                                    </script>
+
+
+                                    <!-- proposedOrgName -->
+                                    <div class="col-md-4" id="proposedOrgName">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="proposedOrgNameInputted" placeholder="Organization Name" name="proposedOrganisationName">
+                                        </div>
+                                    </div>
+
+                                    <!-- organisationId Hidden Field -->
+                                    <div class="col-md-4" style="visibility: hidden; display: none;">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="orgIDSelectedFromList" placeholder="Organization ID" name="organisationId" readonly>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="user-name" placeholder="Organization Address" name="organisationAddress" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <input type="tel" class="form-control" id="telephone" placeholder="Company Official Number" name="contactPersonMobileNumber" required onblur="compareNumber()">
+                                        </div>
+                                    </div>
+
+                                    
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <select required class="form-control" name="organisationType">
+                                                <option value="">Organization Type:</option>
+                                                <% 
+                                                    var oType = memberTypes
+                                                    for(i = 0; i < oType.length; i++)
+                                                        {
+            
+                                                            <!-- hide Individual -->
+                                                            if(oType[i].type !== "Individual")
+                                                            {
+                                                %>
+                                                <option value="<%= oType[i].type %>"><%= oType[i].type %></option>
+                                                <% 
+                                                            }
+                                                        } 
+                                                %>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <input type="text" id="headOfficeAddress" class="form-control" placeholder="Enter Head Office Address" name="headOfficeAddress">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <input type="text" id="managingDirectorOrCEO" class="form-control" placeholder="Managing Director or CEO" name="managingDirectorOrCEO">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="user-name" placeholder="Contact Person Name" name="contactPersonName" required>
+                                        </div>
+                                    </div>
+
+                                    
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <input type="email" class="form-control" id="user-email" placeholder="Contact Email" name="contactOfficialEmail" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="user-name" placeholder="Contact Person Address" name="contactPersonAddress" required>
+                                        </div>
+                                    </div>
+
+
+                                    <!-- Commented Out -->
+                                    <!--
+                                    <div class="col-md-12" style="margin-top: 50px;">
+                                        <h4>Bankers</h4>
+                                        <hr>
+                                        <div class="row" style="height:150px; overflow-y: scroll;">
+                                            <% //financialInstitutions.forEach((item) => { %>
+                                                <div class="col-md-4">
+                                        <div class="form-group">
+                                                <input type='checkbox' name='bankers' value="<%= //item.name %>"><span style='font-size: 16px;'> <%= //item.name %></span style='font-size: 20px;'><hr><br>
+                                                    </div>
+                                                    </div>
+                                            <% //}); %>
+                                        </div>
+                                    </div>
+                                    -->
+
+
+
+                                    <div class="col-md-12" style="margin-top: 50px;">
+                                        <h4>Bankers</h4>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-md-6">
+
+                                                <!-- to show us what will be submitted-->
+                                                <div class="form-group" style="visibility: hidden; display: none;">
+                                                    <label for="phoneNumber1"> List of the bamkers:</label>
+                                                    <input type="text" class="form-control" name="bankers" id="bankers" readonly>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="phoneNumber1"> Enter Your Banker(s) (minimum of one):</label>
+                                                    <input type="text" class="form-control" id="bankerName" placeholder="your banker">
+                                                </div>
+                                                <div class="form-group" style="margin-top: 20px;">
+                                                    <p id="addMoreEH" class="btn btn-light">add to list</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6" style="height:200px; overflow-y: scroll;">
+                                                <label for="phoneNumber1"> List of banker(s) entered appears here:</label>
+                                                <!-- where to display the list of bakers added -->
+                                                <div id="savedListOfQualiifications" class="row"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                    <!-- jquery & ajax link -->
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js "></script>
+
+                      <!-- add to list -->
+                      <script>
+
+                            var submitOtherQualificatnList = [];
+
+                            $("#addMoreEH").click(function(){
+                              //  alert("add more o");
+  
+                                  var bankerName = $("#bankerName").val();
+  
+                                  console.log(bankerName)
+  
+                                  
+  
+                                  if(bankerName == ''){
+  
+                                      // using sweet alert tutorial at https://sweetalert.js.org/
+                                      // swal(
+                                      //         {
+                                      //             title: "info!",
+                                      //             text: "kindly fill all fields...",
+                                      //             icon: "info",
+                                      //         },
+                                              
+                                      //     );
+  
+                                      swal("kindly fill banker field!", {
+                                              buttons: false,
+                                              timer: 2000,  // disappears after 2 seconds
+                                          });
+  
+  
+                                    
+                                  }
+                                  else
+                                  {
+                                      // convert it to object
+                                      var addAsObject = {
+                                            bankerName : bankerName
+                                      }
+  
+                                      
+                                      submitOtherQualificatnList.push(addAsObject);
+                                        console.log(submitOtherQualificatnList)
+
+                                        var html = "<table class='table table-striped'>";
+                                        for (var i = 0; i < submitOtherQualificatnList.length; i++) {
+
+                                            var indexNumber = i +1;
+
+                                            
+                                            html+="<tr>";
+                                            html+="<td>"+indexNumber+"</td>";
+                                            html+="<td>"+submitOtherQualificatnList[i].bankerName+"</td>";
+                                            html+="<td class='deleteButton btn btn-default' onClick='deleteFunction("+i+")'><i class='fa fa-trash'></i></td>";
+                                            
+                                            html+="</tr>";
+
+                                        }
+                                        html+="</table>";
+
+                                        // display record
+                                        $("#savedListOfQualiifications").html(html);
+
+                                        // clear fields
+                                        $("#bankerName").val("");
+
+
+                                        // put our bankers into the input fields
+                                        $("#bankers").val(JSON.stringify(submitOtherQualificatnList));
+                                  }
+
+                                  // show
+                                  if(submitOtherQualificatnList.length > 0){
+                                        $("#submitOtherQualificatn").show();
+                                    };
+  
+                            });
+
+
+                            // function to delete items
+                            function deleteFunction(param){
+                                // console.log(param);
+                                // console.log(submitOtherQualificatnList);
+                                // console.log(submitOtherQualificatnList[0]);
+
+                                // someArray.splice(x, 1);
+
+                                submitOtherQualificatnList.splice(param, 1);
+                                console.log(submitOtherQualificatnList);
+                                console.log(submitOtherQualificatnList.length);
+
+                                var html = "<table class='table table-striped'>";
+                                for (var i = 0; i < submitOtherQualificatnList.length; i++) {
+                                    
+                                    var indexNumber = i +1;
+
+                                    html+="<tr>";
+                                    html+="<td>"+indexNumber+"</td>";
+                                    html+="<td>"+submitOtherQualificatnList[i].bankerName+"</td>";
+                                    html+="<td class='deleteButton btn btn-default' onClick='deleteFunction("+i+")'><i class='fa fa-trash'></i></td>";
+                                    
+                                    html+="</tr>";
+
+                                }
+                                html+="</table>";
+
+                                // display record
+                                $("#savedListOfQualiifications").html(html);
+
+
+                                // show
+                                if(submitOtherQualificatnList.length == 0){
+                                    $("#submitOtherQualificatn").hide();
+                                }
+
+                                // put our bankers into the input fields
+                                $("#bankers").val(JSON.stringify(submitOtherQualificatnList));
+                            }
+
+
+                            
+
+                      </script>
+
+
+
+
+                                    <div class="col-md-12" style="margin-top: 50px;">
+                                        <h4>Required Uploads</h4>
+                                        <hr>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <p>Application Letter (pdf)</p>
+                                            <input type="file" class="form-control" id="letter" placeholder="Application Letter of Request (pdf)" name="organisationLetterOfRequest" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <p>Certificate of Incorporation (pdf)</p>
+                                            <input type="file" class="form-control" id="letter" placeholder="Application Letter of Request (pdf)" name="organisationLetterOfRequest" required>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <p>Memorandum and Article of Association (pdf)</p>
+                                            <input type="file" class="form-control" id="letter" placeholder="Application Letter of Request (pdf)" name="organisationLetterOfRequest" required>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <p>Reference letter from one of the Applicant's Bankers (pdf)</p>
+                                            <input type="file" class="form-control" id="letter" placeholder="Application Letter of Request (pdf)" name="organisationLetterOfRequest" required>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <p> Regulators Approval for Trading/Investment Activities (pdf)</p>
+                                            <input type="file" class="form-control" id="letter" placeholder="Application Letter of Request (pdf)" name="organisationLetterOfRequest" required>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <p>Corporate Brochure (pdf)</p>
+                                            <input type="file" class="form-control" id="letter" placeholder="Application Letter of Request (pdf)" name="organisationLetterOfRequest" required>
+                                        </div>
+                                    </div>
+
+                                    <!--
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <p>Application Letter (pdf)</p>
+                                            <input type="file" class="form-control" id="letter" placeholder="Application Letter of Request (pdf)" name="organisationLetterOfRequest">
+                                        </div>
+                                    </div>
+                                    -->
+
+
+                                    
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <button id="toSubmit" type="submit" class="btn btn-light block btn-lg" data-toggle="modal" data-target="#inlineForm">
+                                                Submit Request
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </fieldset>
+                        </form>
+
+                        <!-- validate telephone number -->
+                        <!-- check phone number -->
+                        <script>
+                            function compareNumber() {
+                                var telephone = $("#telephone").val();
+                                // console.log(telephone.length);
+                                console.log(typeof telephone);
+                                console.log(parseInt(telephone.length));
+                                console.log(typeof parseInt(telephone))
+
+                                if ( parseInt(telephone.length) > 11){
+                                    alert("Phone number must not be greater than 11 digits");
+                                    $("#telephone").val("");
+                                }
+                                else if ( parseInt(telephone.length) < 11) {
+                                    alert("Phone number must not be less than 11 digits");
+                                    $("#telephone").val("");
+                                }
+                            }
+                        </script>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+  
+  <!--end of content-->
+
+  </div>
+
+
+
+  
+  <script src="new_assets/js/register-form.js"></script>
+
+  <!-- BEGIN: Page Vendor JS-->
+  <script src="app-assets/vendors/js/ui/jquery.sticky.js"></script>
+  <script src="app-assets/vendors/js/extensions/jquery.steps.min.js"></script>
+  <script src="app-assets/vendors/js/pickers/dateTime/moment-with-locales.min.js"></script>
+  <script src="app-assets/vendors/js/pickers/daterange/daterangepicker.js"></script>
+  <script src="app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
+  <!-- END: Page Vendor JS-->
+
+  <!-- BEGIN: Theme JS-->
+  <script src="app-assets/js/core/app-menu.min.js"></script>
+  <script src="app-assets/js/core/app.min.js"></script>
+  <script src="app-assets/js/scripts/customizer.min.js"></script>
+  <script src="app-assets/js/scripts/footer.min.js"></script>
+  <!-- END: Theme JS-->
+
+  <!-- BEGIN: Page JS-->
+  <script src="app-assets/js/scripts/pages/material-app.min.js"></script>
+  <script src="app-assets/js/scripts/forms/wizard-steps.min.js"></script>
+  <!-- END: Page JS-->
+
+</body>
+
+</html>

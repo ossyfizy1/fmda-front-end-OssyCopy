@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- BEGIN: Head-->
+<%- include('ind_includes/head.ejs')%>
+
+<body class="v-light vertical-nav fix-header fix-sidebar">
+    <div id="preloader">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10"/></svg>
+        </div>
+    </div>
+    <div id="main-wrapper">
+        <!-- header -->
+        <%- include('ind_includes/header.ejs')%>
+        <!-- #/ header -->
+        <!-- sidebar -->
+        <%- include('ind_includes/sidebar.ejs')%>
+        <!-- #/ sidebar -->
+        <!-- content body -->
+        <div class="content-body">
+            <div class="container-fluid">
+                
+
+                <div class="card">
+                    
+                    <div class="card-content collpase show">
+                        <div class="card-body">
+                            <form id="userForm">
+                                <div class="form-body">
+
+                                    <h2 class="form-section" align="center"> FMDA MEMBERS. </h2>
+                                    <hr>
+                                    
+                                    <div class = "row">
+                                        <div class="col-md-6">
+                                            <div class="form-group row col-md-9 mx-auto">
+                                                <label for="organisationName1">Enter Search Details</label>
+                                                <input type="text" id="search_by" required class="form-control"  name="search_by" placeholder="e.g first or last name, memberID, email, etc." required>
+                                            </div>
+                                        </div>
+
+                                        
+                                    </div>
+                                    
+                                    <!-- Submit button  -->
+                                    <div class="row" style="margin-top: 30px; margin-left: 0px;">
+                                        <div class="col-md-12">
+                                            <div class="form-group row col-md-9 mx-5">
+                                                <button id="response2" class="btn btn-primary">
+                                                    Search For Member
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                            </form>
+                            <!-- Form end  -->
+
+                            <!-- jquery & ajax link -->
+                            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js "></script>
+
+                            <script>
+                                $(document).ready(function(){
+
+                                    // hide
+                                    $('#memberTableDetails').hide();
+
+
+                                    // on submit post form via ajax 
+                                    $("#userForm").submit(function(){
+
+
+                                        $.ajax({
+                                            type: 'POST',
+                                            url: '/ind_get_member_search_result', 
+                                            data: {"search_by":$("#search_by").val()},
+                                        })
+                                        .done(function(data){
+                                            
+                                            // alert(data);
+                                            // console.log(data)
+
+                                            if (data.length > 0) {
+                                               
+
+                                                // show
+                                                $('#memberTableDetails').show();
+
+
+                                                data.forEach(element => {
+                                                  
+                                                    $('tbody').append( "<tr id='"+element.firstName+"'><td>"+element.firstName+"</td><td>"+element.lastName+"</td><td>"+element.memberUUID+"</td><td>"+element.personalEmail+"</td></tr>");
+
+                                                });
+
+                                                
+
+
+
+
+                                            } else {
+                                                
+                                                alert("no record was found.");
+                                              
+
+                                            }
+                                            
+                                            
+                                        })
+                                        .fail(function() {
+                                        
+                                            // just in case posting your form failed
+                                            alert( "Posting failed." );
+                                            
+                                        });
+                                
+                                        // to prevent refreshing the whole page page
+                                        return false;
+
+
+                                    });
+                                });
+                            </script>
+
+
+                        </div>
+
+
+
+
+
+                    </div>
+                </div>
+
+                <!-- result table -->
+                <div id="memberTableDetails" class="container" style="height: 300px; overflow-y: scroll;">
+
+                    <p>Search Result(s)</p>
+                    <table id="resultTable" class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th>Firstname</th>
+                            <th>Lastname</th>
+                            <th>MEMBER UUID</th>
+                            <th>Email</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>                                                
+                      </table>
+                      <button id="response2" class="btn btn-primary" onclick="removeRow()">
+                        Clear History
+                    </button>
+                </div>
+
+
+                <script>
+                    function removeRow(){
+                        window.location.href = "/ind_member_search"
+                    }
+                </script>
+
+
+
+            </div>
+            <!-- #/ container -->
+        </div>
+        <!-- #/ content body -->
+
+        <!-- footer -->
+        <!-- BEGIN: Footer-->
+        <%- include('ind_includes/footer.ejs')%>
+    </div>
+
+    <!-- Common JS -->
+    <script src="new_assets/plugins/common/common.min.js"></script>
+    <!-- Custom script -->
+    <script src="new_assets/js/custom.min.js"></script>
+    <!-- Chartjs chart -->
+    <script src="new_assets/assets/plugins/chartjs/Chart.bundle.js"></script>
+    <!-- Custom dashboard script -->
+    <script src="new_assets/js/dashboard-1.js"></script>
+
+    
+</body>
+
+</html>

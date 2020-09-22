@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>FMDA</title>
+  <!-- Favicon icon -->
+  <link rel="icon" type="image/png" sizes="16x16" href="../../img/fmdalogo.png">
+  <link href="../../new_assets/css/style.css" rel="stylesheet">
+  <link href="../../new_assets/plugins/tables/css/datatable/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <link href="../../new_assets/css/mycss.css" rel="stylesheet">
+  <script src="../../new_assets/js/modernizr-3.6.0.min.js"></script>
+</head>
+
+<body class="v-light vertical-nav fix-header fix-sidebar">
+  <div id="preloader">
+    <div class="loader">
+      <svg class="circular" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" /></svg>
+    </div>
+  </div>
+  <div id="main-wrapper">
+    <!-- header -->
+    <%- include('../includes/sub-sections/dashboard-header.ejs')%>
+    <!-- #/ header -->
+
+    <!-- sidebar -->
+    <%- include('../includes/sub-sections/dashboard-sidebar.ejs', {})%>
+    <!-- #/ sidebar -->
+    <!-- content body -->
+    <div class="content-body">
+
+        <section id="material-datatables">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card mb-0">
+                        <div class="card-header">
+                            <h4 class="card-title">Payment details %></h4>
+                        </div>
+                        <div class="card-content collapse show">
+                            <div class="card-body">
+
+                                <table class="table table-hover table-striped white">
+
+                                        <!-- Table Head  -->
+                                        <thead>
+                                            <tr>
+                                                <th>Payment details</th>
+                                            </tr>
+                                        </thead>
+                                    
+                                        <!-- Table Body  -->
+                                        <tbody>
+                                            <!-- Status -->
+                                            <tr>
+                                                <td> Status </td>
+                                                <td>
+                                                    <span class="badge badge-<%= lookupPaymentDetails.status === 0 ? 'warning' : lookupPaymentDetails.status === 1 ? 'success' : 'danger' %>">
+                                                            <%= lookupPaymentDetails.status === 0 ? 'Unprocessed' : lookupPaymentDetails.status === 1 ? 'Approved' : 'Declined' %>
+                                                    </span>
+                                                    
+                                                </td>
+                                            </tr>
+
+                                            <!-- Purpose -->
+                                            <tr>
+                                                <td> Purpose </td>
+                                                <td>
+                                                    <%= purpose %>
+                                                </td>
+                                            </tr>
+                                    
+                                            <!-- User ID -->
+                                            <tr>
+                                                <td> User ID </td>
+                                                <td>
+                                                    <%= lookupPaymentDetails.userId %>
+                                                </td>
+                                            </tr>
+
+                                            <!-- Depositor name -->
+                                            <tr>
+                                                <td> Depositor name </td>
+                                                <td>
+                                                    <%= lookupPaymentDetails.depositorName %>
+                                                </td>
+                                            </tr>
+                                    
+                                            <!-- Amount -->
+                                            <tr>
+                                                <td> Amount </td>
+                                                <td>
+                                                    <%= lookupPaymentDetails.amount %>
+                                                </td>
+                                            </tr>
+
+                                            <!-- Date -->
+                                            <!-- <tr>
+                                                <td> Date </td>
+                                                <td>
+                                                    <%= lookupPaymentDetails.date %>
+                                                </td>
+                                            </tr> -->
+
+                                                <!-- Payment reference number -->
+                                            <tr>
+                                                <td> Payment reference number </td>
+                                                <td>
+                                                    <%= lookupPaymentDetails.paymentReferenceNo %>
+                                                </td>
+                                            </tr>
+
+                                                <!-- Payment date -->
+                                            <tr>
+                                                <td> Payment date </td>
+                                                <td>
+                                                    <%= lookupPaymentDetails.paymentDate %>
+                                                </td>
+                                            </tr>
+
+                                                <!-- Bank -->
+                                            <tr>
+                                                <td> Bank </td>
+                                                <td>
+                                                    <%= lookupPaymentDetails.bank %>
+                                                </td>
+                                            </tr>
+
+                                                <!-- Account number -->
+                                            <tr>
+                                                <td> Account number </td>
+                                                <td>
+                                                    <%= lookupPaymentDetails.accountNumber %>
+                                                </td>
+                                            </tr>
+
+                                                <!-- Account name -->
+                                            <tr>
+                                                <td> Account name </td>
+                                                <td>
+                                                    <%= lookupPaymentDetails.accountName %>
+                                                </td>
+                                            </tr>
+
+                                            <!-- invoiceNumber -->
+                                             <tr>
+                                                <td> Invoice Number </td>
+                                                <td>
+                                                    <%= invoiceNumber %>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+
+                                <!-- Form Start -->
+                                <% if (lookupPaymentDetails.status !== 1) {%>
+                                <form class="form form-horizontal row-separator" action="/admin/payments/validate/<%=lookupPaymentDetails.paymentReferenceNo%>/<%=lookupPaymentDetails.userId%>/<%= officialEmail%>/<%=purpose%>/<%= invoiceNumber %>" method="POST">
+                                    
+
+                                    <!-- Submit button  -->
+                                    <div class="form-actions text-right">
+                                        <button type="submit" class="btn btn-darken-2 btn-danger" name='status' value=-1> REJECT</button>
+                                        <button type="submit" class="btn btn-darken-2 btn-success" name='status' value=1> ACCEPT </button>
+                                    </div>
+
+                                </form>
+                                <% }; %>
+                                <!-- Form end  -->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+      
+    </div>
+    <!-- #/ content body -->
+    <!-- footer -->
+    <%- include('../includes/sub-sections/dashboard-footer.ejs', {})%>   
+    <!-- #/ footer -->
+  </div>
+  <!-- Common JS -->
+  <script src="../../new_assets/plugins/common/common.min.js"></script>
+  <script src="../../new_assets/plugins/tables/js/jquery.dataTables.min.js"></script>
+  <script src="../../new_assets/plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
+  <script src="../../new_assets/plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
+  <!-- Custom script -->
+  <script src="../../new_assets/js/custom.min.js"></script>
+  <!-- Custom dashboard script -->
+  <script src="../../new_assets/js/dashboard-1.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Individual Member Registration">
+  <meta name="author" content="Softworks">
+
+  <link rel="stylesheet" type="text/css" href="new_assets/scss/register.min.css">
+  <link rel="stylesheet" type="text/css" href="new_assets/plugins/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="new_assets/icons/font-awesome/css/font-awesome.min.css">
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
+
+  <title>FMDA- Individual Member Registration</title>
+
+</head>
+
+<body>
+
+  <div class="col-md-12" style="margin-top: 20px;">
+
+    <section id="number-tabs">
+      <div class="row">
+          <div class="col-12">
+              <div class="card">
+                  <div class="card-content collapse show">
+                      <div class="card-body">
+
+                        <h2 style="background-color: black; color: white;">Attestation</h2> 
+                        <hr>
+
+                        <a class="btn btn-light" href="/ind_other_proffessional_qualifications">Previous Page</a>
+                        <a style="float: right;" class="btn btn-light" href="/logout">Log Out</a>
+  
+                          <!-- first step -->
+                          <form style="margin-top: 50px;" action="/ind_attestation" method="post" class="form-horizontal">
+                              <!-- start of fourth step -->
+                              <fieldset id="ourFieldset5">
+                              <div class="row">
+                                  <div class="col-md-6">
+                                      <div class="form-group">
+                                          <label for="referenceMemberId"> FMDA REFREE MEMBER ID:</label>
+                                          <input type="text" class="form-control" id="referenceMemberId" name="referenceMemberId"  placeholder="FMDA refree member ID e.g AAA16">
+                                      </div>
+                                  </div>
+                              </div>
+  
+                              <button name="submit" type="submit" class="btn btn-light">
+                                  <%= action === 'update' ? 'Update': 'Next' ; %>
+                              </button>
+                              
+                              </fieldset>
+                          <!-- start of fourth step -->
+                          </form>
+                          <!-- end of first step 1-->
+  
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </section>
+
+  </div>
+
+
+
+
+  
+  <script src="new_assets/js/register-form.js"></script>
+
+  <!-- BEGIN: Scripts-->
+  <%- include('onboarding_includes/scripts.ejs')%>
+  <!-- END: Scripts-->
+
+
+</body>
+
+</html>

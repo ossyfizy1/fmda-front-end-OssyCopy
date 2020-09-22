@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- BEGIN: Head-->
+<%- include('../ind_includes/head.ejs')%>
+
+<body class="v-light vertical-nav fix-header fix-sidebar">
+    <div id="preloader">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10"/></svg>
+        </div>
+    </div>
+    <div id="main-wrapper">
+        <!-- header -->
+        <%- include('../ind_includes/header.ejs')%>
+        <!-- #/ header -->
+        <!-- sidebar -->
+        <%- include('../ind_includes/sidebar.ejs')%>
+        <!-- #/ sidebar -->
+        <!-- content body -->
+        <div class="content-body">
+            <div class="container-fluid">
+                
+                <section id="material-datatables">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card mb-0">
+                                <div class="card-header">
+                                    <h4 class="card-title">Upcoming Events</h4>
+                                    <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+                                    <div class="heading-elements">
+                                        <ul class="list-inline mb-0">
+                                            <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
+                                            <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
+                                            <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+                                            <li><a data-action="close"><i class="ft-x"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-content collapse show">
+                                    <div class="card-body">
+
+                                    <!-- Table Content: Start -->
+                                    <%- include('../../generalPartials/event_list.ejs', {})%>
+                                    <!-- Table Content: End -->
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+            <!-- #/ container -->
+        </div>
+        <!-- #/ content body -->
+
+        <!-- footer -->
+        <!-- BEGIN: Footer-->
+        <%- include('../ind_includes/footer.ejs')%>
+    </div>
+
+    <!-- Common JS -->
+    <script src="new_assets/plugins/common/common.min.js"></script>
+    <!-- Custom script -->
+    <script src="new_assets/js/custom.min.js"></script>
+    <!-- Chartjs chart -->
+    <script src="new_assets/assets/plugins/chartjs/Chart.bundle.js"></script>
+    <!-- Custom dashboard script -->
+    <script src="new_assets/js/dashboard-1.js"></script>
+
+
+    <!-- BEGIN: Scripts-->
+    <%- include('../ind_includes/scripts.ejs', {})%>
+    <script src="../../app-assets/vendors/js/tables/datatable/datatables.min.js"></script>
+    <script src="../../app-assets/js/scripts/pages/material-app.min.js"></script>
+    <script src="../../app-assets/js/scripts/tables/material-datatable.min.js"></script>
+
+    
+</body>
+
+</html>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- BEGIN: Head-->
+<%- include('../ind_includes/head.ejs')%>
+
+<body class="v-light vertical-nav fix-header fix-sidebar">
+    <div id="preloader">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10"/></svg>
+        </div>
+    </div>
+    <div id="main-wrapper">
+        <!-- header -->
+        <%- include('../ind_includes/header.ejs')%>
+        <!-- #/ header -->
+        <!-- sidebar -->
+        <%- include('../ind_includes/sidebar.ejs')%>
+        <!-- #/ sidebar -->
+        <!-- content body -->
+        <div class="content-body">
+            <div class="container-fluid">
+                
+
+              <section id="material-datatables">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card mb-0">
+                            <div class="card-header">
+                                <h4 class="card-title">Individual member event registration </h4>
+                                <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+                            </div>
+                            <div class="card-content collapse show">
+                                <div class="card-body">
+
+                                  <div class="container">
+                                    <form class="row" method="POST" action="/ind_event_registration">
+
+                                    <div class="col-md-6 form-group" style="margin-top: 30px;">
+                                        <label for="email">Event Name:</label>
+                                        <input type="text" required readonly class="form-control" id="email" name="eventName" value="<%= registerWith.eventName %>">
+                                    </div>
+
+                                    <div class="col-md-6 form-group" style="margin-top: 30px;">
+                                      <label for="email">Depositor Name:</label>
+                                      <input type="text" required class="form-control" id="email" name="depositorName">
+                                    </div>
+
+                                    <div class="col-md-6 form-group" style="margin-top: 30px;">
+                                      <label for="email">Payment Reference No:</label>
+                                      <input type="text" required class="form-control" id="email" name="paymentReferenceNo">
+                                    </div>
+
+                                      <div class="col-md-6 form-group" style="margin-top: 30px;">
+                                        <label for="email">Amount:</label>
+                                        <input type="text" required readonly class="form-control" id="email" name="amount" value="<%= registerWith.amount %>">
+                                      </div>
+
+                                      <div class="col-md-6 form-group" style="margin-top: 30px;">
+                                        <label for="email">Payment Date:</label>
+                                        <input type="date" required class="form-control" id="email" name="paymentDate">
+                                      </div>
+
+                                      <div class="col-md-6 form-group" style="margin-top: 30px;">
+                                        <label for="email">Bank:</label>
+                                        <select name="bank" id="bank_name" class="form-control" required onchange="getFmdaBankDetails()">
+                                            <option value="" disabled selected >Select bank</option>
+                                            <% for(i = 0; i < lookupBankAccounts.length; i++) { %>
+                                            <option value="<%= lookupBankAccounts[i].bank %>"><%= lookupBankAccounts[i].bank %></option>
+                                            <% } %> 
+                                        </select>
+                                      </div>
+
+                                      <!-- get bank details -->
+                                      <script>
+                                        function getFmdaBankDetails() 
+                                        {
+
+                                          // on selection of bank from dropdown list empty Account Number
+                                          $("#accountNumberOfSelectedBank").empty();
+                                          
+                                          // empty the account name
+                                          $("#theAccountName").val("");
+
+                                          var bank_name = $("#bank_name").val();
+
+                                          $.ajax({
+                                                  type: 'POST',
+                                                  url: '/ind_get_fmda_account_details', 
+                                                  data: {"bank_name" : bank_name}  // This will send the form data to the php page
+                                              })
+                                              .done(function(data){
+
+                                                console.log(data);
+
+                                                // convert data to json and save the data in sessionStorge (in web browser)
+                                              sessionStorage.setItem("accountDetailsData", JSON.stringify(data) );
+
+                                                // show the "--select Account Nunber--" on bank selection
+                                                $("<option>--select Account Nunber--</option>").appendTo("#accountNumberOfSelectedBank");
+
+                                                // update the Account Number field with account numbers
+                                                for (let index = 0; index < data.length; index++) {
+                                                        const element = data[index];
+                                                        // alert(element);
+                                                        $("<option>" + element.accountNumber + "</option>").appendTo("#accountNumberOfSelectedBank");
+                                                    }
+                                              })
+                                              .fail(function() {
+                                                  // just in case posting your form failed
+                                                  alert( "Posting failed." );
+                                              });
+                                        }
+                                    </script>
+
+
+                                      <div class="col-md-6 form-group" style="margin-top: 30px;">
+                                        <label for="email">Account Number:</label>
+                                        <select name="accountNumber" id="accountNumberOfSelectedBank" class="form-control" required onchange="getFmdaBankAccountName()">
+                                        </select>
+                                      </div>
+
+
+                                      <!-- get account name -->
+                                      <script>
+                                        function getFmdaBankAccountName() 
+                                        {
+                                            
+
+                                            // get and parse the bank account details stored in sessionStorage(in the web browser)
+                                            const accountDetailsData = JSON.parse( sessionStorage.getItem("accountDetailsData") );
+
+                                            console.log("account Details Data: ", accountDetailsData);
+
+                                            // get the account number of the selected bank from the dropdown 
+                                            var accountNumberOfSelectedBank = $("#accountNumberOfSelectedBank").val();
+
+                                            console.log("account Number Of Selected Bank : ", accountNumberOfSelectedBank);
+
+                                            for (let index = 0; index < accountDetailsData.length; index++) {
+                                              const element = accountDetailsData[index];
+
+                                              // cross check the selected bank number against the sessionStorage array of object and get the bank name
+                                              if (element.accountNumber == accountNumberOfSelectedBank) {
+                                                  console.log(element.accountName);
+
+                                                  // set the account name
+                                                  $("#theAccountName").val(element.accountName);
+                                              }
+                                              
+                                            }
+
+                                        }
+                                      </script>
+
+                                      <div class="col-md-6 form-group" style="margin-top: 30px;">
+                                        <label for="email">Account Name:</label>
+                                        <input id="theAccountName" type="text" required readonly class="form-control" id="email" name="accountName">
+                                      </div>
+
+
+                                      <% 
+                                        if (registerWith.invoiceNumber) {
+                                      %>
+                                      <!-- invoice number -->
+                                      <div class="col-md-6 form-group" style="margin-top: 30px;">
+                                        <label for="email">Invoice Number:</label>
+                                        <input id="invoiceNumber" type="text" required class="form-control" name="invoiceNumber" value="<%=registerWith.invoiceNumber%>" readonly>
+                                      </div>
+                                      <%
+                                        } else {
+                                      %>
+                                      <!-- invoice number -->
+                                      <div class="col-md-6 form-group" style="margin-top: 30px;">
+                                        <label for="email">Invoice Number:</label>
+                                        <input id="invoiceNumber" type="text" required class="form-control" id="email" name="invoiceNumber">
+                                        <!-- generate invoice number -->
+                                        <button style="margin-top: 20px;" id="generateInvoiceNumber">Click to generate invoice number</button>
+                                      </div>
+                                      <%  
+                                        }
+                                      %>
+
+                                      
+
+                                      <!-- jquery & ajax link -->
+                                      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js "></script>
+
+
+                                      <!-- function to generate invoice number -->
+                                      <script>
+                                        $("#generateInvoiceNumber").click(function() {
+                                            // alert("lets generate invoice number");
+
+                                            // display upon processing
+                                            $("#generateInvoiceNumber").text("processing, please wait...");
+
+                                            // ajax call
+                                            $.post("/ind_generate_event_invoice_number", {"action" : "generate event invoice number", "eventID" : "<%= registerWith.eventId %>"}, function(data) {
+                                                // alert(data);
+
+                                                // display message after processing
+                                                $("#generateInvoiceNumber").text(data);
+                                            });
+
+                                        });
+                                    </script>
+
+                                      <!-- hidden -->
+                                      <div class="col-md-6 form-group" style="visibility: hidden;">
+                                        <label for="email">Event ID:</label>
+                                        <input type="text" required readonly class="form-control" id="email" name="eventId" value="<%= registerWith.eventId %>">
+                                    </div>
+
+                                    <!-- hidden -->
+                                    <div class="col-md-6 form-group" style="visibility: hidden;">
+                                      <label for="email">User ID:</label><br><br>
+                                      <input type="text" required readonly class="form-control" id="email" name="userId" value="<%= registerWith.memberUUID %>">
+                                    </div>
+
+                                     <!-- hidden -->
+                                    <div class="col-md-6 form-group" style="visibility: hidden;">
+                                      <label for="email">Purpose:</label>
+                                      <input type="text" required readonly class="form-control" id="email" name="purpose" value="Event registration">
+                                    </div>
+
+
+                                      <div class="col-md-12 form-group" style="margin-top: 30px;">
+                                        <input type="submit" name="submit"  value="Register">
+                                      </div>
+                                      
+
+                                    </form>
+                                  </div>
+                                  <!-- Table Content: End -->
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+
+            </div>
+            <!-- #/ container -->
+        </div>
+        <!-- #/ content body -->
+
+        <!-- footer -->
+        <!-- BEGIN: Footer-->
+        <%- include('../ind_includes/footer.ejs')%>
+    </div>
+
+    <!-- Common JS -->
+    <script src="new_assets/plugins/common/common.min.js"></script>
+    <!-- Custom script -->
+    <script src="new_assets/js/custom.min.js"></script>
+    <!-- Chartjs chart -->
+    <script src="new_assets/assets/plugins/chartjs/Chart.bundle.js"></script>
+    <!-- Custom dashboard script -->
+    <script src="new_assets/js/dashboard-1.js"></script>
+
+    <!-- BEGIN: Scripts-->
+    <%- include('../ind_includes/scripts.ejs', {})%>
+    <script src="../../app-assets/vendors/js/tables/datatable/datatables.min.js"></script>
+    <script src="../../app-assets/js/scripts/pages/material-app.min.js"></script>
+    <script src="../../app-assets/js/scripts/tables/material-datatable.min.js"></script>
+    
+    <!-- END: Scripts-->
+
+    
+</body>
+
+</html>

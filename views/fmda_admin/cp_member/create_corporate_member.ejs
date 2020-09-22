@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>FMDA</title>
+  <!-- Favicon icon -->
+  <link rel="icon" type="image/png" sizes="16x16" href="../../img/fmdalogo.png">
+  <link href="../../new_assets/css/style.css" rel="stylesheet">
+  <link href="../../new_assets/plugins/tables/css/datatable/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <link href="../../new_assets/css/mycss.css" rel="stylesheet">
+  <script src="../../new_assets/js/modernizr-3.6.0.min.js"></script>
+</head>
+
+
+
+<body class="v-light vertical-nav fix-header fix-sidebar">
+  <div id="preloader">
+    <div class="loader">
+      <svg class="circular" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" /></svg>
+    </div>
+  </div>
+  <div id="main-wrapper">
+    <!-- header -->
+    <%- include('../includes/sub-sections/dashboard-header.ejs')%>
+    <!-- #/ header -->
+
+    <!-- sidebar -->
+    <%- include('../includes/sub-sections/dashboard-sidebar.ejs', {})%>
+    <!-- #/ sidebar -->
+    <!-- content body -->
+    <div class="content-body">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="" id="horz-layout-colored-controls">New Corporate Member</h2>
+                        <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+                        <div class="heading-elements">
+                            <!-- <ul class="list-inline mb-0">
+                                <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
+                                <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
+                                <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+                                <li><a data-action="close"><i class="ft-x"></i></a></li>
+                            </ul> -->
+                        </div>
+                    </div>
+                    <div class="card-content collpase show">
+                        <div class="card-body">
+
+                            <%= JSON.stringify(corporate) %>
+
+                            <!-- Corporate Member data -->
+                            <form class="form form-horizontal cop-mem-info" action="/admin/corporate_member/create_member/<%= corporate.id %>" method="POST">
+                                <div class="form-body">
+
+                                    <!-- form section : Organisation Info  -->
+                                    <h4 class="form-section" align="center"> Submitted Information </h4>
+                                    <hr>
+
+                                    <!-- form row  -->
+                                    <div class="row">
+
+                                        <!--1. Organisation Name  -->
+                                        <div class="col-md-6">
+                                            <div class="form-group row col-md-9 mx-auto">
+                                                <label for="organisationName1">Organisation Name</label>
+                                                <input type="text" disabled id="organisationName1" class="form-control" value="<%= corporate.organisationName %>" name="headOfficeAddress">
+                                            </div>
+                                        </div>
+
+                                        <!--2. Contact Official Email  -->
+                                        <div class="col-md-6">
+                                            <div class="form-group row col-md-9 mx-auto">
+                                                <label for="contactOfficialEmail">Contact Official Email</label>
+                                                <input type="text" disabled id="contactOfficialEmail" class="form-control" value="<%= corporate.contactOfficialEmail %>" name="headOfficeAddress">
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <!-- form row  -->
+                                    <div class="row">
+
+                                        <!--3. Contact Person Address  -->
+                                        <div class="col-md-6">
+                                            <div class="form-group row col-md-9 mx-auto">
+                                                <label for="contactPersonAddress"> Contact Person Address </label>
+                                                <input type="text" disabled id="contactPersonAddress" class="form-control" value="<%= corporate.contactPersonAddress %>" name="headOfficeAddress">
+                                            </div>
+                                        </div>
+
+                                        <!--4. Contact Person Mobile Number  -->
+                                        <div class="col-md-6">
+                                            <div class="form-group row col-md-9 mx-auto">
+                                                <label for="contactPersonMobileNumber"> Contact Person Mobile Number</label>
+                                                <input type="text" disabled id="contactPersonMobileNumber" class="form-control" value="<%= corporate.contactPersonMobileNumber %>" name="headOfficeAddress">
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+
+                                    <!-- form row  -->
+                                    <div class="row">
+
+                                        <!--5. Contact Person Name -->
+                                        <div class="col-md-6">
+                                            <div class="form-group row col-md-9 mx-auto">
+                                                <label for="contactPersonName"> Contact Person Name </label>
+                                                <input type="text" disabled id="contactPersonName" class="form-control" value="<%= corporate.contactPersonName %>" name="headOfficeAddress">
+                                            </div>
+                                        </div>
+
+                                        <!--6. Contact Person Name -->
+                                        <div class="col-md-6">
+                                            <div class="form-group row col-md-9 mx-auto">
+                                                <label for="membershipRequestDate"> Membership Request Date</label>
+                                                <input type="text" disabled id="membershipRequestDate" class="form-control" value="<%= corporate.membershipRequestDate %>" name="headOfficeAddress">
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                    <!-- form row  -->
+                                    <div class="row">
+
+                                        <!--7. Organisation Letter Of Request -->
+                                        <div class="col-md-6">
+                                            <div class="form-group row col-md-9 mx-auto flex-column">
+                                                <label for="organisationLetterOfRequest"> Organisation Letter Of Request </label>
+                                                <a href="/corp_uploads/<%= corporate.organisationLetterOfRequest%>" class="btn btn-primary mt-1">View Letter</a>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </form>
+                            <!-- Corporate Member Data  -->
+
+                            <!-- Organization Form Start -->
+                            <form class="form form-horizontal mt-5" action="/admin/corporate_member/create_member/<%= corporate.id %>" method="POST">
+                                <div class="form-body">
+
+                                    <!-- form section : Organisation Info  -->
+                                    <h4 class="form-section" align="center">Add Organisation Information</h4>
+                                    <hr>
+
+                                    <!-- form row  -->
+                                    <div class="row">
+
+                                        <!-- 1. Organisation Name -->
+                                        <div class="col-md-6">
+
+                                            <!-- Select form  -->
+                                            <div class="form-group row col-md-9 mx-auto">
+                                                <label for="organisationName">Organisation Name</label>
+                                                <select id="organisationName" name="organisation" class="form-control">
+                                                    <option disabled selected>Select Organisation Name </option>
+                                                    <option value='other' >other </option>
+                                                    <% 
+                                                      <!-- filter out organisations that dont have membership id's and the other's option from the db-->
+                                                      let filteredOrganisations = organisations.filter(item => item.membershipId === "" && item.organisationName !== "Others");
+                                                        filteredOrganisations.forEach((item) => { %>
+                                                        <option value="<%= item.organisationName + ',' + item.id %>" <%= corporate.organisationName === item.organisationName ? 'selected': '' %> ><%= item.organisationName %></option>
+                                                    <% }); %> 
+                                                </select>
+                                            </div>
+
+                                            <!-- Optional: Add organisation name -->
+                                            <div class="form-group row d-none addNewOrganisation badge border-left-success badge-square badge-striped pb-1 pt-1">
+                                                <label class="col-md-3 label-control" for="organisationName">Organisation Name</label>
+                                                <div class="col-md-9 mx-auto ">
+                                                    <div class=" input-container">
+                                                    </div>
+                                                    <div class="">
+                                                        <select class="form-control mb-1 mt-1">
+                                                            <% let filteredmemberTypes = memberTypes.filter(item => item.type !== 'Individual');
+                                                            filteredmemberTypes.forEach((item) => { %>
+                                                                <option value="<%= item.type %>" <%= item.type === corporate.organisationType ? 'selected' : '' ; %> ><%= item.type %></option>
+                                                            <% }); %>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <button type="submit" class="btn btn-success btn-min-width box-shadow-2 waves-effect waves-light mt-1 mx-auto"> + Add New Organisation</button>
+                                            </div>
+
+                                        </div>
+
+
+                                        <!-- 2. Head Office Address -->
+                                        <div class="col-md-6">
+                                            <div class="form-group row col-md-9 mx-auto">
+                                                <label for="headOfficeAddress">Head Office Address</label>
+                                                <input type="text" id="headOfficeAddress" class="form-control" placeholder="Enter Head Office Address" name="headOfficeAddress" value="<%= corporate.headOfficeAddress %>">
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <!-- form row  -->
+                                    <div class="row"> 
+
+                                        <!-- 3. Managing Director or CEO -->
+                                        <div class="col-md-6">
+                                            <div class="form-group row col-md-9 mx-auto">
+
+                                                <label for="managingDirectorOrCEO">Managing Director or CEO</label>
+
+                                                <input type="text" id="managingDirectorOrCEO" class="form-control" placeholder="Managing Director or CEO" name="managingDirectorOrCEO" value="<%= corporate.managingDirectorOrCEO %>">
+
+                                            </div>
+                                        </div>
+
+                                        <!-- 4. Organisation Type -->
+                                        <div class="col-md-6">
+                                            <div class="form-group row col-md-9 mx-auto">
+
+                                                <label for="organisationType">organisation Type</label>
+
+                                                <select id="roles" name="organisationType" class="form-control">
+                                                        <% filteredmemberTypes = memberTypes.filter(item => item.type !== 'Individual');
+                                                        filteredmemberTypes.forEach((item) => { %>
+                                                            <option value="<%= item.type %>" <%= item.type === corporate.organisationType ? 'selected' : '' ; %> ><%= item.type %></option>
+                                                        <% }); %>
+                                                    </select>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <!-- form row  -->
+                                    <div class="row">
+
+                                        <!-- 5. Bankers -->
+                                        <div class="col-md-6" style="margin-top: 50px; margin-bottom: 50px;">
+                                            <div class="form-group row">
+                                                <div class="col-md-9 mx-auto mb-1 mt-1 font-medium-2">
+                                                    <u>Tick to Select List of Bankers</u>
+                                                </div>
+
+                                                <div class="col-md-9 mx-auto select-div" style="height:150px; overflow-y: scroll;">
+                                                    
+
+                                                    <% corporate.bankers.forEach((item) => { %>
+                                                        <input type='checkbox' name='bankers' value="<%= item %>" checked><span style='font-size: 16px;'> <%= item %></span style='font-size: 20px;'><hr><br>
+
+                                                    <% }); %>
+                                                
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <!-- form section : Treasury Info -->
+                                <h4 class="form-section" align="center">Add Treasury Info</h4>
+                                <hr>
+
+                                <!-- form row  -->
+                                <div class="row">
+
+                                    <!-- 6. Treasurer Name -->
+                                    <div class="col-md-6">
+                                        <div class="form-group row col-md-9 mx-auto">
+
+                                            <label for="treasurerName">Treasurer Name</label>
+                                            <input class="form-control" type="text" name="treasurerName" placeholder="Enter Treasurer Name" id="treasurerName" value="<%= corporate.treasurerName
+ %>">
+
+                                        </div>
+                                    </div>
+
+                                    <!-- 7. Treasurer Email -->
+                                    <div class="col-md-6">
+                                        <div class="form-group row col-md-9 mx-auto">
+
+                                            <label for="treasurerEmail">Treasurer Email</label>
+
+                                            <input class="form-control" type="email" name="treasurerEmail" placeholder="Enter Treasurer Email" id="treasurerEmail" value="<%= corporate.treasurerEmail %>">
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <!-- form row  -->
+                                <div class="row">
+
+                                    <!-- 8. Treasury Office Address -->
+                                    <div class="col-md-6">
+                                        <div class="form-group row col-md-9 mx-auto">
+
+                                            <label for="treasuryOfficeAddress">Treasury Office Address</label>
+
+                                            <input class="form-control" type="text" name="treasuryOfficeAddress" placeholder="Enter Treasury Office Address" id="treasuryOfficeAddress" value="<%= corporate.treasuryOfficeAddress %>">
+
+                                        </div>
+                                    </div>
+
+                                    <!-- 9. Treasury Unit Phone Number -->
+                                    <div class="col-md-6">
+                                        <div class="form-group row col-md-9 mx-auto">
+
+                                            <label for="treasuryUnitPhoneNumber">Treasury Unit Phone Number</label>
+
+                                            <input class="form-control" type="tel" name="treasuryUnitPhoneNumber" placeholder="Enter Treasury Unit Phone Number" id="treasuryUnitPhoneNumber" value="<%= corporate.treasuryUnitPhoneNumber %>">
+
+                                        </div>
+                                    </div>
+
+
+                                    <!-- 10. Treasury Group Email -->
+                                    <div class="col-md-6">
+                                        <div class="form-group row col-md-9 mx-auto">
+
+                                            <label for="treasuryUnitPhoneNumber">Treasury Group Email</label>
+
+                                            <input class="form-control" type="email" name="treasuryGroupEmail" placeholder="Enter Treasury Group Email" id="treasuryGroupEmail" value="<%= corporate.treasuryGroupEmail %>">
+
+                                        </div>
+                                    </div>
+
+
+                                    <!-- 11. Chief Dealer Email -->
+                                    <div class="col-md-6">
+                                        <div class="form-group row col-md-9 mx-auto">
+
+                                            <label for="treasuryUnitPhoneNumber">Chief Dealer Email</label>
+
+                                            <input class="form-control" type="email" name="chiefDealerEmail" placeholder="Enter Chief Dealer Email" id="chiefDealerEmail" value="<%= corporate.chiefDealerEmail %>">
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                                <!-- Submit button  
+                                <div class="form-actions text-right">
+                                    <button type="submit" class="btn btn-primary">
+                                        Save
+                                    </button>
+                                </div>
+                                -->
+
+                            </form>
+                            <!-- organization Form end  -->
+
+                            
+
+
+
+                        </div>
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+      
+    </div>
+    <!-- #/ content body -->
+    <!-- footer -->
+    <%- include('../includes/sub-sections/dashboard-footer.ejs', {})%>   
+    <!-- #/ footer -->
+  </div>
+  <!-- Common JS -->
+  <script src="../../new_assets/plugins/common/common.min.js"></script>
+  <script src="../../new_assets/plugins/tables/js/jquery.dataTables.min.js"></script>
+  <script src="../../new_assets/plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
+  <script src="../../new_assets/plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
+  <!-- Custom script -->
+  <script src="../../new_assets/js/custom.min.js"></script>
+  <!-- Custom dashboard script -->
+  <script src="../../new_assets/js/dashboard-1.js"></script>
+
+
+  <!-- ajax call -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js "></script>
+
+  <%- //include('../includes/sub-sections/dashboard-scripts.ejs', {})%>
+                    <script>
+                        const addNewOrganisation = document.querySelector('.addNewOrganisation');
+                        const inputContainer = document.querySelector('.addNewOrganisation .input-container');
+                        const selectForm = document.querySelector('#organisationName');
+
+                        // hide create new organisatio section
+                        const hideAddOrganisation = () => {
+                            console.log('aaa')
+                            addNewOrganisation.classList.add('d-none');
+                            inputContainer.innerHTML = '';
+                            return;
+                        }
+
+                        // send an async request to the server to add a new organisation
+                        const fetchAddNewOrganisation = async organisationInfo => {
+                            const options = {
+                                method: 'POST',
+                                body: JSON.stringify(organisationInfo),
+                                headers: {
+                                    'Accept': 'text/html',
+                                    'Content-Type': 'application/json'
+                                },
+                            }
+                            console.log('bfr')
+                            const response = await fetch('/admin/corporate_member/create_organisation', options);
+                            console.log('response', response);
+                            let data = await response.text();
+                            console.log('aft', data)
+                                // update drop down
+                            selectForm.innerHTML = data;
+                            hideAddOrganisation();
+
+                        }
+
+                        // handle clicking of button and creating of new  organisation
+                        selectForm.addEventListener('change', async(e) => {
+                            const value = e.target.value.split(' ')[0];
+                            // check that other value was clicked
+                            if (value !== 'other') {
+                                hideAddOrganisation();
+                                return;
+                            };
+                            // create new input element
+                            let inputField = document.createElement('input');
+                            inputField.setAttribute('class', 'form-control border-primary');
+                            inputField = Object.assign(inputField, {
+                                type: 'text',
+                                placeholder: 'Organisation Name',
+                                value: '<%= corporate.organisationName %>',
+                            });
+                            // add input to page and make visible
+                            inputContainer.appendChild(inputField);
+                            addNewOrganisation.classList.remove('d-none');
+                            // handle input being clicked
+                            document.querySelector('.addNewOrganisation button').addEventListener('click', e => {
+                                e.preventDefault();
+                                const organisationName = document.querySelector('.addNewOrganisation input').value;
+                                const category = document.querySelector('.addNewOrganisation select').value;
+                                const corporateMemberId = '<%= corporate.id %>';
+                                fetchAddNewOrganisation({
+                                    organisationName,
+                                    category,
+                                    corporateMemberId
+                                });
+                            });
+                        });
+                    </script>
+                    <!-- END: Scripts-->
+
+
+</body>
+
+</html>

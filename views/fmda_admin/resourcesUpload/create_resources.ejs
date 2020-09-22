@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>FMDA</title>
+  <!-- Favicon icon -->
+  <link rel="icon" type="image/png" sizes="16x16" href="../../img/fmdalogo.png">
+  <link href="../../new_assets/css/style.css" rel="stylesheet">
+  <link href="../../new_assets/plugins/tables/css/datatable/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <link href="../../new_assets/css/mycss.css" rel="stylesheet">
+  <script src="../../new_assets/js/modernizr-3.6.0.min.js"></script>
+</head>
+
+<body class="v-light vertical-nav fix-header fix-sidebar">
+  <div id="preloader">
+    <div class="loader">
+      <svg class="circular" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" /></svg>
+    </div>
+  </div>
+  <div id="main-wrapper">
+    <!-- header -->
+    <%- include('../includes/sub-sections/dashboard-header.ejs')%>
+    <!-- #/ header -->
+
+    <!-- sidebar -->
+    <%- include('../includes/sub-sections/dashboard-sidebar.ejs', {})%>
+    <!-- #/ sidebar -->
+    <!-- content body -->
+    <div class="content-body">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+
+                    <div class="card-content collpase show">
+                        <div class="card-body">
+                            <form id="userForm2"  method="POST" action="/admin/resource_management/create_resource_directories">
+                                <div class="form-body">
+
+                                    <h2 class="form-section" align="center">  Create Directory </h2>
+                                    <hr>
+                                    
+                                    <div class = "row">
+                                        <div class="col-md-6">
+                                                <div class="form-group row col-md-9 mx-auto">
+                                                    <label for="organisationName1">Directory Name</label>
+                                                    <input type="text" id="title" required class="form-control"  name="title" placeholder="Enter Directory Name">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group row col-md-9 mx-auto autocomplete">
+                                                    <label for="contactPersonAddress"> Directory Description </label>
+                                                    <input id="groupid" required class="form-control" value="" name="Description"  placeholder="Enter Directory Description">
+                                                </div>
+                                            </div>
+
+
+                                    </div>
+                                    <div class = "row"> 
+                                        <div class="col-md-6">
+                                                <div class="form-group row col-md-9 mx-auto">
+                                                    <label for="organisationName1">
+                                                            Acceesible By:
+                                                    </label>
+                                                </div>
+                                                <div class="form-group row col-md-9 mx-auto">
+
+                                                    <p class="col-md-6">
+                                                        
+                                                        <input id="group" type="checkbox" name="Accessor" value='Associate'> Associate
+                                                    </p>
+                                                    <p class="col-md-6">
+                                                        <input id="group" type="checkbox" name="Accessor" value='Member'> Member
+                                                     </p>
+
+                                                     <p class="col-md-6">
+                                                        <input id="group" type="checkbox" name="Accessor" value='Fellow'> Fellow
+                                                     </p>
+
+                                                </div>
+                                        </div>
+                                    </div>
+                                    
+                             
+
+                            
+                             
+
+                                <!-- Submit button  -->
+                                <div class="row" style="margin-top: 100px;">
+                                    <div class="col-md-12">
+                                        <div class="form-group row col-md-9 mx-5">
+                                            <button id="response2" type="submit" class="btn btn-primary">
+                                                Create Directory
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
+                            <!-- Form end  -->
+
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+      
+    </div>
+    <!-- #/ content body -->
+    <!-- footer -->
+    <%- include('../includes/sub-sections/dashboard-footer.ejs', {})%>   
+    <!-- #/ footer -->
+  </div>
+  <!-- Common JS -->
+  <script src="../../new_assets/plugins/common/common.min.js"></script>
+  <script src="../../new_assets/plugins/tables/js/jquery.dataTables.min.js"></script>
+  <script src="../../new_assets/plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
+  <script src="../../new_assets/plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
+  <!-- Custom script -->
+  <script src="../../new_assets/js/custom.min.js"></script>
+  <!-- Custom dashboard script -->
+  <script src="../../new_assets/js/dashboard-1.js"></script>
+</body>
+
+</html>

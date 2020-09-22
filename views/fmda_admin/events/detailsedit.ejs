@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>FMDA</title>
+  <!-- Favicon icon -->
+  <link rel="icon" type="image/png" sizes="16x16" href="../../img/fmdalogo.png">
+  <link href="../../new_assets/css/style.css" rel="stylesheet">
+  <link href="../../new_assets/plugins/tables/css/datatable/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <link href="../../new_assets/css/mycss.css" rel="stylesheet">
+  <script src="../../new_assets/js/modernizr-3.6.0.min.js"></script>
+</head>
+
+<body class="v-light vertical-nav fix-header fix-sidebar">
+  <div id="preloader">
+    <div class="loader">
+      <svg class="circular" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" /></svg>
+    </div>
+  </div>
+  <div id="main-wrapper">
+    <!-- header -->
+    <%- include('../includes/sub-sections/dashboard-header.ejs')%>
+    <!-- #/ header -->
+
+    <!-- sidebar -->
+    <%- include('../includes/sub-sections/dashboard-sidebar.ejs', {})%>
+    <!-- #/ sidebar -->
+    <!-- content body -->
+    <div class="content-body">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="" id="horz-layout-colored-controls">Update Event</h2>
+                    </div>
+                    <div class="card-content collpase show">
+                        <div class="card-body">
+                            <form id="userForm2" enctype="multipart/form-data" method="POST" action="/admin/events/updatepicture_upload?eventId=<%= lookupEvent.id %>">
+                                <div class="form-body">
+
+                                    <h4 class="form-section" align="center">  Current Event Details </h4>
+                                    <hr>
+
+                                    <div class="row" style="margin-top: 30px; margin-bottom: 40px;">
+                                        <div class="col-md-6">
+                                            <div class="form-group row col-md-9 mx-auto">
+                                                <input id="images" required name="images" multiple type="file" class="form-control" value = ""> 
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group row col-md-9 mx-auto">
+                                                <label for="organisationName1">Event Name</label>
+                                                <input type="text" id="title" required class="form-control" value="<%= lookupEvent.title%>" name="title" placeholder="Enter Event Name">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group row col-md-9 mx-auto">
+                                                <label for="organisationName1">
+                                                        Participant List
+                                                </label>
+                                            </div>
+                                            <div class="form-group row col-md-9 mx-auto">
+
+                                                <% 
+                                                
+                                                    for(i = 0; i < participants.length; i++) {
+                                                %>
+
+                                                    <p class="col-md-6">
+                                                        <input id="participantCategory" type="checkbox" name="participantCategory" value='<%= participants[i].name %>'> <%= participants[i].name %>
+                                                    </p>
+                                                    
+
+                                                <%
+                                                    }
+                                                
+                                                %>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <hr class="form-section">
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group row col-md-9 mx-auto">
+                                                <label for="contactPersonAddress"> Event Description </label>
+                                                <input id="description" required type="textarea" class="form-control" value="<%= lookupEvent.description%>" name="description" placeholder="Enter Description">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group row col-md-9 mx-auto">
+                                                <label for="contactPersonAddress"> Event Location </label>
+                                                <input id="venue" type="textarea" required class="form-control" value="" name="venue" placeholder="Enter Detailed Address">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    
+                                </div>
+
+                            
+                                <div class="form-body" style="margin-top: 50px;">
+                                    <h4 class="form-section" align="center"> Event Date and Time  </h4>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group row col-md-9 mx-auto">
+                                                <label for="organisationName">Event Start Date</label>
+                                                <input id="startDate" required type="date" class="form-control" value="lookupEvent.startDate" name="startDate" placeholder="">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group row col-md-9 mx-auto">
+                                                <label for="organisationName">Event End Date</label>
+                                                <input id="endDate" required type="date" class="form-control" value="lookupEvent.endDate" name="endDate" placeholder="">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group row col-md-9 mx-auto">
+                                                <label for="organisationName">Event Start Time</label>
+                                                <input id="eventTime" required type="time" class="form-control" value="lookupEvent.eventTime" name="eventTime" placeholder="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                
+                                
+
+
+                                
+
+                                <!-- Submit button  -->
+                                <div class="row" style="margin-top: 100px;">
+                                    <div class="col-md-12">
+                                        <div class="form-group row col-md-9 mx-5">
+                                            <button id="response2" type="submit" class="btn btn-primary">
+                                                Next
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
+                            <!-- Form end  -->
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+      
+    </div>
+    <!-- #/ content body -->
+    <!-- footer -->
+    <%- include('../includes/sub-sections/dashboard-footer.ejs', {})%>   
+    <!-- #/ footer -->
+  </div>
+  <!-- Common JS -->
+  <script src="../../new_assets/plugins/common/common.min.js"></script>
+  <script src="../../new_assets/plugins/tables/js/jquery.dataTables.min.js"></script>
+  <script src="../../new_assets/plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
+  <script src="../../new_assets/plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
+  <!-- Custom script -->
+  <script src="../../new_assets/js/custom.min.js"></script>
+  <!-- Custom dashboard script -->
+  <script src="../../new_assets/js/dashboard-1.js"></script>
+</body>
+
+</html>

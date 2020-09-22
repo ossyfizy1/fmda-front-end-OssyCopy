@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>FMDA</title>
+  <!-- Favicon icon -->
+  <link rel="icon" type="image/png" sizes="16x16" href="../../img/fmdalogo.png">
+  <link href="../../new_assets/css/style.css" rel="stylesheet">
+  <link href="../../new_assets/plugins/tables/css/datatable/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <link href="../../new_assets/css/mycss.css" rel="stylesheet">
+  <script src="../../new_assets/js/modernizr-3.6.0.min.js"></script>
+</head>
+
+<body class="v-light vertical-nav fix-header fix-sidebar">
+  <div id="preloader">
+    <div class="loader">
+      <svg class="circular" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" /></svg>
+    </div>
+  </div>
+  <div id="main-wrapper">
+    <!-- header -->
+    <%- include('../includes/sub-sections/dashboard-header.ejs')%>
+    <!-- #/ header -->
+
+    <!-- sidebar -->
+    <%- include('../includes/sub-sections/dashboard-sidebar.ejs', {})%>
+    <!-- #/ sidebar -->
+    <!-- content body -->
+    <div class="content-body">
+
+        <section id="material-datatables">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card mb-0">
+                        <div class="card-header">
+                            <h4 class="card-title">Individaul Bulk Upload List</h4>
+                            <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+                            <div class="heading-elements">
+                                <ul class="list-inline mb-0">
+                                    <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
+                                    <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
+                                    <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+                                    <li><a data-action="close"><i class="ft-x"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card-content collapse show">
+                            <div class="card-body" style="overflow-x: scroll;">
+
+                            
+                                <button id="migrateDataButton" class="btn btn-primary" style="margin-bottom: 10px;" onclick="migrateDate()">Migrate Data Now</button>
+
+                                <!-- append the result here -->
+                                <p id="resultUpdateForEach"></p>
+
+
+                              <!-- Table Content: Start -->
+                              <table class="table table-hover zero-configuration dataTable table-striped white">
+                                
+                                <!-- Table Head  -->
+                                <thead>
+                                    <tr>
+                                        <th>membership id</th>
+                                        <th>certificate number</th>
+                                        <th>first name</th>
+                                        <th>last name</th>
+                                        <th>membership category</th>
+                                        <th>current organisation</th>
+                                        <th>current organisation Id</th>
+                                        <th>address</th>
+                                        <th>years of post nysc experience</th>
+                                        <!-- <th>exemption status</th> -->
+                                        <th>personal email</th>
+                                        <th>years of treasury experience</th>
+                                        <!-- <th>year of registration</th> -->
+                                        <th>membership category</th>
+                                        <th>membership request date</th>
+                                        <th>mobile number</th>
+                                        <th>office number</th>
+                                        <th>registration fee paid</th>
+                                        <th>verifier comment</th>
+                                        <th>verifier id</th>
+                                        <th>date verified</th>
+                                        <th>hasBeen verified</th>
+                                        <th>approval comment</th>
+                                        <th>approval member id</th>
+                                        <th>approval date</th>
+                                        <th>has been approved</th>
+                                        <th>attestation complete</th>
+                                        <th>referee member id</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+
+                                <!-- Table Body  -->
+                                <tbody id="theIntialTableToDisplayData">
+                                    <% 
+                                    theParsedExcelFile.forEach( item => { %>
+                                        <tr>
+                                            <td><%=item.memberUUID%></td>
+                                            <td><%=item.certificateNumber%></td>
+                                            <td><%=item.firstName%></td>
+                                            <td><%=item.lastName%></td>
+                                            <td><%=item.membershipCategory%></td>
+                                            <td><%=item.currentOrganisation%></td>
+                                            <td><%=item.currentOrganisationId%></td>
+                                            <td><%=item.address%></td>
+                                            <td><%=item.yearsOfPostNyscExperience%></td>
+                                            <!--<td><%=//item.exemptionStatus%></td>-->
+                                            <td><%=item.personalEmail%></td>
+                                            <td><%=item.yearsOfTreasuryExperience%></td>
+                                            <!--<td><%=//item.year_of_registration%></td>-->
+                                            <td><%=item.membershipCategory%></td>
+                                            <td><%=item.membershipRequestDate%></td>
+                                            <td><%=item.mobileNumber%></td>
+                                            <td><%=item.officeNumber%></td>
+                                            <td><%=item.registrationFeePaid%></td>
+                                            <td><%=item.verifierComment%></td>
+                                            <td><%=item.verifierId%></td>
+                                            <td><%=item.dateVerified%></td>
+                                            <td><%=item.hasBeenVerified%></td>
+                                            <td><%=item.approverComment%></td>
+                                            <td><%=item.approverMemberId%></td>
+                                            <td><%=item.approvalDate%></td>
+                                            <td><%=item.hasBeenApproved%></td>
+                                            <td><%=item.attestationComplete%></td>
+                                            <td><%=item.refereeMemberId%></td>
+                                            <td class='deleteButton btn btn-default' onClick='deleteFunction("<%=item.memberUUID%>")'><i class='fa fa-trash'></i></td>
+                                        </tr>
+                                    <% 
+                                        }); 
+                                    %>
+                                </tbody>
+
+                                <!--adjustedListOfParsedExcelFile-->
+                                <tbody id="adjustedListOfParsedExcelFile"></tbody>
+
+                              </table>
+                              <!-- Table Content: End -->
+
+
+
+                            
+                            <script>
+
+                                var theParsedExcelFile = '<%= JSON.stringify(theParsedExcelFile); %>';
+
+                                // to remove "&#34;" from the array
+                                var the_new_parsedExcelFile = JSON.parse(theParsedExcelFile.replace(/&#34;/g,'"'));
+
+
+                                var the_filtered_parsedExcelFile = [];
+
+                                // function deleteFunction
+                                function deleteFunction(param){
+                                    // alert("delete record: " + param);
+                                    console.log("delete record: " + param);
+
+                                    // theIntialTableToDisplayData to hide the initail rows of data
+                                    $("#theIntialTableToDisplayData").hide();
+
+                                    console.log(param);
+                                    console.log(the_new_parsedExcelFile);
+
+                                    the_new_parsedExcelFile.forEach(element => {
+                                        if (element.memberUUID != param) {
+                                            the_filtered_parsedExcelFile.push(element);
+                                        }
+                                    });
+                                    
+
+                                    console.log(the_filtered_parsedExcelFile);
+
+                                    the_new_parsedExcelFile = the_filtered_parsedExcelFile;
+
+                                    console.log(the_new_parsedExcelFile);
+
+
+
+                                        var html = "<tr>";
+                                        for (var i = 0; i < the_new_parsedExcelFile.length; i++) {
+                                            
+                                            // html+="<tr>";
+                                                
+                                                html+="<td>"+the_new_parsedExcelFile[i].memberUUID+"</td>";
+                                                html+="<td>"+the_new_parsedExcelFile[i].certificateNumber+"</td>";
+                                                html+="<td>"+the_new_parsedExcelFile[i].firstName+"</td>";
+                                                html+="<td>"+the_new_parsedExcelFile[i].lastName+"</td>";
+                                                html+="<td>"+the_new_parsedExcelFile[i].membershipCategory+"</td>";
+                                                html+="<td>"+the_new_parsedExcelFile[i].currentOrganisation+"</td>";
+                                                html+="<td>"+the_new_parsedExcelFile[i].currentOrganisationId+"</td>";
+                                                html+="<td>"+the_new_parsedExcelFile[i].address+"</td>";
+                                                html+="<td>"+the_new_parsedExcelFile[i].yearsOfPostNyscExperience+"</td>";
+                                                html+="<td>"+the_new_parsedExcelFile[i].personalEmail+"</td>";
+                                                html+="<td>"+the_new_parsedExcelFile[i].yearsOfTreasuryExperience+"</td>";
+                                                html+="<td>"+the_new_parsedExcelFile[i].membershipCategory+"</td>";
+                                                html+="<td>"+the_new_parsedExcelFile[i].membershipRequestDate+"</td>";
+                                                html+="<td>"+the_new_parsedExcelFile[i].mobileNumber+"</td>";
+                                                html+="<td>"+the_new_parsedExcelFile[i].officeNumber+"</td>";
+                                                html+="<td>"+the_new_parsedExcelFile[i].registrationFeePaid+"</td>";
+                                                html+="<td>"+the_new_parsedExcelFile[i].verifierComment+"</td>";
+                                                html+="<td>"+the_new_parsedExcelFile[i].verifierId+"</td>";
+                                                html+="<td>"+the_new_parsedExcelFile[i].dateVerified+"</td>";
+                                                html+="<td>"+the_new_parsedExcelFile[i].hasBeenVerified+"</td>";
+                                                html+="<td>"+the_new_parsedExcelFile[i].approverComment+"</td>";
+                                                html+="<td>"+the_new_parsedExcelFile[i].approverMemberId+"</td>";
+                                                html+="<td>"+the_new_parsedExcelFile[i].approvalDate+"</td>";
+                                                html+="<td>"+the_new_parsedExcelFile[i].hasBeenApproved+"</td>";
+                                                html+="<td>"+the_new_parsedExcelFile[i].attestationComplete+"</td>";
+                                                html+="<td>"+the_new_parsedExcelFile[i].refereeMemberId+"</td>";
+    html+="<td class='deleteButton btn btn-default' onClick='deleteFunction("+ the_new_parsedExcelFile[i].memberUUID +")'><i class='fa fa-trash'></i></td>";
+
+                                            // html+="</tr>";
+
+                                        }
+                                        html+="</tr>";
+
+                                        // display adjusted record
+                                        $("#adjustedListOfParsedExcelFile").html(html);
+
+
+                                }
+                            
+
+
+                                // function migrateDate
+                                function migrateDate(){
+                                    // alert("about to migrate data");
+
+                                    // migrateDataButton
+                                    $("#migrateDataButton").hide();
+
+                                    console.log(the_new_parsedExcelFile)
+
+                                    $.ajax({
+                                        type: 'POST',
+                                        url: '/admin/individual_member/submit_bulk_upload', 
+                                        data: {"data" : JSON.stringify(the_new_parsedExcelFile)}  // This will send the form data to the php page
+                                    })
+                                    .done(function(data){
+                                        
+                                        // alert(data.resilt);
+
+                                        if(data.resilt.statusCode == 200){
+                                            if (data.resilt.userMessage.length > 0) {
+                                                data.resilt.userMessage.forEach(element => {
+                                                    // alert(element.message);
+                                                    if (element.message == "Either useremail or mobile number already exist in the DB!") {
+                                                        // alert(element.message + " for " + element.email);
+                                                        var migrationUpdate = element.message + " for " + element.email;
+                                                        $("#resultUpdateForEach").append("<span style='color: red'>Failed: </span>"+migrationUpdate+"<br>");
+                                                    } else {
+                                                        // alert(element.message + " for " + element.email);
+                                                        var migrationUpdate = element.message + " for " + element.email;
+                                                        $("#resultUpdateForEach").append("<span style='color: green'>Successful: </span>"+migrationUpdate+"<br>");
+                                                    }
+
+                                                    
+
+                                                });
+                                            }else{
+                                                $("#resultUpdateForEach").append("<span style='color: red'>Empty reponse, contact the admin.</span>");
+                                            } 
+                                        }
+                                        else{
+                                            alert("issues migrating data, contact the admin");
+                                            window.location.href = "/admin/individual_member/ind_bulk_upload";
+                                        }
+
+                                        // redirect
+                                        // window.location.href = "/admin/individual_member/ind_bulk_upload";
+
+                                        
+                                    })
+                                    .fail(function() {
+                                    
+                                        // just in case posting your form failed
+                                        alert( "Posting failed." );
+                                        
+                                    });
+                            
+                                    // to prevent refreshing the whole page page
+                                    return false;
+
+
+                                }
+                                
+                            </script>
+
+                              
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+      
+    </div>
+    <!-- #/ content body -->
+    <!-- footer -->
+    <%- include('../includes/sub-sections/dashboard-footer.ejs', {})%>   
+    <!-- #/ footer -->
+  </div>
+  <!-- Common JS -->
+  <script src="../../new_assets/plugins/common/common.min.js"></script>
+  <script src="../../new_assets/plugins/tables/js/jquery.dataTables.min.js"></script>
+  <script src="../../new_assets/plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
+  <script src="../../new_assets/plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
+  <!-- Custom script -->
+  <script src="../../new_assets/js/custom.min.js"></script>
+  <!-- Custom dashboard script -->
+  <script src="../../new_assets/js/dashboard-1.js"></script>
+</body>
+
+</html>

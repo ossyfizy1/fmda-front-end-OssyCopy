@@ -1,0 +1,19 @@
+version: '2'
+services:
+  web:
+    container_name: 'fmda_frontend'
+    build: 
+      context: .
+    restart: on-failure  
+    ports:
+      - '3033:3033'
+    volumes:
+      - './:/src/app'
+      - '$HOME/fmda_file_uploads/corp_uploads:/src/app/public/corp_uploads'
+      - '$HOME/fmda_file_uploads/event_uploads:/src/app/public/events_pics_uploads'
+      - '$HOME/fmda_file_uploads/individual_passports_uploads:/src/app/public/ind_passport'
+      - '$HOME/fmda_file_uploads/individual_uploads:/src/app/public/ind_uploads'
+      - '$HOME/fmda_file_uploads/treasury_certificate_uploads:/src/app/public/treasuryCertificate_uploads'
+      - '$HOME/fmda_file_uploads/academic_certificate_upload:/src/app/public/academic_certificate_upload'
+      - '$HOME/fmda_file_uploads/other_professional_certificate_upload:/src/app/public/other_professional_certificate_upload'
+     

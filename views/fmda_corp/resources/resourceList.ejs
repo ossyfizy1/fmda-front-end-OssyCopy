@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+<!-- BEGIN: Head-->
+<%- include('../corp_includes/head.ejs')%>
+
+    <head>
+        <!-- BEGIN: Vendor CSS-->
+        <link rel="stylesheet" type="text/css" href="../app-assets/vendors/css/material-vendors.min.css">
+        <link rel="stylesheet" type="text/css" href="../app-assets/vendors/css/tables/datatable/datatables.min.css">
+        <!-- END: Vendor CSS-->
+    </head>
+    <!-- END: Head-->
+
+    <!-- BEGIN: Body-->
+
+    <body class="vertical-layout vertical-content-menu material-vertical-layout material-layout 2-columns   fixed-navbar" data-open="click" data-menu="vertical-content-menu" data-col="2-columns">
+
+        <!-- BEGIN: Header-->
+        <%- include('../corp_includes/header.ejs')%>
+            <!-- END: Header-->
+
+            <!-- BEGIN: Content-->
+            <div class="app-content content">
+                <div class="content-header row">
+                </div>
+                <div class="content-wrapper">
+
+                    <!-- BEGIN: Side bar-->
+                    <%- include('../corp_includes/sidebar.ejs', {})%>
+                        <!-- END: Side bar-->
+
+                        <div class="content-body">
+
+                                <section id="material-datatables">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="card mb-0">
+                                                    <div class="card-header">
+                                                        <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+                                                        <div class="heading-elements">
+                                                            <ul class="list-inline mb-0">
+                                                                <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
+                                                                <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
+                                                                <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+                                                                <li><a data-action="close"><i class="ft-x"></i></a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    
+
+                                                    <div class="card-content collapse show">
+                                                        <div class="card-body">
+                                                    
+                                                          <!-- Table Content: Start -->
+                                                          <table class="table table-hover table-striped white">
+
+                                                            <!-- Table Head  -->
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Directory Details</th>
+                                                                    </tr>
+                                                                </thead>
+                                
+                                                                <!-- Table Body  -->
+                                                                <tbody>
+                                                                    <!-- 1. full name -->
+                                                                    <tr>
+                                                                        <td> Directory name </td>
+                                                                        <td>
+                                
+                                                                            <%= data.directoryName %>
+                                                                        </td>
+                                
+                                                                    </tr>
+                                
+                                                                    <tr>
+                                                                        <td> Description </td>
+                                                                        <td>
+                                
+                                                                            <%= data.description %>
+                                                                        </td>
+                                
+                                                                    </tr>
+                                
+                                                                    <tr>
+                                                                        <td> Date Created </td>
+                                                                        <td>
+                                
+                                                                            <%= data.dateCreated %>
+                                                                        </td>
+                                
+                                                                    </tr>
+                                
+                                                                    <tr>
+                                                                        <td> Created By </td>
+                                                                        <td>
+                                
+                                                                            <%= data.createdBy %>
+                                                                        </td>
+                                
+                                                                    </tr>
+                                
+                                                                    
+                                
+                                                                    <tr>
+                                                                        <td> Accessors </td>
+                                                                        <td>
+                                                                            <%= data.accessors[0] %>
+                                                                        </td>
+                                
+                                                                    </tr>
+                                
+                                
+                                
+                                                                </tbody>
+                                
+                                
+                                                            </table>
+                                                            <!-- Table Content: End -->
+                                
+                                                            <h4 class="form-section" align="center">  List of Resources in Directory </h4>
+                                
+                                                                  <!-- Table Content: Start -->
+                                                                  <table class="table table-hover zero-configuration dataTable table-striped white">
+                                                                    
+                                                                    <!-- Table Head  -->
+                                                                    <thead>
+                                                                        <tr>
+                                                                                <th class="d-none">s/n</th>
+                                                                                <th>Resource name</th>
+                                                                                <th>Date Created</th>
+                                                                                <th>Accessors</th>
+                                                                                <th>Format</th>
+                                                                                <th></th>
+                                                                        </tr>
+                                                                    </thead>
+                                
+                                                                    <!-- Table Body  -->
+                                                                    <tbody>
+                                                                        <% 
+                                                                            list.forEach((item, i) => { 
+                                                                         %>
+                                                                            <tr>
+                                                                                    <td class="d-none" > <%= i %> </td>
+                                                                                    <td><i class="material-icons">perm_media</i> <%= item.name %></td>
+                                                                                    <td><%= item.dateCreated %></td>
+                                                                                    <td><%= item.accessors %></td>
+                                                                                    <td><%= item.format %></td>
+                                                                                    <td><a href="../../<%= item.url %>" class="btn btn-primary" download> Download </a></td>
+                                                                              </tr>
+                                                                        <% 
+                                                                            }); 
+                                                                        %>
+                                                                    </tbody>
+                                                                  </table>
+                                                                  <!-- Table Content: End -->
+                                                          
+                                                    
+                                                        </div>
+                                                    </div>
+
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                </section>
+                        </div>
+
+                </div>
+            </div>
+            <!-- END: Content-->
+
+            <!-- BEGIN: Footer-->
+            <%- include('../corp_includes/footer.ejs', {})%>
+            <!-- END: Footer-->
+            
+            <!-- BEGIN: Scripts-->
+            <%- include('../corp_includes/scripts.ejs', {})%>
+            <script src="../app-assets/vendors/js/tables/datatable/datatables.min.js"></script>
+            <script src="../app-assets/js/scripts/pages/material-app.min.js"></script>
+            <script src="../app-assets/js/scripts/tables/material-datatable.min.js"></script>
+            
+            <!-- END: Scripts-->
+
+    </body>
+    <!-- END: Body-->
+
+</html>

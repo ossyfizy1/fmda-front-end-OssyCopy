@@ -1,0 +1,6 @@
+# Ignore all files
+**/*.js
+# Enable linting just for some files
+!fmda_admin_routes.js
+!admin_utils/*.js
+!admin/**/*.js

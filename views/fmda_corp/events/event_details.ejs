@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- for carousel slider -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+<!-- BEGIN: Head-->
+<%- include('../corp_includes/head.ejs')%>
+
+
+<body class="v-light vertical-nav fix-header fix-sidebar">
+    <div id="preloader">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10"/></svg>
+        </div>
+    </div>
+    <div id="main-wrapper">
+        <!-- header -->
+        <%- include('../corp_includes/header.ejs')%>
+        <!-- #/ header -->
+        <!-- sidebar -->
+        <%- include('../corp_includes/sidebar.ejs')%>
+        <!-- #/ sidebar -->
+        <!-- content body -->
+        <div class="content-body">
+            <div class="container-fluid">
+
+                <section id="material-datatables">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card mb-0">
+                                <div class="card-header">
+                                    <h4 class="card-title">Event Details</h4>
+
+                                    
+                                </div>
+                                <div class="card-content collapse show">
+                                    <div class="card-body">
+
+
+                                    
+                                        <!-- Carousel for picture slider-->
+                            <div class="container">
+                                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+                                    
+                                    <!-- Indicators -->
+                                    <ol class="carousel-indicators">
+                                        
+                                        <%  
+                                            var carouselImages = lookupEvent.images;
+
+                                            for (let index = 0; index < carouselImages.length; index++) {
+                                                const element = carouselImages[index];
+                                        %>
+                                            <li data-target="#myCarousel" data-slide-to="<%= index; %>"></li>
+                                        <%
+                                            }
+                                        %>
+                                    </ol>
+                                    
+                                
+                                    <!-- Wrapper for slides -->
+                                    <div class="carousel-inner">
+                                    <div class="item active">
+                                        <img src="../../../<%= carouselImages[0]; %>">
+                                    </div>
+                                
+                                    <%  
+                                        var carouselImages = lookupEvent.images;
+
+                                        for (let index = 1; index < carouselImages.length; index++) {
+                                            const element = carouselImages[index];
+                                    %>
+                                    <div class="item">
+                                        <img src="../../../<%= element; %>">
+                                    </div>
+                                    <%
+                                            }
+                                    %>
+                                    </div>
+                                
+                                    <!-- Left and right controls -->
+                                    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                                    <span class="glyphicon glyphicon-chevron-left"></span>
+                                    <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                                    <span class="glyphicon glyphicon-chevron-right"></span>
+                                    <span class="sr-only">Next</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- end carousel for picture slider -->
+
+
+
+                                      <!-- Table Content: Start -->
+                                      <%- include('./event_details_infull.ejs', {}) %>
+                                      <!-- Table Content: End -->
+
+                                    </div>
+
+                                    <!-- display payment status -->
+                                    <%
+                                    if (paymentStatusDisplay) 
+                                        {
+                                    %>
+                                            <div class="card-body">Payment status: <%= paymentStatusDisplay %></div>
+                                    <%
+                                        }
+                                    %>
+
+
+
+                                    <!-- display event status for free event -->
+                                    <%
+                                        if (checkEventRegistration.statusCode == 200) 
+                                            {
+                                    %>
+                                                <div class="card-body">Event Registration Status: <%= checkEventRegistration.message %></div>
+                                    <%
+                                            }
+                                    %>
+
+
+
+                                    
+
+                                    
+
+
+
+                                    <!-- to handle checkbox & clickProceed delegates modal popup -->
+                                    <script>
+                                    
+                                    // delegates List
+                                    var delegateList = [];
+
+                                    function delegatesFunction(value) {
+                                        // console.log("value passed: " + value);
+                                        delegateList.push(value);
+                                    }
+
+
+                                    function clickProceed() {
+                                        // alert("modal closed" + JSON.stringify(delegateList) );
+
+                                         // get the ID for the Register buttons
+                                        var url = $("#eventIdTag").attr("href");
+                                        // add new parameters to the link.
+                                        $("#eventIdTag").attr("href", url + '&delegateArray=' + JSON.stringify(delegateList) );
+
+                                        var newURL = $("#eventIdTag").attr("href");
+
+                                        console.log("new URL: ", newURL);
+
+                                        // redirect to link
+                                        window.location.href = newURL;
+                                        
+                                    }
+                                    
+                                    </script>
+                                    <!-- end of to handle checkbox & clickProceed delegates modal popup -->
+
+
+
+
+                                    <!-- using logic from include('./event_details_infull.ejs', {}) -->
+                                    <%
+                                        if (lookupEvent.isFree == true && checkEventRegistration.statusCode != 200) 
+                                        {    
+                                    %>
+
+                                    <!-- Trigger the modal with a button -->
+                                    <div id="modalDelegatePopId" class="card-body">
+                                        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Appoint Delegate(s)</button>
+                                    </div>
+
+                                    <!-- free from include('./event_details_infull.ejs', {}) -->
+                                    <!-- hide -->
+                                    <div class="card-body" style="visibility: hidden;">
+                                        <a id="eventIdTag" href="/corp_event_registration?eventId=<%=lookupEvent.id%>&type=<%=lookupEvent.type%>&eventName=<%=lookupEvent.title%>&amount=0" class="btn btn-primary" style="float: right; margin-bottom: 10px;">Register</a>
+                                    </div>
+                                    <%
+                                        }
+                                        else if (lookupEvent.isFree == false && lookupEvent.feeType == "Flat" && paymentStatus.lookupEventPaymentStatus.status != 0 && paymentStatus.lookupEventPaymentStatus.status != -1 && paymentStatus.lookupEventPaymentStatus.status != 1&& paymentStatus.lookupEventPaymentStatus.status != -5) 
+                                        {   
+                                    %>
+
+                                    <!-- flatFee from include('./event_details_infull.ejs', {}) -->
+
+                                    <!-- Trigger the modal with a button -->
+                                    <div id="modalDelegatePopId" class="card-body">
+                                        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Appoint Delegate(s)</button>
+                                    </div>
+
+                                    <!-- hide -->
+                                    <div class="card-body"  style="visibility: hidden;">
+                                        <a id="eventIdTag" href="/corp_event_registration?eventId=<%=lookupEvent.id%>&type=<%=lookupEvent.type%>&eventName=<%=lookupEvent.title%>&amount=<%= lookupEventAmount %>" class="btn btn-primary" style="float: right; margin-bottom: 10px;">Register</a>
+                                    </div>
+                                    <%
+                                        }
+                                        else if (lookupEvent.isFree == false && paymentStatus.lookupEventPaymentStatus.status != 0 && paymentStatus.lookupEventPaymentStatus.status != -1 && paymentStatus.lookupEventPaymentStatus.status != 1&& paymentStatus.lookupEventPaymentStatus.status != -5) 
+                                        {    
+                                            
+                                                
+                                    %>
+                                    <!-- custom from include('./event_details_infull.ejs', {}) -->
+
+                                    <!-- Trigger the modal with a button -->
+                                    <div id="modalDelegatePopId" class="card-body">
+                                        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Appoint Delegate(s)</button>
+                                    </div>
+
+                                    <!-- hide -->
+                                    <div class="card-body" style="visibility: hidden;">
+                                        <a id="eventIdTag" href="/corp_event_registration?eventId=<%=lookupEvent.id%>&type=<%=lookupEvent.type%>&eventName=<%=lookupEvent.title%>&amount=<%= lookupEventAmount %>" class="btn btn-primary" style="float: right; margin-bottom: 10px;">Register</a>
+                                    </div>
+                                    <% 
+                                        }   
+                                    %>
+                                    
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </section>
+                
+            </div>
+            <!-- #/ container -->
+        </div>
+        <!-- #/ content body -->
+
+        <!-- footer -->
+        <!-- BEGIN: Footer-->
+        <%- include('../corp_includes/footer.ejs')%>
+    </div>
+
+    <!-- Common JS -->
+    <script src="new_assets/plugins/common/common.min.js"></script>
+    <!-- Custom script -->
+    <script src="new_assets/js/custom.min.js"></script>
+    <!-- Chartjs chart -->
+    <script src="new_assets/assets/plugins/chartjs/Chart.bundle.js"></script>
+    <!-- Custom dashboard script -->
+    <script src="new_assets/js/dashboard-1.js"></script>
+
+
+    <!-- BEGIN: Scripts-->
+    <%- include('../corp_includes/scripts.ejs', {})%>
+    <script src="../../app-assets/vendors/js/tables/datatable/datatables.min.js"></script>
+    <script src="../../app-assets/js/scripts/pages/material-app.min.js"></script>
+    <script src="../../app-assets/js/scripts/tables/material-datatable.min.js"></script>
+
+    
+</body>
+</html>
+
+<!-- Modal start -->
+<div id="myModal" class="modal fade" role="dialog" tabindex='-1'>
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="card-body">
+                    <h4>Select Delegate(s): </h4>
+                    <hr>
+                    <% 
+                        for(i = 0; i < organisationMembersLookup.length; i++) {
+                    %>
+                    
+                        <p class="col-md-12" style="font-size: 18px;">
+                            <input class='delegatesValues' type="checkbox" name="delegates" onclick="delegatesFunction('<%= organisationMembersLookup[i].memberUUID %>')"> <%= organisationMembersLookup[i].firstName %> <%= organisationMembersLookup[i].lastName %>
+                        </p>
+                    <%
+                        }
+                    %>
+                    <hr>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-btn-primary" data-dismiss="modal" onclick="clickProceed()">Click To Proceed</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<hr>
+<!-- Modal end -->

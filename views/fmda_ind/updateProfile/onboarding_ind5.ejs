@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+  <!-- BEGIN: Head-->
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="FMDA dashboard, FMDA OnBoarding Process Form">
+    <meta name="keywords" content="FMDA dashboard, FMDA OnBoarding Process Form">
+    <meta name="author" content="fmda">
+    <title>FMDA OnBoarding Process Form </title>
+    <link rel="apple-touch-icon" href="app-assets/images/ico/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="app-assets/images/ico/favicon.png">
+    <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i%7CQuicksand:300,400,500,700" rel="stylesheet"> -->
+    <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
+
+    <!-- BEGIN: Vendor CSS-->
+    <!-- <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/material-vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/pickers/daterange/daterangepicker.css"> -->
+    <!-- END: Vendor CSS-->
+
+    <!-- BEGIN: Theme CSS-->
+    <link rel="stylesheet" type="text/css" href="app-assets/css/material.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/components.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/bootstrap-extended.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/material-extended.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/material-colors.min.css">
+    <!-- END: Theme CSS-->
+
+    <!-- BEGIN: Page CSS-->
+    <!-- <link rel="stylesheet" type="text/css" href="app-assets/css/core/menu/menu-types/material-horizontal-menu.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/plugins/forms/wizard.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/plugins/pickers/daterange/daterange.min.css"> -->
+    <!-- END: Page CSS-->
+
+    <!-- BEGIN: Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <!-- END: Custom CSS-->
+
+     
+
+
+  </head>
+  <!-- END: Head-->
+
+  <!-- BEGIN: Body-->
+  <body class="horizontal-layout horizontal-menu horizontal-menu-padding material-horizontal-layout material-layout 2-columns  " data-open="click" data-menu="horizontal-menu" data-col="2-columns">
+
+    <div class="app-content container center-layout mt-2">
+      <div class="content-header row">
+        <div class="content-header-dark bg-img col-12">
+          <div class="row">
+            <div class="content-header-left col-md-9 col-12 mb-2">
+              <h3 class="content-header-title white">Membership Registration Form</h3>
+              <div class="row breadcrumbs-top">
+                <div class="breadcrumb-wrapper col-12">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item active">Payment Information
+                    </li>
+                    <li style="margin-left: 50px"><a style="color: white" href="/logout">(Log Out)</a></li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+            <div class="content-header-right col-md-3 col-12">
+              <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown">
+                <!-- dropdown-toggle dropdown-menu-right -->
+                <!-- <div class="dropdown-menu"><a class="dropdown-item" href="component-alerts.html"> Alerts</a><a class="dropdown-item" href="material-component-cards.html"> Cards</a><a class="dropdown-item" href="component-progress.html"> Progress</a>
+                  <div class="dropdown-divider"></div><a class="dropdown-item" href="register-with-bg-image.html"> Register</a>
+                </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="content-wrapper">
+        <div class="content-body"><!-- Form wizard with number tabs section start -->
+
+
+      <!-- start progress bar -->
+      <div id="progressBar1" class="progressBar1">
+        <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
+        aria-valuenow="98" aria-valuemin="0" aria-valuemax="100" style="width:98%">
+          98% Completion
+        </div>
+      </div>
+      <!-- start progress bar -->
+
+
+
+<section id="number-tabs">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-content collapse show">
+                    <div class="card-body">
+
+                          <!-- first step -->
+                          <form >
+                          <fieldset id="ourFieldset1">
+                                
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="emailAddress1">Email Address :</label>
+                                            <input name="userId" type="email" class="form-control" id="userId" placeholder="Email Address" value="<%= userID_email %>" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="Address1"> depositor name :</label>
+                                            <input name="depositorName" type="text" class="form-control" id="depositorName" required="required">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="emailAddress1"> payment reference No :</label>
+                                            <input name="paymentReferenceNo" type="text" class="form-control" id="paymentReferenceNo" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="phoneNumber1"> amount :</label>
+                                            <input name="amount" type="text" class="form-control" id="amount" placeholder="e.g 5000.00" required>
+                                        </div>
+                                    </div>
+        
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="phoneNumber1"> payment date :</label>
+                                            <input name="paymentDate" type="date" class="form-control" id="paymentDate" required>
+                                        </div>
+                                    </div>
+                                    
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="date1"> bank :</label>
+                                              <select name="bank" id="bank" class="form-control" required>
+                                                  <option value="">bank list:</option>
+                                                  <% 
+                                                      var bankList = banks.financialInstitutions
+                                                      for(i = 0; i < bankList.length; i++)
+                                                          {
+                                                  %>
+                                                  <option value="<%= bankList[i].name %>"><%= bankList[i].name %></option>
+                                                  <% 
+                                                          } 
+                                                  %> 
+                                              </select>
+                                      </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="date1"> purpose :</label>
+                                            <!-- <input name="purpose" type="text" class="form-control" id="purpose" required> -->
+                                            <select name="purpose" id="purpose" class="form-control" required>
+                                              <option value="">purpose list:</option>
+                                              <% 
+                                                  var purposeList = purpose.paymentPurposes
+                                                  for(i = 0; i < purposeList.length; i++)
+                                                      {
+                                              %>
+                                              <option value="<%= purposeList[i].description %>"><%= purposeList[i].description %></option>
+                                              <% 
+                                                      } 
+                                              %> 
+                                          </select>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                                <button id="paymentDetails" type="button" class="btn btn-primary">Save</button>
+
+                            </fieldset>
+                          </form>
+                          <!-- end of first step 1-->
+
+
+                         
+                    <!-- jquery & ajax link -->
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js "></script>
+                        
+                    <!-- for the fancy sweet alert box -->
+                    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+                     
+
+                     <script>
+                           $("#paymentDetails").click(function(){
+                             //  alert("add more o");
+ 
+                                 var userId = $("#userId").val();
+                                 var depositorName = $("#depositorName").val();
+                                 var paymentReferenceNo = $("#paymentReferenceNo").val();
+                                 var amount = $("#amount").val();
+                                 var paymentDate = $("#paymentDate").val();
+                                 var bank = $("#bank").val();
+                                 var purpose = $("#purpose").val();
+                                 var accountNumber = $("accountNumber").val()
+                                 var accountName = $("accountName").val()
+
+
+                                if(depositorName == '' || paymentReferenceNo == '' || amount == '' || paymentDate == '' || bank == '' || purpose == ''){
+
+                                    // using sweet alert tutorial at https://sweetalert.js.org/
+                                    // swal(
+                                    //         {
+                                    //             title: "info!",
+                                    //             text: "kindly fill all fields...",
+                                    //             icon: "info",
+                                    //         },
+                                            
+                                    //     );
+
+                                    swal("kindly fill all fields!", {
+                                            buttons: false,
+                                            timer: 2000,  // disappears after 2 seconds
+                                        });
+
+
+                                        
+                                 }
+                                else
+                                {
+                                 
+                                    // convert it to object
+                                    var addAsObject = {
+                                      userId,
+                                      depositorName,
+                                      paymentReferenceNo,
+                                      amount,
+                                      paymentDate,
+                                      bank,
+                                      purpose,
+                                      accountNumber,
+                                      accountName,
+                                    }
+    
+                                    
+                                    $.post("/update_ind_payment_for_member", addAsObject, function(data){
+                                        //  alert(data);
+                                        alert(data); 
+                                        alert("changes saved successfully, will reflect on next login.");
+                                        window.location.href='/ind_profile_page_for_member';
+                                    });
+                                }
+ 
+                                 
+
+                                
+ 
+                           });
+ 
+                     </script>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Form wizard with number tabs section end -->
+
+<!-- Form wizard with icon tabs section start -->
+
+        </div>
+      </div>
+    </div>
+    <!-- END: Content-->
+
+
+
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="app-assets/vendors/js/ui/jquery.sticky.js"></script>
+    <script src="app-assets/vendors/js/extensions/jquery.steps.min.js"></script>
+    <script src="app-assets/vendors/js/pickers/dateTime/moment-with-locales.min.js"></script>
+    <script src="app-assets/vendors/js/pickers/daterange/daterangepicker.js"></script>
+    <script src="app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
+    <!-- END: Page Vendor JS-->
+
+    <!-- BEGIN: Theme JS-->
+    <script src="app-assets/js/core/app-menu.min.js"></script>
+    <script src="app-assets/js/core/app.min.js"></script>
+    <script src="app-assets/js/scripts/customizer.min.js"></script>
+    <script src="app-assets/js/scripts/footer.min.js"></script>
+    <!-- END: Theme JS-->
+
+    <!-- BEGIN: Page JS-->
+    <script src="app-assets/js/scripts/pages/material-app.min.js"></script>
+    <script src="app-assets/js/scripts/forms/wizard-steps.min.js"></script>
+    <!-- END: Page JS-->
+
+  </body>
+  <!-- END: Body-->
+</html>

@@ -1,0 +1,11 @@
+<!-- Loop through data array and return full list table rows  -->
+<% 
+data.forEach((item) => { %>
+    <tr>
+        <td><%= item.contactPersonName %>rs</td>
+        <td><%= item.contactOfficialEmail %>rs</td>
+        <td><%= item.membershipRequestDate %>rs</td>
+        <td> <button type="button" class="btn btn-sm btn-accent-3 round">View Letter</button></td>
+        <td> <a href="admin_create_corporate_member?id=<%=item.contactOfficialEmail%>" id='<%= item.contactOfficialEmail %>' class="btn btn-sm btn-success round create-member">Create Member</button></td>
+    </tr>
+<% }); %>

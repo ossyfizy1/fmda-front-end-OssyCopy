@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+  <!-- BEGIN: Head-->
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="FMDA dashboard, FMDA OnBoarding Process Form">
+    <meta name="keywords" content="FMDA dashboard, FMDA OnBoarding Process Form">
+    <meta name="author" content="fmda">
+    <title>FMDA OnBoarding Process Form </title>
+    <link rel="apple-touch-icon" href="app-assets/images/ico/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="app-assets/images/ico/favicon.png">
+    <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i%7CQuicksand:300,400,500,700" rel="stylesheet"> -->
+    <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
+
+    <!-- BEGIN: Vendor CSS-->
+    <!-- <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/material-vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/pickers/daterange/daterangepicker.css"> -->
+    <!-- END: Vendor CSS-->
+
+    <!-- BEGIN: Theme CSS-->
+    <link rel="stylesheet" type="text/css" href="app-assets/css/material.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/components.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/bootstrap-extended.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/material-extended.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/material-colors.min.css">
+    <!-- END: Theme CSS-->
+
+    <!-- BEGIN: Page CSS-->
+    <!-- <link rel="stylesheet" type="text/css" href="app-assets/css/core/menu/menu-types/material-horizontal-menu.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/plugins/forms/wizard.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/plugins/pickers/daterange/daterange.min.css"> -->
+    <!-- END: Page CSS-->
+
+    <!-- BEGIN: Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <!-- END: Custom CSS-->
+
+  </head>
+  <!-- END: Head-->
+
+  <!-- BEGIN: Body-->
+  <body class="horizontal-layout horizontal-menu horizontal-menu-padding material-horizontal-layout material-layout 2-columns  " data-open="click" data-menu="horizontal-menu" data-col="2-columns">
+
+    <div class="app-content container center-layout mt-2">
+      <div class="content-header row">
+        <div class="content-header-dark bg-img col-12">
+          <div class="row">
+            <div class="content-header-left col-md-9 col-12 mb-2">
+              <h3 class="content-header-title white">Membership Registration Form</h3>
+              <div class="row breadcrumbs-top">
+                <div class="breadcrumb-wrapper col-12">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item active">Personal Information
+                    </li>
+                    <li style="margin-left: 50px"><a style="color: white" href="/logout">(Log Out)</a></li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+            <div class="content-header-right col-md-3 col-12">
+              <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown">
+                <!-- dropdown-toggle dropdown-menu-right -->
+                <!-- <div class="dropdown-menu"><a class="dropdown-item" href="component-alerts.html"> Alerts</a><a class="dropdown-item" href="material-component-cards.html"> Cards</a><a class="dropdown-item" href="component-progress.html"> Progress</a>
+                  <div class="dropdown-divider"></div><a class="dropdown-item" href="register-with-bg-image.html"> Register</a>
+                </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="content-wrapper">
+        <div class="content-body"><!-- Form wizard with number tabs section start -->
+
+
+      <!-- start progress bar -->
+      <div id="progressBar1" class="progressBar1">
+        <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
+        aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+          0% Completion
+        </div>
+      </div>
+      <!-- start progress bar -->
+
+
+
+<section id="number-tabs">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-content collapse show">
+                    <div class="card-body">
+
+                          <!-- first step -->
+                          <form action="/update_ind_personalInformation" method="post" class="form-horizontal" enctype="multipart/form-data">
+                          <fieldset id="ourFieldset1">
+                                <div class="row">
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="firstName1">Passport Upload (jpg, png, JPG, PNG) :</label>
+                                            <input name="profilePhoto" type="file" id="profilePhoto" placeholder="profile photo" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                      <hr>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="firstName1">First Name :</label>
+                                            <input name="firstName" type="text" class="form-control" id="firstName1" placeholder="First Name" value="<%= memberCompleteDetails.lookupMember.member.firstName %>" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="lastName1">Last Name :</label>
+                                            <input name="lastName" type="text" class="form-control" id="lastName1" placeholder="Last Name" value="<%= memberCompleteDetails.lookupMember.member.lastName %>" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                      <div class="form-group">
+                                          <label for="lastName1">Gender :</label>
+                                          <select name="gender" id="gender" class="form-control" required>
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                        </select>
+                                      </div>
+                                  </div>
+
+
+                                  <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="emailAddress1">Address :</label>
+                                        <input name="address" type="text" class="form-control" id="emailAddress1" placeholder="Your Address" required>
+                                    </div>
+                                  </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="emailAddress1">Email Address :</label>
+                                            <input name="personalEmail" type="email" class="form-control" id="emailAddress1" placeholder="Email Address" value="<%= userID_email %>" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="margin-top: 30px">
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="Address1"> Current Organisation :</label>
+                                            <select name="currentOrganisation" id="orgTypeGotten" class="form-control" required onchange="OrgIdToGet()">
+                                                <option value="">Select from list:</option>
+                                                <% 
+                                                    var orgList = orgList_for_ind
+                                                    for(i = 0; i < orgList.length; i++)
+                                                        {
+                                                %>
+                                                <option value="<%= orgList[i].organisationName %>"><%= orgList[i].organisationName %></option>
+                                                <% 
+                                                        } 
+                                                %> 
+                                            </select>
+
+                                          <!-- jquery & ajax link -->
+                                          <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js "></script>
+
+                                          <!-- on page load hide this field, only show if member selects Others under Current Organisation-->
+                                          <script>
+                                              $(document).ready(function(){
+                                                $("#proposedOrgName").hide();
+                                              });
+                                          </script>
+
+
+                                          <!-- function when selection is made under Current Organisation -->
+                                          <script>
+                                              function OrgIdToGet() 
+                                              {
+
+                                                // upon industry category selection, always empty the dropdown selection with id = "industryTypeDisplay" for industry type dropdown
+                                                $("#orgIDGotten").empty();
+    
+                                                var mySelection = $("#orgTypeGotten").val();
+                                                // alert( mySelection + " was clicked");
+
+                                                // if Others was selected, display another field for member to input their organization name
+                                                if (mySelection === "Others") {
+                                                  $("#proposedOrgName").show();
+                                                }
+                                                else if(mySelection != "Others"){
+                                                  $("#proposedOrgName").hide();
+                                                  $("#proposedOrgNameInputted").val(""); // empty it
+                                                }
+
+    
+                                                // ajax request to get organization ID by my selection
+                                                $.ajax({
+                                                          type: 'POST',
+                                                          url: '/update_ind_get_organization_ID_by_my_selection', 
+                                                          data: {"mySelection" : mySelection}  // This will send the form data to the php page
+                                                        })
+                                                        .done(function(data){
+                                                            
+                                                          // show the response
+                                                          // $('#response').html(data);
+                                                          // alert(data.response);
+  
+                                                          var grtOrgIdByMySelectionGotten = data.response
+                                                          
+                                                          // set the ID
+                                                          $("#orgIDGotten").val(grtOrgIdByMySelectionGotten);
+                                                            
+                                                            
+                                                        })
+                                                        .fail(function() {
+                                                            // just in case posting your form failed
+                                                            alert( "Posting failed." );
+                                                            
+                                                        });
+          
+                                              }
+                                          </script>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-4" id="proposedOrgName">
+                                        <div class="form-group">
+                                            <label for="emailAddress1"> Organization Name :</label>
+                                            <input name="proposedOrganisationName" type="text" class="form-control" id="proposedOrgNameInputted" placeholder="Organization Name">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4" style="visibility: hidden; display:none;">
+                                        <div class="form-group">
+                                            <label for="Address1"> Current Organisation ID :</label>
+                                            <input name="currentOrganisationId" type="text" class="form-control" id="orgIDGotten" placeholder="Current Organisation" required readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="emailAddress1"> Years of Treasury Experience :</label>
+                                            <input name="yearsOfTreasuryExperience" type="text" class="form-control" id="emailAddress1" placeholder="Number of Years e.g 0 - 2 years" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="phoneNumber1"> Years of Work Experience (Post NYSC) :</label>
+                                            <input name="yearsOfPostNyscExperience" type="text" class="form-control" id="Number" placeholder="Number of Years e.g 0 - 2 years" required>
+                                        </div>
+                                    </div>
+        
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="phoneNumber1"> Mobile Number :</label>
+                                            <input name="mobileNumber" type="tel" class="form-control" id="telephone" placeholder="Mobile Number" required onblur="compareNumber()">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="date1"> Date of Birth :</label>
+                                            <input name="dateOfBirth" type="date" class="form-control" id="date1" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="location1">Select City :</label>
+                                            <select class="c-select form-control" id="location1" name="location" required>
+                                                <option value="">Select City</option>
+                                                <option value="Abuja">Abuja</option>
+                                                <option value="Lagos">Lagos</option>
+                                                <option value="Port-Harcourt">Port-Harcourt</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <!-- <button id='goToStep2' type="button" class="btn btn-primary">Next</button> -->
+                                <input type="submit" name="submit" value="Save" class="btn btn-primary" onclick="validateAllFields()"/>
+                                <!-- next step -->
+
+                            </fieldset>
+                          </form>
+                          <!-- end of first step 1-->
+
+
+
+                          <!-- validate telephone number -->
+                        <!-- check phone number -->
+                        <script>
+                            function compareNumber() {
+                                var telephone = $("#telephone").val();
+                                // console.log(telephone.length);
+                                console.log(typeof telephone);
+                                console.log(parseInt(telephone.length));
+                                console.log(typeof parseInt(telephone))
+
+                                if ( parseInt(telephone.length) > 11){
+                                    alert("Phone number must not be greater than 11 digits");
+                                    $("#telephone").val("");
+                                }
+                                else if ( parseInt(telephone.length) < 11) {
+                                    alert("Phone number must not be less than 11 digits");
+                                    $("#telephone").val("");
+                                }
+                            }
+                        </script>
+
+
+                        <!-- for the fancy sweet alert box -->
+                        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+                        <script>
+                          function validateAllFields() {
+                            var orgTypeGotten = $("#orgTypeGotten").val();
+                            if(orgTypeGotten == ''){
+
+                                // using sweet alert tutorial at https://sweetalert.js.org/
+                                // swal(
+                                //         {
+                                //             title: "info!",
+                                //             text: "kindly fill all fields...",
+                                //             icon: "info",
+                                //         },
+                                        
+                                //     );
+
+                                swal("kindly fill all fields!", {
+                                        buttons: false,
+                                        timer: 2000,  // disappears after 2 seconds
+                                    });
+
+
+                                  
+                              }
+                          }
+                        </script>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Form wizard with number tabs section end -->
+
+<!-- Form wizard with icon tabs section start -->
+
+        </div>
+      </div>
+    </div>
+    <!-- END: Content-->
+
+
+
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="app-assets/vendors/js/ui/jquery.sticky.js"></script>
+    <script src="app-assets/vendors/js/extensions/jquery.steps.min.js"></script>
+    <script src="app-assets/vendors/js/pickers/dateTime/moment-with-locales.min.js"></script>
+    <script src="app-assets/vendors/js/pickers/daterange/daterangepicker.js"></script>
+    <script src="app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
+    <!-- END: Page Vendor JS-->
+
+    <!-- BEGIN: Theme JS-->
+    <script src="app-assets/js/core/app-menu.min.js"></script>
+    <script src="app-assets/js/core/app.min.js"></script>
+    <script src="app-assets/js/scripts/customizer.min.js"></script>
+    <script src="app-assets/js/scripts/footer.min.js"></script>
+    <!-- END: Theme JS-->
+
+    <!-- BEGIN: Page JS-->
+    <script src="app-assets/js/scripts/pages/material-app.min.js"></script>
+    <script src="app-assets/js/scripts/forms/wizard-steps.min.js"></script>
+    <!-- END: Page JS-->
+
+  </body>
+  <!-- END: Body-->
+</html>

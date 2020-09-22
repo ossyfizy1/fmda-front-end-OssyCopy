@@ -1,0 +1,76 @@
+<!-- ajax call -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js "></script>
+
+<!-- get loggedin user name -->
+<script>
+    $(document).ready(function(){
+        // loading image
+        $('.user-name').html("<b><img src='../../../../img/preloader.gif' width='30px' /></b>");
+
+        $.ajax({
+                type: 'POST',
+                url: '/admin/theAdminDetailsInSession', 
+                data: {"getAminDetails" : "getAminDetails"},  // This will send the form data to the back page
+            })
+            .done(function(data){
+                // show the response
+                // $('#response').html(data);
+                // alert(data);
+                console.log(data);
+                $(".user-name").text(data);
+            })
+            .fail(function() {
+                // just in case posting your form failed
+                // alert( "Posting failed." );
+                $(".user-name").text("failed to load name.");
+            });
+    });
+</script>
+
+<div class="header">
+    <div class="nav-header">
+        <div class="brand-logo"><a href="index.html"><b><img src="../../new_assets/images/logo.png" alt=""> </b><span class="brand-title"><img src="../../new_assets/images/logo-text.png" alt=""></span></a>
+        </div>
+        <div class="nav-control">
+            <div class="hamburger"><span class="line"></span> <span class="line"></span> <span class="line"></span>
+            </div>
+        </div>
+    </div>
+    <div class="header-content">
+        <div class="header-left">
+            <ul>
+                <li class="icons position-relative"><a href="javascript:void(0)"><i class="icon-magnifier f-s-16"></i></a>
+                    <div class="drop-down animated bounceInDown">
+                        <div class="dropdown-content-body">
+                            <div class="header-search" id="header-search">
+                                <form action="#">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Search">
+                                        <div class="input-group-append"><span class="input-group-text"><i class="icon-magnifier"></i></span>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="header-right">
+            <ul>
+                <li class="icons"><a href="javascript:void(0)"><span class="user-name"></span><i class="mdi mdi-account f-s-20" aria-hidden="true"></i></a>
+                    <div class="drop-down dropdown-profile animated bounceInDown">
+                        <div class="dropdown-content-body">
+                            <ul>
+                                <li><a href="/admin/change_password"><i class="mdi mdi-key"></i> <span>Change Password</span></a>
+                                </li>
+                                <li><a href="/admin/logout"><i class="icon-power"></i> <span>Logout</span></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

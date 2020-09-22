@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+  <!-- BEGIN: Head-->
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="FMDA dashboard, FMDA Register">
+    <meta name="keywords" content="FMDA dashboard, FMDA Register">
+    <meta name="author" content="fmda">
+    <title>FMDA Register (Coporate) </title>
+    <link rel="apple-touch-icon" href="app-assets/images/ico/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="app-assets/images/ico/favicon.png">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i%7CQuicksand:300,400,500,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- BEGIN: Vendor CSS-->
+    <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/material-vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/forms/icheck/icheck.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/forms/icheck/custom.css">
+    <!-- END: Vendor CSS-->
+
+    <!-- BEGIN: Theme CSS-->
+    <link rel="stylesheet" type="text/css" href="app-assets/css/material.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/components.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/bootstrap-extended.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/material-extended.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/material-colors.min.css">
+    <!-- END: Theme CSS-->
+
+    <!-- BEGIN: Page CSS-->
+    <link rel="stylesheet" type="text/css" href="app-assets/css/core/menu/menu-types/material-vertical-content-menu.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/pages/login-register.min.css">
+    <!-- END: Page CSS-->
+
+    <!-- BEGIN: Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <!-- END: Custom CSS-->
+
+
+
+    <!-- new style added -->
+  <!-- <link rel="stylesheet" type="text/css" href="../new_assets/scss/login.min.css"> -->
+  <link rel="stylesheet" type="text/css" href="../new_assets/plugins/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="../new_assets/icons/font-awesome/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
+
+
+  </head>
+  <!-- END: Head-->
+
+  <!-- BEGIN: Body-->
+  <body class="vertical-layout vertical-content-menu material-vertical-layout material-layout 1-column  bg-full-screen-image" data-open="click" data-menu="vertical-content-menu" data-col="1-column">
+    <!-- BEGIN: Content-->
+    <div class="app-content content">
+      <div class="content-header row">
+      </div>
+      <div class="content-wrapper">
+        <div class="content-body"><section class="flexbox-container">
+    <div class="col-12 d-flex align-items-center justify-content-center">
+        <div class="col-lg-4 col-md-8 col-10 box-shadow-2 p-0">
+            <div class="card border-grey border-lighten-3 px-1 py-1 m-0">
+                <div class="card-header border-0 pb-0">
+                    <div class="card-title text-center">
+                        <img src="app-assets/images/logo/register.png" alt="branding logo">
+                    </div>
+                </div>
+                <div class="card-content">
+
+                    <p class="card-subtitle line-on-side text-muted text-center font-small-3 mx-2 my-1"><span>Register Using Email</span></p>
+                    <div class="card-body">
+                        <form action="/register_corperate" method="post" class="form-horizontal" enctype="multipart/form-data">
+                            <fieldset class="form-group position-relative">
+                                <input type="text" class="form-control" id="user-name" placeholder="Contact Person Name" name="contactPersonName" required>
+                                <div class="form-control-position">
+                                    <i ></i>
+                                </div>
+                            </fieldset>
+                            <fieldset class="form-group position-relative">
+                                <input type="email" class="form-control" id="user-email" placeholder="Contact Official Email" name="contactOfficialEmail" required>
+                                <div class="form-control-position">
+                                    <i ></i>
+                                </div>
+                            </fieldset>
+                            <fieldset class="form-group position-relative">
+                                <input type="text" class="form-control" id="user-name" placeholder="Contact Person Address" name="contactPersonAddress" required>
+                                <div class="form-control-position">
+                                    <i></i>
+                                </div>
+                            </fieldset>
+                            <fieldset class="form-group position-relative">
+                                <input type="tel" class="form-control" id="telephone" placeholder="Company Official Number" name="contactPersonMobileNumber" required onblur="compareNumber()">
+                                <div class="form-control-position">
+                                    <i></i>
+                                </div>
+                            </fieldset>
+                            <fieldset class="form-group position-relative">
+                                <input type="text" class="form-control" id="user-name" placeholder="Organization Name" name="organisationName" required>
+                                <div class="form-control-position">
+                                    <i></i>
+                                </div>
+                            </fieldset>
+                            <fieldset class="form-group position-relative">
+                                <input type="text" class="form-control" id="user-name" placeholder="Organization Address" name="organisationAddress" required>
+                                <div class="form-control-position">
+                                    <i></i>
+                                </div>
+                            </fieldset>
+                            <fieldset class="form-group position-relative">
+                                <select required class="form-control" name="organisationType">
+                                    <option value="">Organization Type:</option>
+                                    <% 
+                                        var oType = organisationTypes
+                                        for(i = 0; i < oType.length; i++)
+                                            {
+
+                                                <!-- hide Individual -->
+                                                if(oType[i].type !== "Individual")
+                                                {
+                                    %>
+                                    <option value="<%= oType[i].type %>"><%= oType[i].type %></option>
+                                    <% 
+                                                }
+                                            } 
+                                    %>
+                                </select>
+                            </fieldset>
+                            <fieldset class="form-group position-relative">
+                                <label>Application Letter (pdf)</label>
+                                <input type="file" class="form-control" id="letter" placeholder="Application Letter of Request (pdf)" name="organisationLetterOfRequest" required>
+                                <div class="form-control-position">
+                                    <i></i>
+                                </div>
+                            </fieldset>
+                            <!-- <fieldset class="form-group position-relative">
+                                <input type="password" class="form-control" id="user-password" placeholder="Enter Password" name="password" required>
+                                <div class="form-control-position">
+                                    <i ></i>
+                                </div>
+                            </fieldset> -->
+                            
+                            <div class="form-group position-relative has-icon-left">
+                                    <!-- Button trigger modal -->
+                                    <button id="toSubmit" name="submit" type="submit" class="btn btn-light block btn-lg" data-toggle="modal" data-target="#inlineForm">
+                                        Register
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
+
+                        <!-- validate telephone number -->
+                        <!-- check phone number -->
+                        <script>
+                            function compareNumber() {
+                                var telephone = $("#telephone").val();
+                                // console.log(telephone.length);
+                                console.log(typeof telephone);
+                                console.log(parseInt(telephone.length));
+                                console.log(typeof parseInt(telephone))
+
+                                if ( parseInt(telephone.length) > 11){
+                                    alert("Phone number must not be greater than 11 digits");
+                                    $("#telephone").val("");
+                                }
+                                else if ( parseInt(telephone.length) < 11) {
+                                    alert("Phone number must not be less than 11 digits");
+                                    $("#telephone").val("");
+                                }
+                            }
+                        </script>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+        </div>
+      </div>
+    </div>
+    <!-- END: Content-->
+
+
+    <!-- BEGIN: Vendor JS-->
+    <script src="app-assets/vendors/js/material-vendors.min.js"></script>
+    <!-- BEGIN Vendor JS-->
+
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="app-assets/vendors/js/ui/headroom.min.js"></script>
+    <script src="app-assets/vendors/js/forms/validation/jqBootstrapValidation.js"></script>
+    <script src="app-assets/vendors/js/forms/icheck/icheck.min.js"></script>
+    <!-- END: Page Vendor JS-->
+
+    <!-- BEGIN: Theme JS-->
+    <script src="app-assets/js/core/app-menu.min.js"></script>
+    <script src="app-assets/js/core/app.min.js"></script>
+    <!-- END: Theme JS-->
+
+    <!-- BEGIN: Page JS-->
+    <script src="app-assets/js/scripts/pages/material-app.min.js"></script>
+    <script src="app-assets/js/scripts/forms/form-login-register.min.js"></script>
+    <!-- END: Page JS-->
+
+  </body>
+  <!-- END: Body-->
+</html>

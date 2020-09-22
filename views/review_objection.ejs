@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+  <!-- BEGIN: Head-->
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="FMDA dashboard, FMDA Register">
+    <meta name="keywords" content="FMDA dashboard, FMDA Register">
+    <meta name="author" content="fmda">
+    <title>FMDA Register (Individual) </title>
+    <link rel="apple-touch-icon" href="app-assets/images/ico/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="app-assets/images/ico/favicon.png">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i%7CQuicksand:300,400,500,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- BEGIN: Vendor CSS-->
+    <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/material-vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/forms/icheck/icheck.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/forms/icheck/custom.css">
+    <!-- END: Vendor CSS-->
+
+    <!-- BEGIN: Theme CSS-->
+    <link rel="stylesheet" type="text/css" href="app-assets/css/material.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/components.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/bootstrap-extended.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/material-extended.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/material-colors.min.css">
+    <!-- END: Theme CSS-->
+
+    <!-- BEGIN: Page CSS-->
+    <link rel="stylesheet" type="text/css" href="app-assets/css/core/menu/menu-types/material-vertical-content-menu.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/pages/login-register.min.css">
+    <!-- END: Page CSS-->
+
+    <!-- BEGIN: Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <!-- END: Custom CSS-->
+
+
+
+    <!-- new style added -->
+  <!-- <link rel="stylesheet" type="text/css" href="../new_assets/scss/login.min.css"> -->
+  <link rel="stylesheet" type="text/css" href="../new_assets/plugins/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="../new_assets/icons/font-awesome/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
+    
+    <!-- END: Custom CSS-->
+
+  </head>
+  <!-- END: Head-->
+
+  <!-- BEGIN: Body-->
+  <body class="vertical-layout vertical-content-menu material-vertical-layout material-layout 1-column  bg-full-screen-image blank-page" data-open="click" data-menu="vertical-content-menu" data-col="1-column">
+    <!-- BEGIN: Content-->
+    <div class="app-content content">
+      <div class="content-header row">
+      </div>
+      <div class="content-wrapper">
+        <div class="content-body"><section class="flexbox-container">
+    <div class="col-12 d-flex align-items-center justify-content-center">
+        <div class="col-lg-4 col-md-8 col-10 box-shadow-2 p-0">
+            <div class="card border-grey border-lighten-3 px-1 py-1 m-0">
+                <div class="card-header border-0">
+                    <div class="card-title text-center">
+                        <img src="app-assets/images/logo/login.png" alt="branding logo">
+                    </div>
+                </div>
+                <div class="card-content">
+
+                    <p class="card-subtitle line-on-side text-muted text-center font-small-3 mx-2 my-1"><span>Review Objection.</span></p>
+                    <div class="card-body">
+                        
+
+                        <!-- Form -->
+                    <form id="userForm2" >
+                        <p>Review Corporate Objection for: <%=companyName %></p>
+                        <hr>
+                        <div class="form-body">
+                            <p>Objection to be reviewd by:</p>
+                            <input class="form-control" name="email" type="text" value="<%=email %>" readonly/>
+                        </div>
+                        <br>
+                        <div class="form-body">
+                            <textarea class="form-control" name="objection" rows="4" width="100%" placeholder="Write up here"></textarea> 
+                        </div>
+
+                        <button style="margin-top: 10px;" id="response2" class="btn btn-primary" name="submit" type="submit">Submit</button>
+                    </form>
+
+                    
+
+
+                    <!-- ajax link -->
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+                    <script>
+                        $(document).ready(function(){
+
+                            $('#userForm2').submit(function(){
+                                
+                                // show that something is loading
+                                $('#response2').html("<b>processing please wait...</b>");
+                                // $('#response2').html("<b><img src='../assets/img/preloader3.gif' width='20px' /></b>");
+                                    
+                                /*
+                                    * 'post_receiver.php' - where you will pass the form data
+                                    * $(this).serialize() - to easily read form data
+                                    * function(data){... - data contains the response from post_receiver.php
+                                    */
+                                $.ajax({
+                                    type: 'POST',
+                                    url: '/review_objection', 
+                                    data: $(this).serialize()  // This will send the form data to the php page
+                                })
+                                .done(function(data){
+                                        
+                                    console.log(data);
+
+                                    if (data.result == "Successful!") {
+                                        // show the response
+                                        $('#response2').html(data.result);
+                                        $("#buttonResponse").hide();
+
+                                        alert(data.result);
+                                        window.location.href = "/";
+                                    } else {
+                                        alert("Not Successful");
+                                        window.location.href = "/";
+                                    }
+                                    
+                                        
+                                })
+                                .fail(function() {
+                                    
+                                    // just in case posting your form failed
+                                    alert( "Posting failed." );
+                                        
+                                });
+                            
+                                // to prevent refreshing the whole page page
+                                return false;
+                            
+                            });
+                        });
+                    </script>
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+        </div>
+      </div>
+    </div>
+    <!-- END: Content-->
+
+
+    <!-- BEGIN: Vendor JS-->
+    <script src="app-assets/vendors/js/material-vendors.min.js"></script>
+    <!-- BEGIN Vendor JS-->
+
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="app-assets/vendors/js/ui/headroom.min.js"></script>
+    <script src="app-assets/vendors/js/forms/validation/jqBootstrapValidation.js"></script>
+    <script src="app-assets/vendors/js/forms/icheck/icheck.min.js"></script>
+    <!-- END: Page Vendor JS-->
+
+    <!-- BEGIN: Theme JS-->
+    <script src="app-assets/js/core/app-menu.min.js"></script>
+    <script src="app-assets/js/core/app.min.js"></script>
+    <!-- END: Theme JS-->
+
+    <!-- BEGIN: Page JS-->
+    <script src="app-assets/js/scripts/pages/material-app.min.js"></script>
+    <script src="app-assets/js/scripts/forms/form-login-register.min.js"></script>
+    <!-- END: Page JS-->
+
+  </body>
+  <!-- END: Body-->
+</html>

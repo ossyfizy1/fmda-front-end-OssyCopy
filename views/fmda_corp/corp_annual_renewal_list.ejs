@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- BEGIN: Head-->
+<%- include('corp_includes/head.ejs')%>
+
+
+<!-- BEGIN: Vendor CSS-->
+<link rel="stylesheet" type="text/css" href="../app-assets/vendors/css/material-vendors.min.css">
+<link rel="stylesheet" type="text/css" href="../app-assets/vendors/css/tables/datatable/datatables.min.css">
+<!-- END: Vendor CSS-->
+
+
+<!-- to make the checkbox bigger -->
+<style>
+    input[type='checkbox'] {
+        /* -webkit-appearance:none; */
+        width:30px;
+        height:30px;
+        background:white;
+        border-radius:5px;
+        border:2px solid #555;
+    }
+    input[type='checkbox']:checked {
+        background: green;
+    }
+</style>
+
+
+
+<!-- start function to check all boxes and also to uncheck all boxes -->
+<script>
+    function toggle(source) {
+        var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i] != source)
+                checkboxes[i].checked = source.checked;
+        }
+    }
+</script>
+<!-- end function to check all boxes  and also to uncheck all boxes -->
+
+
+
+
+<!-- start function to check all boxes and also to uncheck all boxes -->
+<script>
+    function toggle2(source) {
+        var checkboxes2 = document.querySelectorAll('input[type="checkbox2"]');
+        for (var i = 0; i < checkboxes2.length; i++) {
+            if (checkboxes2[i] != source)
+                checkboxes2[i].checked = source.checked;
+        }
+    }
+</script>
+<!-- end function to check all boxes  and also to uncheck all boxes -->
+
+
+<body class="v-light vertical-nav fix-header fix-sidebar">
+    <div id="preloader">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10"/></svg>
+        </div>
+    </div>
+    <div id="main-wrapper">
+        <!-- header -->
+        <%- include('corp_includes/header.ejs')%>
+        <!-- #/ header -->
+        <!-- sidebar -->
+        <%- include('corp_includes/sidebar.ejs')%>
+        <!-- #/ sidebar -->
+        <!-- content body -->
+        <div class="content-body">
+            <div class="container-fluid">
+
+                <section id="material-datatables">
+                    <form id="userFormInvoice" method="POST" action="/corp_annual_renewal" class="row">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card mb-0">
+                                    <div class="card-header">
+                                        <h4 class="card-title"><span style="color: red;"><u>Instruction:</u> </span> Make a check list of members for annual payment. %></h4>
+                                    </div>
+                                    
+
+                                    <!-- <%= JSON.stringify(organisationMembersLookup); %> -->
+
+                                    <div class="card-content collapse show">
+                                        <div class="card-body">
+                                    
+                                          <!-- Table Content: Start -->
+                                          <table class="table table-hover material-table table-striped white">
+                                            
+                                            <!-- Table Head  -->
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th>Full name</th>
+                                                    <th>Gender</th>
+                                                    <th>Type</th>
+                                                    <th>Member ID</th>
+                                                    <th>Category</th>
+                                                    <th>Treasury Experience</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                    
+                                            <!-- Table Body  -->
+                                            <tbody>
+                                                <% 
+                                                
+                                                for(index = 0; index < organisationMembersLookup.length; index++)
+                                                { 
+                                                    var item = organisationMembersLookup[index];
+                                                    var memberUUID = organisationMembersLookup[index].memberUUID;
+
+                                                %>
+                                                    <tr>
+                                                        <td> <input type="checkbox"  name="memberUUID" value='<%= memberUUID %>'> </td>
+                                                        <td>
+                                                            <%= item.firstName %> <%= item.lastName %>
+                                                        </td>
+                                                        <td><%= item.gender %></td>
+                                                        <td><%= item.memberType %></td>
+                                                        <td><%= item.memberUUID %></td>
+                                                        <td><%= item.membershipCategory %></td>
+                                                        <td><%=  item.yearsOfTreasuryExperience  %></td>
+                                                        <td>
+                                                            <a href="/corp_viewMyMemberDetails?details=<%= item.memberUUID %>" class="btn btn-primary">View Details</a>
+                                                        </td>
+                                                    </tr>
+                                                <% 
+                                                    }
+                                                 %>
+                                            </tbody>
+                                          </table>
+                                          <!-- Table Content: End -->
+                                          
+
+                                          <!-- button -->
+                                        <div class="form-group col-md-12" style="margin-top: 20px;">
+                                            <input class="btn btn-success" type="submit" name="submit" value="Generate Invoice" />
+                                        </div>
+
+                                    
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+
+
+                </section>
+                
+            </div>
+            <!-- #/ container -->
+        </div>
+        <!-- #/ content body -->
+
+        <!-- footer -->
+        <!-- BEGIN: Footer-->
+        <%- include('corp_includes/footer.ejs')%>
+    </div>
+
+    <!-- Common JS -->
+    <script src="new_assets/plugins/common/common.min.js"></script>
+    <!-- Custom script -->
+    <script src="new_assets/js/custom.min.js"></script>
+    <!-- Chartjs chart -->
+    <script src="new_assets/assets/plugins/chartjs/Chart.bundle.js"></script>
+    <!-- Custom dashboard script -->
+    <script src="new_assets/js/dashboard-1.js"></script>
+
+
+    <!-- BEGIN: Scripts-->
+    <%- include('corp_includes/scripts.ejs', {})%>
+    <script src="../app-assets/vendors/js/tables/datatable/datatables.min.js"></script>
+    <script src="../app-assets/js/scripts/pages/material-app.min.js"></script>
+    <script src="../app-assets/js/scripts/tables/material-datatable.min.js"></script>
+
+    
+</body>
+
+</html>

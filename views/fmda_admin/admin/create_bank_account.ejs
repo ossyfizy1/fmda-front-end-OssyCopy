@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>FMDA</title>
+  <!-- Favicon icon -->
+  <link rel="icon" type="image/png" sizes="16x16" href="../../img/fmdalogo.png">
+  <link href="../../new_assets/css/style.css" rel="stylesheet">
+  <link href="../../new_assets/plugins/tables/css/datatable/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <link href="../../new_assets/css/mycss.css" rel="stylesheet">
+  <script src="../../new_assets/js/modernizr-3.6.0.min.js"></script>
+</head>
+
+<body class="v-light vertical-nav fix-header fix-sidebar">
+  <div id="preloader">
+    <div class="loader">
+      <svg class="circular" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" /></svg>
+    </div>
+  </div>
+  <div id="main-wrapper">
+    <!-- header -->
+    <%- include('../includes/sub-sections/dashboard-header.ejs')%>
+    <!-- #/ header -->
+
+    <!-- sidebar -->
+    <%- include('../includes/sub-sections/dashboard-sidebar.ejs', {})%>
+    <!-- #/ sidebar -->
+    <!-- content body -->
+    <div class="content-body">
+
+        <section id="material-datatables">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card mb-0">
+                        <div class="card-header">
+                            <h4 class="card-title">Add a Bank Account%></h4>
+                        </div>
+
+                        <div class="card-content collapse show">
+                            <div class="card-body">
+                                <div class="form-body bankForm">
+                                    <h4 class="form-section">Account Details</h4>
+
+                                    <!-- Form Start -->
+                                    <form class="form form-horizontalrs card-form" action="/admin/bank_accounts/add" method="POST">
+
+                                        <!-- General select bank row -->
+                                        <div class="row pl-1">
+
+                                            <!-- 1. Select Bank -->
+                                            <div class="col-md-12">
+                                                <div class="form-group col-md-7">
+                                                    <label class="" for="verifierComment">Select Bank</label>
+                                                    <select id="bank" name="bank" required class="form-control border-primary">
+                                                        <option disabled selected>Select Bank </option>
+                                                        <% financialInstitutions.forEach((item) => { %>
+                                                            <option value="<%= item.name %>" ><%= item.name %></option>
+                                                        <% }); %> 
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <!-- All accounts -->
+                                        <div class="accounts">
+
+                                            <!-- Single bank account -->
+                                            <div class="row pt-1 single-account">
+
+                                                <!-- 1. Form fields -->
+                                                <div class="col-md-7 pt-2">
+
+                                                    <div class="row pl-2">
+
+                                                        <!-- Account Name -->
+                                                        <div class="form-group col-md-12 mx-auto">
+                                                            <label class="label-control" for="accountName">Account Name</label>
+                                                            <div class="form-group">
+                                                                <input type="text" id="accountName" required class="form-control border-primary" placeholder="Account name.." name="accountName">
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="row pl-2">
+
+                                                        <!-- Account Number -->
+                                                        <div class="form-group col-md-6 mx-auto">
+                                                            <label class="label-control">Account Number</label>
+                                                            <div class="form-group">
+                                                                <input type="text" id="accountNumber" required class="form-control border-primary" placeholder="Account number..." name="accountNumber">
+                                                            </div>
+                                                        </div>
+
+                                                        <!--Account Type -->
+                                                        <div class="form-group col-md-6 mx-auto">
+                                                            <label class="label-control">Account Type</label>
+                                                            <select name="type" required class="form-control border-primary">
+                                                                <option disabled selected>Select account type </option>
+                                                                <option value="savings" >Savings</option>
+                                                                <option value="savings" >Current</option>
+                                                            </select>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                                <!-- 1. Card & control buttons -->
+                                                <div class="col-md-5">
+
+                                                    <!-- Card image -->
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="card-wrapper"></div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Buttons -->
+                                                    <div class="row pl-5 pr-5 pt-1 pb-1">
+                                                        <div class="col-md-6">
+                                                            <!-- AddMore button  -->
+                                                            <div class="btn btn-success btn-round addMore"> + Add more </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <!-- Remove button  -->
+                                                            <div class="btn btn-danger btn-round remove ml-5">Remove</div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+
+                                        <!-- Submit button  -->
+                                        <div class="form-actions text-left pl-3">
+                                            <button type="submit" class="btn btn-darken-2 btn-success">Add Accounts</button>
+                                        </div>
+
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <script>
+
+                        const addAccountFields = () => {
+                            // All accounts container
+                            const accounts = document.querySelector('.accounts');
+
+                            const singleAccount = document.querySelector('.single-account');
+
+                            // create a clone of the single account
+                            const clone = singleAccount.cloneNode(true);
+                            // append it into the main form
+                            accounts.appendChild(clone);
+
+                            //clean up the newly appended form
+                            document.querySelectorAll('.single-account:last-child input').forEach(item => {
+                                item.value = '';
+                            });
+
+                            // Attach event listener to buttons
+                            document.querySelector('.single-account:last-child .addMore').addEventListener('click', addAccountFields)
+                            document.querySelector('.single-account:last-child .remove').addEventListener('click', removeAccountFields)
+                        };
+
+                        const removeAccountFields = (e) => {
+                            const accounts = e.target.parentElement
+                                                     .parentElement
+                                                     .parentElement
+                                                     .parentElement
+                            accounts.parentNode.removeChild(accounts);
+                        }
+
+                        // Handle the creation and addition of new account form fields
+                        document.querySelector(".addMore").addEventListener('click', addAccountFields);
+
+                        // Handle the removal of an account
+                        document.querySelector(".remove").addEventListener('click', removeAccountFields);
+                    </script>
+
+                </div>
+
+
+            </div>
+            </section>
+      
+    </div>
+    <!-- #/ content body -->
+    <!-- footer -->
+    <%- include('../includes/sub-sections/dashboard-footer.ejs', {})%>   
+    <!-- #/ footer -->
+  </div>
+  <!-- Common JS -->
+  <script src="../../new_assets/plugins/common/common.min.js"></script>
+  <script src="../../new_assets/plugins/tables/js/jquery.dataTables.min.js"></script>
+  <script src="../../new_assets/plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
+  <script src="../../new_assets/plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
+  <!-- Custom script -->
+  <script src="../../new_assets/js/custom.min.js"></script>
+  <!-- Custom dashboard script -->
+  <script src="../../new_assets/js/dashboard-1.js"></script>
+</body>
+
+</html>

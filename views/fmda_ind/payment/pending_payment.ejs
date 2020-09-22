@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- BEGIN: Head-->
+<%- include('../ind_includes/head.ejs')%>
+
+<body class="v-light vertical-nav fix-header fix-sidebar">
+    <div id="preloader">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10"/></svg>
+        </div>
+    </div>
+    <div id="main-wrapper">
+        <!-- header -->
+        <%- include('../ind_includes/header.ejs')%>
+        <!-- #/ header -->
+        <!-- sidebar -->
+        <%- include('../ind_includes/sidebar.ejs')%>
+        <!-- #/ sidebar -->
+        <!-- content body -->
+        <div class="content-body">
+            <!-- #/ container -->
+            <div class="container-fluid">
+                <div class="row page-titles">
+                    <div class="col p-0">
+                        <h4>Pending Payment</h4>
+                    </div>
+                </div>
+                <!-- row -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table style=" border-collapse:collapse!important;background:" class="table thead-custom zero-configuration">
+                                        <thead style="color:#fff;">
+                                            <tr style=" border-collapse:collapse!important; background: #212121; color:#fff;">
+                                                <th>Purpose</th>
+                                                <th>Description</th>
+                                                <th>Invoice Number</th>
+                                                <th>Amount</th>                                                                    
+                                                <th>Category</th>
+                                                <th>MemberId</th>
+                                                <th>Date</th>
+                                                <th></th>
+                                                <!-- <th>View Details</th> -->
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% lookupMemberInvoices.forEach(item => { %>
+                                                <tr>
+                                                    <td><%= item.paymentPurpose %></td>
+                                                    <% 
+                                                        if (item.paymentPurpose == "Event registration") 
+                                                        {
+                                                    %>
+                                                    <td ><%= item.eventTitle %></td>
+                                                    <%
+                                                        } else {
+                                                    %>
+                                                    <td ><%= item.description %></td>
+                                                    <%    
+                                                        }
+                                                    %>
+                                                    <td><%= item.invoiceNumber %></td>
+                                                    <td><%= item.amount %></td>
+                                                    <td><%= item.membershipCategory %></td>
+                                                    <td><%= item.memberId %></td>
+                                                    <td><%= item.date %></td>
+
+                                                    <% 
+                                                        if (item.paymentPurpose == "Event registration") 
+                                                        {
+                                                    %>
+                                                    <td><a href="/ind_event_registration?eventId=<%=item.eventId%>&type=Paid&eventName=<%=item.eventTitle%>&amount=<%=item.amount%>&invoiceNumber=<%=item.invoiceNumber%>" class="btn btn-sm btn-success create-member">Pay Now</a></td>
+                                                    <%
+                                                        } else {
+                                                    %>
+                                                    <td><a href="/ind_payment_for_member?type=pendingPayment&purpose=<%=item.paymentPurpose%>&amount=<%=item.amount%>&invoiceNumber=<%=item.invoiceNumber%>" class="btn btn-sm btn-primary create-member">Pay Now</a></td>
+                                                    <%    
+                                                        }
+                                                    %>
+
+                                                </tr>
+                                            <% }); %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #/ container -->
+        </div>
+        <!-- #/ content body -->
+        <!-- footer -->
+        <!-- BEGIN: Footer-->
+        <%- include('../ind_includes/footer.ejs')%>
+    </div>
+    <!-- Common JS -->
+    <script src="new_assets/plugins/common/common.min.js"></script>
+    <!-- Custom script -->
+    <script src="new_assets/js/custom.min.js"></script>
+    <script src="new_assets/plugins/tables/js/jquery.dataTables.min.js"></script>
+    <script src="new_assets/plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
+    <script src="new_assets/plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
+</body>
+
+</html>

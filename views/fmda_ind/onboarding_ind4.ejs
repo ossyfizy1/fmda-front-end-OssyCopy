@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+  <!-- BEGIN: Head-->
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="FMDA dashboard, FMDA OnBoarding Process Form">
+    <meta name="keywords" content="FMDA dashboard, FMDA OnBoarding Process Form">
+    <meta name="author" content="fmda">
+    <title>FMDA OnBoarding Process Form </title>
+    <link rel="apple-touch-icon" href="app-assets/images/ico/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="app-assets/images/ico/favicon.png">
+    <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i%7CQuicksand:300,400,500,700" rel="stylesheet"> -->
+    <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
+
+    <!-- BEGIN: Vendor CSS-->
+    <!-- <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/material-vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/pickers/daterange/daterangepicker.css"> -->
+    <!-- END: Vendor CSS-->
+
+    <!-- BEGIN: Theme CSS-->
+    <link rel="stylesheet" type="text/css" href="app-assets/css/material.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/components.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/bootstrap-extended.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/material-extended.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/material-colors.min.css">
+    <!-- END: Theme CSS-->
+
+    <!-- BEGIN: Page CSS-->
+    <!-- <link rel="stylesheet" type="text/css" href="app-assets/css/core/menu/menu-types/material-horizontal-menu.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/plugins/forms/wizard.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/plugins/pickers/daterange/daterange.min.css"> -->
+    <!-- END: Page CSS-->
+
+    <!-- BEGIN: Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <!-- END: Custom CSS-->
+
+  </head>
+  <!-- END: Head-->
+
+  <!-- BEGIN: Body-->
+  <body class="horizontal-layout horizontal-menu horizontal-menu-padding material-horizontal-layout material-layout 2-columns  " data-open="click" data-menu="horizontal-menu" data-col="2-columns">
+
+    <div class="app-content container center-layout mt-2">
+      <div class="content-header row">
+        <div class="content-header-dark bg-img col-12">
+          <div class="row">
+            <div class="content-header-left col-md-9 col-12 mb-2">
+              <h3 class="content-header-title white">Membership Registration Form</h3>
+              <div class="row breadcrumbs-top">
+                <div class="breadcrumb-wrapper col-12">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item active">Attestation
+                    </li>
+                    <li style="margin-left: 50px"><a style="color: white" href="/logout">(Log Out)</a></li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+            <div class="content-header-right col-md-3 col-12">
+              <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown">
+                <!-- dropdown-toggle dropdown-menu-right -->
+                <!-- <div class="dropdown-menu"><a class="dropdown-item" href="component-alerts.html"> Alerts</a><a class="dropdown-item" href="material-component-cards.html"> Cards</a><a class="dropdown-item" href="component-progress.html"> Progress</a>
+                  <div class="dropdown-divider"></div><a class="dropdown-item" href="register-with-bg-image.html"> Register</a>
+                </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="content-wrapper">
+        <div class="content-body"><!-- Form wizard with number tabs section start -->
+
+
+      <!-- start progress bar -->
+      <div class="row">
+            <div class="col-md-12">
+
+      <div id="progressBar1" class="progressBar1">
+        <div class="col-md-12 progress-bar progress-bar-info progress-bar-striped" role="progressbar"
+        aria-valuenow="50" aria-valuemin="90" aria-valuemax="100" style="width:90%">
+          90% Completion
+        </div>
+      </div>
+
+        </div>
+    </div>
+      <!-- start progress bar -->
+
+
+
+<section id="number-tabs">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-content collapse show">
+                    <div class="card-body">
+
+                        <!-- first step -->
+                        <form action="/ind_attestation" method="post" class="form-horizontal">
+                            <!-- start of fourth step -->
+                            <fieldset id="ourFieldset5">
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <div>
+                                      <p>
+                                          I_________________________________ of_________________________________ hereby certify that Mr./Mrs./Miss 
+                                          <u>
+                                              ___<%= memberCompleteDetails.lookupMember.member.firstName %>
+                                              ___<%= memberCompleteDetails.lookupMember.member.lastName %>___
+                                          </u>
+                                          is an
+                                          employee <br><br> of
+                                          <u>
+                                            ___<%= memberCompleteDetails.lookupMember.member.currentOrganisation %>___
+                                          </u>
+                                          and is currently a staff in the
+                                          Treasury/related department. Furthermore he/she is fit to be admitted as a member of the Financial
+                                          Markets Dealers Association.
+                                      </p>
+
+                                      <br>
+                                      <br>
+
+                                      <div class="row">
+                                        <div class="container">
+                                            <label for="date1"> Member Reference ID :</label>
+                                            <input name="referenceMemberId" type="text" class="form-control" id="date1" placeholder="e.g FMDA/2019/2345" required>
+                                        </div>
+                                      </div>
+
+                                        <br>
+                                        <br>
+                                        <div class="row">
+                                          <div class="container">
+                                              <input type="checkbox" name="true" required>
+                                              <label class="custom-control-label" for="staffing1">Click if you agree to <a href="google.com">Terms and Conditions</a></label>
+                                          </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <button name="submit" type="submit" class="btn btn-primary">Submit</button>
+                            </fieldset>
+                        <!-- start of fourth step -->
+                        </form>
+                        <!-- end of first step 1-->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Form wizard with number tabs section end -->
+
+<!-- Form wizard with icon tabs section start -->
+
+        </div>
+      </div>
+    </div>
+    <!-- END: Content-->
+
+
+
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="app-assets/vendors/js/ui/jquery.sticky.js"></script>
+    <script src="app-assets/vendors/js/extensions/jquery.steps.min.js"></script>
+    <script src="app-assets/vendors/js/pickers/dateTime/moment-with-locales.min.js"></script>
+    <script src="app-assets/vendors/js/pickers/daterange/daterangepicker.js"></script>
+    <script src="app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
+    <!-- END: Page Vendor JS-->
+
+    <!-- BEGIN: Theme JS-->
+    <script src="app-assets/js/core/app-menu.min.js"></script>
+    <script src="app-assets/js/core/app.min.js"></script>
+    <script src="app-assets/js/scripts/customizer.min.js"></script>
+    <script src="app-assets/js/scripts/footer.min.js"></script>
+    <!-- END: Theme JS-->
+
+    <!-- BEGIN: Page JS-->
+    <script src="app-assets/js/scripts/pages/material-app.min.js"></script>
+    <script src="app-assets/js/scripts/forms/wizard-steps.min.js"></script>
+    <!-- END: Page JS-->
+
+  </body>
+  <!-- END: Body-->
+</html>

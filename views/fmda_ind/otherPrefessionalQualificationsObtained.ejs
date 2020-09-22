@@ -1,0 +1,63 @@
+
+<div class="col-md-12" style="margin-top: 30px">
+    <p>List of your other professional qualifications</p>            
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>institution name:</th>
+                <th>qualification</th>
+                <th>year attained</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+
+                <% 
+
+                    var qualificationsListGotten = qualificationsList;
+
+                    for (let index = 0; index < qualificationsListGotten.length; index++) 
+                    {
+                        const element = qualificationsListGotten[index];
+                %>     
+
+                <tr>
+                    <td><%= element.institutionName %></td>
+                    <td><%= element.qualification %></td>
+                    <td><%= element.yearAttained %></td>
+                    <td><p class="deleteButton btn btn-default" id="<%= element.institutionName %>"  value="<%= element.institutionName %>"><i class='fa fa-trash'></i></p></td>
+                </tr>
+
+                <% 
+                    }
+                %>
+ 
+            </tbody>
+        </table>
+
+
+        <!-- get the id value of the button clicked -->
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+        <script type="text/javascript">
+            
+
+            const buttons = document.querySelectorAll('.deleteButton')
+            buttons.forEach(item => {
+                item.addEventListener('click', e => {
+                    console.log(e.target.id);
+
+                    var removeByName = e.target.id;
+                    // call "/removeQualification_individual" endpoint to delete
+                    $.post("/remove_other_professional_Qualification_individual", {"removeByName" : removeByName}, function(data){
+                        // alert(data);
+                        $('#savedListOfQualiifications').html(data);
+                    });
+
+                });
+            });
+
+                   
+
+
+        </script>
+</div>

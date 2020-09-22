@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+  <!-- BEGIN: Head-->
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="FMDA dashboard, FMDA OnBoarding Process Form">
+    <meta name="keywords" content="FMDA dashboard, FMDA OnBoarding Process Form">
+    <meta name="author" content="fmda">
+    <title>FMDA OnBoarding Process Form </title>
+    <link rel="apple-touch-icon" href="app-assets/images/ico/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="app-assets/images/ico/favicon.png">
+
+    <!-- BEGIN: Theme CSS-->
+    <link rel="stylesheet" type="text/css" href="app-assets/css/material.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/components.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/bootstrap-extended.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/material-extended.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/material-colors.min.css">
+    <!-- END: Theme CSS-->
+
+    <!-- BEGIN: Page CSS-->
+    <!-- <link rel="stylesheet" type="text/css" href="app-assets/css/core/menu/menu-types/material-horizontal-menu.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/plugins/forms/wizard.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/plugins/pickers/daterange/daterange.min.css"> -->
+    <!-- END: Page CSS-->
+
+    <!-- BEGIN: Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <!-- END: Custom CSS-->
+
+  
+
+  </head>
+  <!-- END: Head-->
+
+  <!-- BEGIN: Body-->
+  <body class="horizontal-layout horizontal-menu horizontal-menu-padding material-horizontal-layout material-layout 2-columns  " data-open="click" data-menu="horizontal-menu" data-col="2-columns">
+
+    <div class="app-content container center-layout mt-2">
+      <div class="content-header row">
+        <div class="content-header-dark bg-img col-12">
+          <div class="row">
+            <div class="content-header-left col-md-9 col-12 mb-2">
+              <h3 class="content-header-title white">Membership Registration Form</h3>
+              <div class="row breadcrumbs-top">
+                <div class="breadcrumb-wrapper col-12">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item active">View Your Profile Below (Edit Where Neccessary)
+                    </li>
+                    <li style="margin-left: 50px"><a style="color: white" href="/logout">(Log Out)</a></li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+            <div class="content-header-right col-md-3 col-12">
+              <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown">
+                <!-- dropdown-toggle dropdown-menu-right -->
+                <!-- <div class="dropdown-menu"><a class="dropdown-item" href="component-alerts.html"> Alerts</a><a class="dropdown-item" href="material-component-cards.html"> Cards</a><a class="dropdown-item" href="component-progress.html"> Progress</a>
+                  <div class="dropdown-divider"></div><a class="dropdown-item" href="register-with-bg-image.html"> Register</a>
+                </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="content-wrapper">
+        <div class="content-body"><!-- Form wizard with number tabs section start -->
+
+
+      <!-- start progress bar -->
+      <div id="progressBar1" class="progressBar1">
+        <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
+        aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+          100% Completion
+        </div>
+      </div>
+      <!-- start progress bar -->
+
+
+
+<section id="number-tabs">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+
+                <% var detailsToUse = memberCompleteDetails.lookupMember.member %>
+
+                <div class="card-content collapse show">
+                    <div class="card-body">
+
+
+
+                      
+
+
+                      <div class="jumbotron">
+                        <div class="row">
+                            <div class="col-md-4 col-xs-12 col-sm-6 col-lg-4">
+                                <% if(detailsToUse.profilePhoto){ %> 
+                                  <img src="<%= detailsToUse.profilePhoto %>" width="150px" height="150px" alt="stack photo" class="img">
+                                <% }else{ %> 
+                                  <img src="img/userIcon.png" width="150px" height="150px" alt="stack photo" class="img">
+                                <% } %> 
+                            </div>
+                            <div class="col-md-8 col-xs-12 col-sm-6 col-lg-8">
+                                <div class="container" style="border-bottom:1px solid black">
+                                  <h2><%= detailsToUse.firstName %> <%= detailsToUse.lastName %></h2>
+                                </div>
+                                  <hr>
+                                <ul class="container details">
+                                  <li><p>Gender: <%= detailsToUse.gender %></p></li>
+                                  <li><p>Address: <%= detailsToUse.address %></p></li>
+                                  <li><p>Email: <%= userID_email %></p></li>
+                                  <li><p>Number: <%= detailsToUse.mobileNumber %></p></a>
+                                  <li><p>Organization: <%= detailsToUse.currentOrganisation %></p></li>
+                                  <li><p>Industry Category: <%= detailsToUse.industryCategory %></p></li>
+                                  <li><p>Industry Type: <%= detailsToUse.industryType %></p></li>
+                                  <li><p>Certification Type: <%= detailsToUse.certificationType %></p></li>
+                                  <li><p>Years Of Treasury Experience: <%= detailsToUse.yearsOfTreasuryExperience %></p></a>
+                                  <li><p>Years Of Post Nysc Experience: <%= detailsToUse.yearsOfPostNyscExperience %></p></a>
+                                </ul>
+                                <a href = '/onboarding_ind?action=update' class="btn btn-primary float-right"> Edit </a>
+                            </div>
+                        </div>
+                      </div>
+
+
+                      <div class="jumbotron">
+                        <div class="row">
+                            <div class="col-md-4 col-xs-12 col-sm-6 col-lg-4">
+                                <div class="container" style="border-bottom:1px solid black">
+                                    <h2> Employment History</h2>
+                                </div>
+                            </div>
+                            <div class="col-md-8 col-xs-12 col-sm-6 col-lg-8">
+                              <ul class="container details">
+                                  <%
+                                    detailsToUse.employmentHistory.forEach(element => {
+                                  %>
+                                  
+
+                                  <li><p>Organization Name: <%= element.organisationName %></p></li>
+                                  <li><p>Position Held: <%= element.positionHeld %></p></li>
+                                  <li><p>Responsibilities: <%= element.responsibilities %></p></li>
+                                  <li><p>Start Date: <%= element.startDate %></p></li>
+                                  <li><p>End Date: <%= element.endDate %></p></li>
+                                  <li><p>Treasury Certification: 
+                                        <a href="<%= detailsToUse.treasuryCertification %>" class="btn btn-primary" download> Download Treasury Certification </a>
+                                      </p>
+                                  </li>
+                                  
+                                  <hr>
+                                  
+
+                                  <%
+                                    });
+                                  %>
+
+                              </ul>
+                              <button onclick="window.location.href = '/update_ind_professionalInformation'" style="float: right" class="btn btn-primary"> Add More </button>
+                            </div>
+                        </div>
+                      </div>
+
+
+                      
+                      <div class="jumbotron">
+                          <div class="row">
+                              <div class="col-md-4 col-xs-12 col-sm-6 col-lg-4">
+                                  <div class="container" style="border-bottom:1px solid black">
+                                      <h2> Academic Qualifications</h2>
+                                  </div>
+                              </div>
+                              <div class="col-md-8 col-xs-12 col-sm-6 col-lg-8">
+                                <ul class="container details">
+                                    <%
+                                      detailsToUse.qualifications.forEach(element => {
+                                    %>
+                                    
+  
+                                    <li><p>Degree Optained: <%= element.degreeOptained %></p></li>
+                                    <li><p>Institution Name: <%= element.institutionName %></p></li>
+                                    <li><p>From: <%= element.from %></p></li>
+                                    <li><p>To: <%= element.to %></p></li>
+                                    
+                                    <hr>
+  
+                                    <%
+                                      });
+                                    %>
+  
+                                </ul>
+                                <button  onclick="window.location.href = '/update_ind_qualifications'" style="float: right" class="btn btn-primary"> Add More </button>
+                              </div>
+                          </div>
+                        </div>
+
+                        
+                        <!-- Attestation -->
+                        <div class="jumbotron">
+                          <div class="row">
+                              <div class="col-md-4 col-xs-12 col-sm-6 col-lg-4">
+                                  <div class="container" style="border-bottom:1px solid black">
+                                      <h2> Attestation </h2>
+                                  </div>
+                              </div>
+                              <div class="col-md-8 col-xs-12 col-sm-6 col-lg-8">
+                                <ul class="container details">
+                                    
+                                    <li><p>Attestation Completed: <%= detailsToUse.attestationComplete === 1 ? 'Approved' : 'Pending'; %></p></li>
+  
+                                </ul>
+                                <button onclick="window.location.href = '/ind_attestation?action=update'" style="float: right" class="btn btn-primary"> Edit </button>
+                              </div>
+                          </div>
+                        </div>
+
+
+                       
+                        <div class="jumbotron">
+                          <div class="row">
+                              <div class="col-md-4 col-xs-12 col-sm-6 col-lg-4">
+                                  <div class="container" style="border-bottom:1px solid black">
+                                      <h2> Membership Details </h2>
+                                  </div>
+                              </div>
+                              <div class="col-md-8 col-xs-12 col-sm-6 col-lg-8">
+                                <ul class="container details">
+                                    
+                                    <li><p>Member Type: <%= detailsToUse.memberType %></p></li>
+                                    <li><p>Member UUID: <%= detailsToUse.memberUUID %></p></li>
+                                    <li><p>Membership Category: <%= detailsToUse.membershipCategory %></p></li>
+                                    <li><p>Membership Request Date: <%= detailsToUse.membershipRequestDate %></p></li>
+
+                                    <br>
+                                    
+                                    <h5><u>Verification & Approval</u></h5>
+
+                                    <%
+                                        var verified = detailsToUse.hasBeenVerified 
+                                        if( verified != 1 ){
+                                          var verifiedStatus = "awating verification.";
+                                    %>
+                                      <li><p>Membership verified: <%= verifiedStatus %></p></li>
+                                    <%
+                                        }
+                                        else
+                                        {
+                                          var verifiedStatus = "verified.";
+                                    %>
+                                      <li><p>Membership verified: <%= verifiedStatus %></p></li>
+                                    <%
+                                        } 
+                                    %>
+
+
+
+                                    <%
+                                        var approved = detailsToUse.hasBeenApproved 
+                                        if( approved != 1 ){
+                                          var approvedStatus = "awating approval.";
+                                    %>
+                                    <li><p>Membership Approved: <%= approvedStatus %></p></li>
+                                    <%
+                                    }
+                                    else
+                                    {
+                                      var approvedStatus = "approved.";
+                                    %>
+                                    <li><p>Membership Approved: <%= approvedStatus %></p></li>
+                                    <%
+                                        } 
+                                    %>
+
+  
+                                </ul>
+                              </div>
+                          </div>
+                        </div>
+
+
+                       
+                        <div class="jumbotron">
+                          <div class="row">
+                              <div class="col-md-4 col-xs-12 col-sm-6 col-lg-4">
+                                  <div class="container" style="border-bottom:1px solid black">
+                                      <h2> Registration Fee </h2>
+                                  </div>
+                              </div>
+                              <div class="col-md-8 col-xs-12 col-sm-6 col-lg-8">
+                                <ul class="container details">
+
+                                    <%
+                                        var registrationFeePaid = detailsToUse.registrationFeePaid 
+                                        if( registrationFeePaid != 1 ){
+                                          var registrationFeePaidStatus = "awating payment verification.";
+                                    %>
+                                    <li><p>Payment Completed: <%= registrationFeePaidStatus %></p></li>
+                                    <%
+                                    }
+                                    else{
+                                      var registrationFeePaidStatus = "verified.";
+                                    %>
+                                    <li><p>Payment Completed: <%= registrationFeePaidStatus %></p></li>
+                                    <%
+                                        } 
+                                    %>
+  
+                                </ul>
+                                <button onclick="window.location.href = '/ind_payment_for_member'" style="float: right" class="btn btn-primary"> Provide Payment Details </button> 
+                              </div>
+                          </div>
+                        </div>
+                        
+                        
+
+
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Form wizard with number tabs section end -->
+
+<!-- Form wizard with icon tabs section start -->
+
+        </div>
+      </div>
+    </div>
+    <!-- END: Content-->
+
+
+
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="app-assets/vendors/js/ui/jquery.sticky.js"></script>
+    <script src="app-assets/vendors/js/extensions/jquery.steps.min.js"></script>
+    <script src="app-assets/vendors/js/pickers/dateTime/moment-with-locales.min.js"></script>
+    <script src="app-assets/vendors/js/pickers/daterange/daterangepicker.js"></script>
+    <script src="app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
+    <!-- END: Page Vendor JS-->
+
+    <!-- BEGIN: Theme JS-->
+    <script src="app-assets/js/core/app-menu.min.js"></script>
+    <script src="app-assets/js/core/app.min.js"></script>
+    <script src="app-assets/js/scripts/customizer.min.js"></script>
+    <script src="app-assets/js/scripts/footer.min.js"></script>
+    <!-- END: Theme JS-->
+
+    <!-- BEGIN: Page JS-->
+    <script src="app-assets/js/scripts/pages/material-app.min.js"></script>
+    <script src="app-assets/js/scripts/forms/wizard-steps.min.js"></script>
+    <!-- END: Page JS-->
+
+  </body>
+  <!-- END: Body-->
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- BEGIN: Head-->
+<%- include('../ind_includes/head.ejs')%>
+
+<body class="v-light vertical-nav fix-header fix-sidebar">
+    <div id="preloader">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10"/></svg>
+        </div>
+    </div>
+    <div id="main-wrapper">
+        <!-- header -->
+        <%- include('../ind_includes/header.ejs')%>
+        <!-- #/ header -->
+        <!-- sidebar -->
+        <%- include('../ind_includes/sidebar.ejs')%>
+        <!-- #/ sidebar -->
+        <!-- content body -->
+        <div class="content-body">
+            
+
+            <div class="card-body">
+                <table class="table table-hover table-striped white">
+
+                    
+                        <!-- Table Head  -->
+                        <thead>
+                            <tr>
+                                <th>Directory Details</th>
+                            </tr>
+                        </thead>
+
+                        <!-- Table Body  -->
+                        <tbody>
+                            <!-- 1. full name -->
+                            <tr>
+                                <td> Directory name </td>
+                                <td>
+                                    <%= data.directoryName %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td> Description </td>
+                                <td>
+                                    <%= data.description %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td> Date Created </td>
+                                <td>
+                                    <%= data.dateCreated %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td> Created By </td>
+                                <td>
+                                    <%= data.createdBy %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td> Accessors </td>
+                                <td>
+                                    <%= data.accessors[0] %>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Table Content: End -->
+                                
+                    <h4 class="form-section" align="center">  List of Resources in Directory </h4>
+                                
+                    <!-- Table Content: Start -->
+                    <table style=" border-collapse:collapse!important;background:" class="table thead-custom zero-configuration">
+                      
+                      <!-- Table Head  -->
+                      <thead style="color:#fff;">
+                          <tr style=" border-collapse:collapse!important; background: #212121; color:#fff;">
+                            <th class="d-none">s/n</th>
+                            <th>Resource name</th>
+                            <th>Date Created</th>
+                            <th>Accessors</th>
+                            <th>Format</th>
+                            <th></th>
+                          </tr>
+                      </thead>
+
+                      <!-- Table Body  -->
+                      <tbody>
+                          <% 
+                              list.forEach((item, i) => { 
+                           %>
+                            <tr>
+                                <td class="d-none" > <%= i %> </td>
+                                <td><i class="fa fa-file"></i> <%= item.name %></td>
+                                <td><%= item.dateCreated %></td>
+                                <td><%= item.accessors %></td>
+                                <td><%= item.format %></td>
+                                <td><a href="../../<%= item.url %>" class="btn btn-primary" download> Download </a></td>
+                            </tr>
+                          <% 
+                              }); 
+                          %>
+                      </tbody>
+                    </table>
+                    <!-- Table Content: End -->
+
+            </div>
+
+            
+        </div>
+        <!-- #/ content body -->
+        <!-- footer -->
+        <!-- BEGIN: Footer-->
+        <%- include('../ind_includes/footer.ejs')%>
+    </div>
+    <!-- Common JS -->
+    <script src="new_assets/plugins/common/common.min.js"></script>
+    <!-- Custom script -->
+    <script src="new_assets/js/custom.min.js"></script>
+    <script src="new_assets/plugins/tables/js/jquery.dataTables.min.js"></script>
+    <script src="new_assets/plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
+    <script src="new_assets/plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
+</body>
+
+</html>

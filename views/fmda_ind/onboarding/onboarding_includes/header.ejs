@@ -1,0 +1,8 @@
+<%= action === 'update' ? 'Update': '' ; %> 
+<%= pageInfo %>
+<a class="btn btn-light" style="float: right;" href="/logout">Log Out</a>
+<% if( action === 'update' ) { %>
+    <a class="btn btn-light" href="/ind_profile_page_for_member">Profile</a>
+<% }else{ %>
+    <a class="btn btn-light" href="/confirmatory_update">Previous Page</a>
+<% } %>

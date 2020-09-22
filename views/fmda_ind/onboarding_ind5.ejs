@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+<!-- BEGIN: Head-->
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="FMDA dashboard, FMDA OnBoarding Process Form">
+    <meta name="keywords" content="FMDA dashboard, FMDA OnBoarding Process Form">
+    <meta name="author" content="fmda">
+    <title>FMDA OnBoarding Process Form </title>
+    <link rel="apple-touch-icon" href="app-assets/images/ico/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="app-assets/images/ico/favicon.png">
+    <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i%7CQuicksand:300,400,500,700" rel="stylesheet"> -->
+    <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
+
+    <!-- BEGIN: Vendor CSS-->
+    <!-- <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/material-vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/pickers/daterange/daterangepicker.css"> -->
+    <!-- END: Vendor CSS-->
+
+    <!-- BEGIN: Theme CSS-->
+    <link rel="stylesheet" type="text/css" href="app-assets/css/material.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/components.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/bootstrap-extended.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/material-extended.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/material-colors.min.css">
+    <!-- END: Theme CSS-->
+
+    <!-- BEGIN: Page CSS-->
+    <!-- <link rel="stylesheet" type="text/css" href="app-assets/css/core/menu/menu-types/material-horizontal-menu.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/plugins/forms/wizard.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/plugins/pickers/daterange/daterange.min.css"> -->
+    <!-- END: Page CSS-->
+
+    <!-- BEGIN: Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <!-- END: Custom CSS-->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js "></script>
+
+
+
+
+</head>
+<!-- END: Head-->
+
+<!-- BEGIN: Body-->
+
+<body class="horizontal-layout horizontal-menu horizontal-menu-padding material-horizontal-layout material-layout 2-columns  " data-open="click" data-menu="horizontal-menu" data-col="2-columns">
+
+    <div class="app-content container center-layout mt-2">
+        <div class="content-header row">
+            <div class="content-header-dark bg-img col-12">
+                <div class="row">
+                    <div class="content-header-left col-md-9 col-12 mb-2">
+                        <h3 class="content-header-title white">Membership Registration Form</h3>
+                        <div class="row breadcrumbs-top">
+                            <div class="breadcrumb-wrapper col-12">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item active">Payment Information
+                                    </li>
+                                </ol>
+                                <li style="margin-left: 50px"><a style="color: white" href="/logout">(Log Out)</a></li>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-header-right col-md-3 col-12">
+                        <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown">
+                            <!-- dropdown-toggle dropdown-menu-right -->
+                            <!-- <div class="dropdown-menu"><a class="dropdown-item" href="component-alerts.html"> Alerts</a><a class="dropdown-item" href="material-component-cards.html"> Cards</a><a class="dropdown-item" href="component-progress.html"> Progress</a>
+                  <div class="dropdown-divider"></div><a class="dropdown-item" href="register-with-bg-image.html"> Register</a>
+                </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content-wrapper">
+            <div class="content-body">
+                <!-- Form wizard with number tabs section start -->
+
+
+                <!-- start progress bar -->
+                <div id="progressBar1" class="progressBar1">
+                    <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="98" aria-valuemin="0" aria-valuemax="100" style="width:98%">
+                        98% Completion
+                    </div>
+                </div>
+                <!-- start progress bar -->
+
+
+
+                <section id="number-tabs">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-content collapse show">
+                                    <div class="card-body">
+
+                                        <!-- first step -->
+                                        <form>
+                                            <fieldset id="ourFieldset1">
+
+
+                                                <div class="row">
+
+                                                    <!-- 1. payment purpose  -->
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="date1"> Purpose :</label>
+                                                            <input name="purpose" type="text" class="form-control dark" id="purpose" value="<%= paymentInfo.description %>" disabled>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- 2. amount  -->
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="amount">Amount:</label>
+                                                            <input name="amount" type="text" class="form-control dark" id="amount" value="<%= paymentInfo.amount %>" disabled>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- 3. list of banks  -->
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="date1"> Bank :</label>
+                                                            <select name="bank" id="bank" class="form-control" required>
+                                                                <option value="" disabled selected >Select bank</option>
+                                                                <% for(i = 0; i < banks.length; i++) { %>
+                                                                <option value="<%= banks[i].bank %>"><%= banks[i].bank %></option>
+                                                                <% } %> 
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- fetch the list of bank accounts for the selected bank when the dropdown is changed -->
+                                                    <script>
+                                                        let accounts;
+                                                        $("#bank").change(e => {                                                     
+                                                            // loop through and determine which of the banks was selected in the upper dropdown
+                                                            let banks = JSON.parse('<%- banksString %>');
+                                                            console.log('a', banks);
+                                                            banks.forEach(item => {
+                                                                if(item.bank === e.target.value) accounts = item.accounts
+                                                            });
+                                                            // create option elements containing account details and append them to the accounts dropdown 
+                                                            accounts.forEach(item => {
+                                                                const option = document.createElement("option");
+                                                                option.value = item.accountNumber;
+                                                                option.textContent = item.accountNumber;
+                                                                $("#accountNumber").append(option);
+                                                            });                                                           
+
+                                                        });
+                                                    </script>
+
+                                                    <!-- 4. Account number  -->
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="accountNumber"> Account Number : </label>
+                                                            <select name="accountNumber" id="accountNumber" class="form-control" required>
+                                                                <option value="">Select account number</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- update the account name field based on which account number has been selected -->
+                                                    <script>
+                                                        $("#accountNumber").change(e => {
+                                                            accounts.forEach(item =>{
+                                                                if (e.target.value === item.accountNumber ) {
+                                                                    document.querySelector('#accountName').value = item.accountName;
+                                                                    document.querySelector('#type').value = item.type;
+                                                                }
+                                                            });                                                            
+                                                        });
+                                                    </script>
+
+                                                    <!-- 5. Account name for the selected bank  -->
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="accountName"> Account Name : </label>
+                                                            <input name="accountName" type="text" class="form-control dark" id="accountName" disabled>
+                                                        </div>
+                                                    </div>
+
+                                                     <!-- _(unassigned). Account type for selected bank  -->
+                                                     <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="type"> Account Type : </label>
+                                                            <input name="type" type="text" class="form-control dark" id="type" disabled>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- 6. Email address -->
+                                                    <div class="col-md-4 d-none">
+                                                        <div class="form-group">
+                                                            <label for="emailAddress1">Email Address :</label>
+                                                            <input name="userId" type="email" class="form-control dark" id="userId" placeholder="Email Address" value="<%= userID_email %>" required disabled>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- 7. Depositor name  -->
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="Address1"> Depositor Name :</label>
+                                                            <input name="depositorName" type="text" class="form-control" id="depositorName" required="required">
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- 8. payment reference no  -->
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="emailAddress1"> Payment Reference No :</label>
+                                                            <input name="paymentReferenceNo" type="text" class="form-control" id="paymentReferenceNo" required>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- 9. payment date  -->
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="phoneNumber1"> Payment Date :</label>
+                                                            <input name="paymentDate" type="date" class="form-control" id="paymentDate" required>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <!-- submit button  -->
+                                                <button id="paymentDetails" type="button" class="btn btn-primary">Submit</button>
+
+                                            </fieldset>
+                                        </form>
+                                        <!-- end of first step 1-->
+
+
+
+                                        <!-- jquery & ajax link -->
+                                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js "></script>
+                                        <!-- for the fancy sweet alert box -->
+                                        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+                                        <script>
+                                            $("#paymentDetails").click(function() {
+                                                //  alert("add more o");
+
+                                                var userId = $("#userId").val();
+                                                var depositorName = $("#depositorName").val();
+                                                var paymentReferenceNo = $("#paymentReferenceNo").val();
+                                                var amount = $("#amount").val();
+                                                var paymentDate = $("#paymentDate").val();
+                                                var bank = $("#bank").val();
+                                                var purpose = $("#purpose").val();
+                                                var accountNumber = $("#accountNumber").val();
+                                                var accountName = $("#accountName").val();
+
+
+                                                if (depositorName == '' || paymentReferenceNo == '' || amount == '' || paymentDate == '' || bank == '' || purpose == '') {
+
+                                                    // using sweet alert tutorial at https://sweetalert.js.org/
+                                                    // swal(
+                                                    //         {
+                                                    //             title: "info!",
+                                                    //             text: "kindly fill all fields...",
+                                                    //             icon: "info",
+                                                    //         },
+
+                                                    //     );
+
+                                                    swal("kindly fill all fields!", {
+                                                        buttons: false,
+                                                        timer: 2000, // disappears after 2 seconds
+                                                    });
+
+
+
+                                                } else {
+
+                                                    // convert it to object
+                                                    var addAsObject = {
+                                                        userId,
+                                                        depositorName,
+                                                        paymentReferenceNo,
+                                                        amount,
+                                                        paymentDate,
+                                                        bank,
+                                                        accountNumber,
+                                                        accountName,
+                                                        purpose,
+                                                    }
+
+                                                    console.log(addAsObject);
+                                                    $.post("/ind_payment_for_member", addAsObject, function(data) {
+                                                        //  alert(data);
+                                                        alert(data);
+                                                        window.location.href = '/ind_profile_page_for_member';
+                                                    });
+                                                }
+
+
+
+
+
+                                            });
+                                        </script>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Form wizard with number tabs section end -->
+
+                <!-- Form wizard with icon tabs section start -->
+
+            </div>
+        </div>
+    </div>
+    <!-- END: Content-->
+
+
+
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="app-assets/vendors/js/ui/jquery.sticky.js"></script>
+    <script src="app-assets/vendors/js/extensions/jquery.steps.min.js"></script>
+    <script src="app-assets/vendors/js/pickers/dateTime/moment-with-locales.min.js"></script>
+    <script src="app-assets/vendors/js/pickers/daterange/daterangepicker.js"></script>
+    <script src="app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
+    <!-- END: Page Vendor JS-->
+
+    <!-- BEGIN: Theme JS-->
+    <script src="app-assets/js/core/app-menu.min.js"></script>
+    <script src="app-assets/js/core/app.min.js"></script>
+    <script src="app-assets/js/scripts/customizer.min.js"></script>
+    <script src="app-assets/js/scripts/footer.min.js"></script>
+    <!-- END: Theme JS-->
+
+    <!-- BEGIN: Page JS-->
+    <script src="app-assets/js/scripts/pages/material-app.min.js"></script>
+    <script src="app-assets/js/scripts/forms/wizard-steps.min.js"></script>
+    <!-- END: Page JS-->
+
+</body>
+<!-- END: Body-->
+
+</html>

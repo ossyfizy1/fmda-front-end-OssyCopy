@@ -1,0 +1,5 @@
+<select class="select2-tags form-control" name="organisationName" multiple="" id="select2-tags">
+        <% data.forEach((item) => { %>
+            <option value="<%= item.id %>"><%= item.name %></option>
+        <% }); %>
+    </select>

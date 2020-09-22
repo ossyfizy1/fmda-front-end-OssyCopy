@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- BEGIN: Head-->
+<%- include('../ind_includes/head.ejs')%>
+
+<body class="v-light vertical-nav fix-header fix-sidebar">
+    <div id="preloader">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10"/></svg>
+        </div>
+    </div>
+    <div id="main-wrapper">
+        <!-- header -->
+        <div class="header">
+            <div class="nav-header">
+                <div class="brand-logo"><a href="index.html"><b><img src="new_assets/images/logo.png" alt=""> </b><span class="brand-title"><img src="new_assets/images/logo-text.png" alt=""></span></a>
+                </div>
+                <div class="nav-control">
+                    <div class="hamburger"><span class="line"></span> <span class="line"></span> <span class="line"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="header-content">
+                <div class="header-left">
+                    <ul>
+                        <li class="icons position-relative"><a href="javascript:void(0)"><i class="icon-magnifier f-s-16"></i></a>
+                            <div class="drop-down animated bounceInDown">
+                                <div class="dropdown-content-body">
+                                    <div class="header-search" id="header-search">
+                                        <form action="#">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" placeholder="Search">
+                                                <div class="input-group-append"><span class="input-group-text"><i class="icon-magnifier"></i></span>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="header-right">
+                    <ul>
+                        <li class="icons"><a href="javascript:void(0)"><i class="mdi mdi-account f-s-20" aria-hidden="true"></i></a>
+                            <div class="drop-down dropdown-profile animated bounceInDown">
+                                <div class="dropdown-content-body">
+                                    <ul>
+                                        <li><a href="/ind_profile_page_for_member"><i class="mdi mdi-settings"></i> <span>Profile Setting</span></a>
+                                        </li>
+                                        <li><a href="/logout"><i class="icon-power"></i> <span>Logout</span></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+          </div>
+        <!-- #/ header -->
+
+        <!-- sidebar -->
+        <% if(PaymentFor == "onboarding payment"){ %>
+            <%- //include('../ind_includes/sidebar.ejs')%>
+        <% } else { %> 
+            <%- include('../ind_includes/sidebar.ejs')%>
+        <% } %> 
+        <!-- #/ sidebar -->
+
+
+        <!-- content body -->
+        <div class="content-body">
+            <div class="container-fluid">
+
+
+                <section id="number-tabs">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-content collapse show">
+                                    <div class="card-body">
+
+                                        <!-- first step -->
+                                        <form>
+                                            <fieldset id="ourFieldset1">
+
+
+                                                <div class="row">
+
+                                                    <!-- payment type to be done -->
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="date1"> Payment For :</label>
+                                                            <input name="purpose" type="text" class="form-control dark" id="PaymentFor" value="<%= PaymentFor %>" disabled>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <!-- 1. payment purpose  -->
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="date1"> Purpose :</label>
+                                                            <input name="purpose" type="text" class="form-control dark" id="purpose" value="<%= paymentInfo.description %>" disabled>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- 2. amount  -->
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="amount">Amount:</label>
+                                                            <input name="amount" type="text" class="form-control dark" id="amount" value="<%= paymentInfo.amount %>" disabled>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- 3. list of banks  -->
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="date1"> Bank :</label>
+                                                            <select name="bank" id="bank_name" class="form-control" required onchange="getFmdaBankDetails()">
+                                                                <option value="" disabled selected >Select bank</option>
+                                                                <% for(i = 0; i < banks.length; i++) { %>
+                                                                <option value="<%= banks[i].bank %>"><%= banks[i].bank %></option>
+                                                                <% } %> 
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+
+
+                                                     <!-- get bank details -->
+                                                    <script>
+                                                        function getFmdaBankDetails() 
+                                                        {
+
+                                                        // on selection of bank from dropdown list empty Account Number
+                                                        $("#accountNumberOfSelectedBank").empty();
+                                                        
+                                                        // empty the account name
+                                                        $("#theAccountName").val("");
+
+                                                        var bank_name = $("#bank_name").val();
+
+                                                        $.ajax({
+                                                                type: 'POST',
+                                                                url: '/ind_get_fmda_account_details', 
+                                                                data: {"bank_name" : bank_name}  // This will send the form data to the php page
+                                                            })
+                                                            .done(function(data){
+
+                                                                console.log(data);
+
+                                                                // convert data to json and save the data in sessionStorge (in web browser)
+                                                            sessionStorage.setItem("accountDetailsData", JSON.stringify(data) );
+
+                                                                // show the "--select Account Nunber--" on bank selection
+                                                                $("<option>--select Account Nunber--</option>").appendTo("#accountNumberOfSelectedBank");
+
+                                                                // update the Account Number field with account numbers
+                                                                for (let index = 0; index < data.length; index++) {
+                                                                        const element = data[index];
+                                                                        // alert(element);
+                                                                        $("<option>" + element.accountNumber + "</option>").appendTo("#accountNumberOfSelectedBank");
+                                                                    }
+                                                            })
+                                                            .fail(function() {
+                                                                // just in case posting your form failed
+                                                                alert( "Posting failed." );
+                                                            });
+                                                        }
+                                                    </script>
+
+
+                                                    
+
+                                                    <!-- 4. Account number  -->
+                                                    <div class="col-md-4 form-group">
+                                                        <label for="email">Account Number:</label>
+                                                        <select name="accountNumber" id="accountNumberOfSelectedBank" class="form-control" required onchange="getFmdaBankAccountName()">
+                                                        </select>
+                                                      </div>
+                
+                
+                                                      <!-- get account name -->
+                                                      <script>
+                                                        function getFmdaBankAccountName() 
+                                                        {
+                                                            
+                
+                                                            // get and parse the bank account details stored in sessionStorage(in the web browser)
+                                                            const accountDetailsData = JSON.parse( sessionStorage.getItem("accountDetailsData") );
+                
+                                                            console.log("account Details Data: ", accountDetailsData);
+                
+                                                            // get the account number of the selected bank from the dropdown 
+                                                            var accountNumberOfSelectedBank = $("#accountNumberOfSelectedBank").val();
+                
+                                                            console.log("account Number Of Selected Bank : ", accountNumberOfSelectedBank);
+                
+                                                            for (let index = 0; index < accountDetailsData.length; index++) {
+                                                              const element = accountDetailsData[index];
+                
+                                                              // cross check the selected bank number against the sessionStorage array of object and get the bank name
+                                                              if (element.accountNumber == accountNumberOfSelectedBank) {
+                                                                  console.log(element.accountName);
+                
+                                                                  // set the account name
+                                                                  $("#theAccountName").val(element.accountName);
+
+                                                                //   set account type
+                                                                $("#accountType").val(element.type);
+
+                                                                  
+                                                              }
+                                                              
+                                                            }
+                
+                                                        }
+                                                      </script>
+
+                                                   
+                                                    <!-- 5. Account name for the selected bank  -->
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="accountName"> Account Name : </label>
+                                                            <input name="accountName" type="text" id="theAccountName" class="form-control dark" id="accountName" disabled>
+                                                        </div>
+                                                    </div>
+
+                                                     <!-- _(unassigned). Account type for selected bank  -->
+                                                     <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="type"> Account Type : </label>
+                                                            <input name="type" type="text" class="form-control dark" id="accountType" disabled>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- 6. Email address -->
+                                                    <div class="col-md-4 d-none">
+                                                        <div class="form-group">
+                                                            <label for="emailAddress1">Email Address :</label>
+                                                            <input name="userId" type="email" class="form-control dark" id="userId" placeholder="Email Address" value="<%= userID_email %>" required disabled>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- 7. Depositor name  -->
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="Address1"> Depositor Name :</label>
+                                                            <input name="depositorName" type="text" class="form-control" id="depositorName" required="required">
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- 8. payment reference no  -->
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="emailAddress1"> Payment Reference No :</label>
+                                                            <input name="paymentReferenceNo" type="text" class="form-control" id="paymentReferenceNo" required>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- 9. payment date  -->
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="phoneNumber1"> Payment Date :</label>
+                                                            <input name="paymentDate" type="date" class="form-control" id="paymentDate" required>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <!-- invoiceNumber  -->
+                                                    <div class="col-md-4">
+                                                        <% if (paymentInfo.invoiceNumber) 
+                                                            {
+                                                        %>
+                                                            <div class="form-group">
+                                                                <label for="emailAddress1"> Invoice Number (check your mail) :</label>
+                                                                <input name="invoiceNumber" type="text" class="form-control" id="invoiceNumber" value="<%=paymentInfo.invoiceNumber%>" readonly>
+                                                            </div>
+                                                        <%
+                                                            }
+                                                            else if(paymentInfo.invoiceNumber == undefined)
+                                                            {
+                                                        %>
+                                                            <div class="form-group">
+                                                                <label for="emailAddress1"> Invoice Number (check your mail) :</label>
+                                                                <input name="invoiceNumber" type="text" class="form-control" id="invoiceNumber" required>
+                                                            </div>
+
+                                                            <!-- generate invoice number -->
+                                                            <!--<button id="generateInvoiceNumber">Don't have an invoice number? Click to generate</button>-->
+
+
+                                                        <%
+                                                            } 
+                                                        %> 
+                                                        
+                                                        
+                                                    </div>
+
+
+                                                </div>
+
+                                                <!-- submit button  -->
+                                                <button style="margin-top: 50px;" id="paymentDetails" type="button" class="btn btn-primary">
+                                                    <%= action === 'update' ? 'Make Payment': 'Make Payment' ; %>
+                                                </button>
+
+                                            </fieldset>
+                                        </form>
+                                        <!-- end of first step 1-->
+
+
+                                        <!-- jquery & ajax link -->
+                                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js "></script>
+
+
+                                         <!-- function to generate invoice number -->
+                                         <script>
+                                            $("#generateInvoiceNumber").click(function() {
+                                                // alert("lets generate invoice number");
+
+                                                // display upon processing
+                                                $("#generateInvoiceNumber").text("processing, please wait...");
+
+                                                // ajax call
+                                                $.post("/ind_generate_invoice_number", {"action" : "generate invoice number"}, function(data) {
+                                                    // alert(data);
+
+                                                    // display message after processing
+                                                    $("#generateInvoiceNumber").text(data);
+                                                });
+
+                                            });
+                                        </script>
+
+
+                                        <!-- jquery & ajax link -->
+                                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js "></script>
+                                        <!-- for the fancy sweet alert box -->
+                                        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+                                        <!-- fucntion to submit payments -->
+                                        <script>
+                                            $("#paymentDetails").click(function() {
+                                                //  alert("add more o");
+
+                                                var userId = $("#userId").val();
+                                                var depositorName = $("#depositorName").val();
+                                                var paymentReferenceNo = $("#paymentReferenceNo").val();
+                                                var invoiceNumber = $("#invoiceNumber").val();
+                                                var amount = $("#amount").val();
+                                                var paymentDate = $("#paymentDate").val();
+                                                var bank = $("#bank_name").val();
+                                                var purpose = $("#purpose").val();
+                                                var accountNumber = $("#accountNumberOfSelectedBank").val();
+                                                var accountName = $("#theAccountName").val();
+
+
+                                                if (depositorName == '' || paymentReferenceNo == '' || invoiceNumber == '' || amount == '' || paymentDate == '' || bank == '' || purpose == '') {
+
+                                                    // using sweet alert tutorial at https://sweetalert.js.org/
+                                                    // swal(
+                                                    //         {
+                                                    //             title: "info!",
+                                                    //             text: "kindly fill all fields...",
+                                                    //             icon: "info",
+                                                    //         },
+
+                                                    //     );
+
+                                                    swal("kindly fill all fields!", {
+                                                        buttons: false,
+                                                        timer: 2000, // disappears after 2 seconds
+                                                    });
+
+
+
+                                                } else {
+
+                                                    // convert it to object
+                                                    var addAsObject = {
+                                                        userId,
+                                                        depositorName,
+                                                        paymentReferenceNo,
+                                                        invoiceNumber,
+                                                        amount,
+                                                        paymentDate,
+                                                        bank,
+                                                        accountNumber,
+                                                        accountName,
+                                                        purpose,
+                                                    }
+
+                                                    console.log(addAsObject);
+                                                    $.post("/ind_payment_for_member", addAsObject, function(data) {
+                                                        //  alert(data);
+                                                        alert(data);
+                                                        
+                                                        var PaymentFor = $("#PaymentFor").val();
+                                                        if (PaymentFor == "onboarding payment") {
+                                                            window.location.href = '/ind_profile_page_for_member';
+                                                        } else if(PaymentFor == "pending invoices") {
+                                                            window.location.href = '/ind_pending_payment';
+                                                        };
+                                                        
+                                                    });
+                                                }
+
+
+
+
+
+                                            });
+                                        </script>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+
+                
+            </div>
+            <!-- #/ container -->
+        </div>
+        <!-- #/ content body -->
+
+        <!-- footer -->
+        <!-- BEGIN: Footer-->
+        <%- include('../ind_includes/footer.ejs')%>
+    </div>
+
+    <!-- Common JS -->
+    <script src="new_assets/plugins/common/common.min.js"></script>
+    <!-- Custom script -->
+    <script src="new_assets/js/custom.min.js"></script>
+    <!-- Chartjs chart -->
+    <script src="new_assets/assets/plugins/chartjs/Chart.bundle.js"></script>
+    <!-- Custom dashboard script -->
+    <script src="new_assets/js/dashboard-1.js"></script>
+
+    <!-- BEGIN: Scripts-->
+    <%- include('onboarding_includes/scripts.ejs')%>
+    <!-- END: Scripts-->
+
+    
+</body>
+
+</html>

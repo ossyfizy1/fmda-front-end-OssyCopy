@@ -1,0 +1,457 @@
+<table class="table table-hover table-striped white">
+
+    <!-- Table Head  -->
+    <thead>
+        <tr>
+            <th>Individual member details</th>
+        </tr>
+    </thead>
+
+    <!-- Table Body  -->
+    <tbody>
+        <!-- 1. full name -->
+        <tr>
+            <td> Full name </td>
+            <td>
+                <% var fullName = '' %>
+                <% if (member.firstName || member.lastName == '') { %>
+                    <% fullName = 'N/A'%>
+                    <%} %>
+
+                <% if (member.firstName || member.lastName != '') { %>
+                <% fullName = `${member.firstName} ${member.lastName}`%>
+                <%} %>
+
+                <%= fullName %>
+                <!-- i dont know why the else statements dont work-->
+            </td>
+
+        </tr>
+
+
+        <!-- 2. Email -->
+        <tr>
+            <td> Personal email </td>
+            <td>
+                <% var personalEmail = '' %>
+                <% if (member.personalEmail == '') { %>
+                    <% personalEmail = 'N/A'%>
+                    <%} %>
+
+                <% if ( member.personalEmail != '') { %>
+                <% personalEmail = `${member.personalEmail}`%>
+                <%} %>
+
+                <%= personalEmail %>
+                <!-- see how this typeof worrked-->
+            </td>
+        </tr>
+
+        <!-- 3. Member ID -->
+        <tr>
+            <td> Member ID </td>
+            <td>
+                <% var memberUUID = '' %>
+                <% if (member.memberUUID == '') { %>
+                    <% memberUUID = 'N/A'%>
+                    <%} %>
+
+                <% if ( member.memberUUID != '') { %>
+                <% personalEmail = `${member.memberUUID}`%>
+                <%} %>
+
+                <%= memberUUID %>
+            </td>
+        </tr>
+        
+        <!-- 2. Last login date -->
+        <tr>
+            <td> Last login date </td>
+            <td>
+                <% var lastLoginDate = '' %>
+                <% if (member.lastLoginDate == '') { %>
+                    <% lastLoginDate = 'N/A'%>
+                    <%} %>
+
+                <% if (member.lastLoginDate != '') { %>
+                <% lastLoginDate = `${member.lastLoginDate}`%>
+                <%} %>
+
+                <%= lastLoginDate %>
+            </td>
+
+        </tr>
+
+                <!-- 3. mobileNumber -->
+                <tr>
+                    <td> Mobile number </td>
+                    <td>
+                        <% var mobileNumber = '' %>
+                        <% if (member.mobileNumber == '') { %>
+                            <% mobileNumber = 'N/A'%>
+                            <%} %>
+        
+                        <% if ( member.mobileNumber != '') { %>
+                        <% mobileNumber = `${member.mobileNumber}`%>
+                        <%} %>
+
+                        <%= mobileNumber %>
+                    </td>
+                </tr>
+
+                <!-- 4. Gender -->
+                <tr>
+                    <td> Gender </td>
+                    <td>
+                        <% var gender = '' %>
+                        <% if (member.gender == '') { %>
+                            <% gender = 'N/A'%>
+                            <%} %>
+        
+                        <% if (member.gender != '') { %>
+                        <% gender = `${member.gender}`%>
+                        <%} %>
+
+                        <%= gender %>
+                    </td>
+                </tr>
+
+                        <!-- 6. Member type -->
+                <tr>
+                    <td> Member type </td>
+                    <td>
+                        <% var memberType = '' %>
+                        <% if (member.memberType == '') { %>
+                            <% memberType = 'N/A'%>
+                            <%} %>
+        
+                        <% if ( member.memberType != '') { %>
+                        <% memberType = `${member.memberType}`%>
+                        <%} %>
+
+                        <%= memberType %>
+                    </td>
+                </tr>
+                <!-- 7. membershipCategory -->
+                <tr>
+                    <td> Membership category </td>
+                    <td>
+                        <% var membershipCategory = '' %>
+                        <% if (member.membershipCategory == '') { %>
+                            <% membershipCategory = 'N/A'%>
+                            <%} %>
+        
+                        <% if (member.membershipCategory != '') { %>
+                        <% membershipCategory = `${member.membershipCategory}`%>
+                        <%} %>
+
+                        <%= membershipCategory %>
+                    </td>
+                </tr>
+
+                <!-- 5. Current organisation -->
+                <tr>
+                    <td> Current organisation </td>
+                    <td>
+                        <% var currentOrganisation = '' %>
+                        <% if (member.currentOrganisation == '') { %>
+                            <% currentOrganisation = 'N/A'%>
+                            <%} %>
+        
+                        <% if (member.currentOrganisation != '') { %>
+                        <% currentOrganisation = `${member.currentOrganisation}`%>
+                        <%} %>
+
+                        <%= currentOrganisation %>
+                    </td>
+                </tr>
+
+        <!-- 9. Employment history -->
+        <tr>
+            <td>  Employment history </td>
+            <td>
+                <% if (member.employmentHistory != '') { %>
+                    <% if ( member.employmentHistory.length !== 0 ) { %>
+                        <!-- employmentHistory modal button -->
+                        <button class="btn btn-info btn-sm"
+                        data-toggle="modal" data-target="#employmentHistoryModal"> 
+                          view employment history
+                        </button>
+                      <% } %>
+      
+                      <!-- Employment history Modal -->
+                      <div class="modal fade text-left" id="employmentHistoryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
+                       aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                  <div class="modal-header">
+                                      <h4 class="modal-title" id="myModalLabel1">Employment history</h4>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                      </button>
+                                  </div>
+                                  <% member.employmentHistory.forEach(item => { %>
+                                      <div class="modal-body">
+                                          <h6>Organisation name : <%= item.organisationName %> </h6>
+                                          <h6>Position held : <%= item.positionHeld %> </h6>
+                                          <h6>Duration : <%= `${item.startDate} - ${item.endDate}` %> </h6>
+                                          <h6>Responsibilities : <%= item.responsibilities %> </h6>
+                                          <hr>
+                                      </div>
+                                  <% }) %>
+                                  
+                                  <div class="modal-footer">
+                                      <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                <% } %>
+
+                <% if ( member.employmentHistory == '') { %>
+                    
+                    <!-- employmentHistory modal button -->
+                    <button class="btn btn-info btn-warning btn-sm"
+                     data-target="#"> 
+                      Employment Histroy Not Available
+                    </button>
+                  <% } %>
+            </td>
+        </tr>
+
+                    <!-- 6. Industry type -->
+                <tr>
+                    <td> Industry type </td>
+                    <td>
+                        <% var industryType = '' %>
+                        <% if (member.industryType == '') { %>
+                            <% industryType = 'N/A'%>
+                            <%} %>
+        
+                        <% if (member.industryType != '') { %>
+                        <% industryType = `${member.industryType}`%>
+                        <%} %>
+
+                        <%= industryType %>
+                    </td>
+                </tr>
+
+                <!-- 7. Industry category -->
+                <tr>
+                    <td> Industry category </td>
+                    <td>
+                        <% var industryCategory = '' %>
+                        <% if (member.industryCategory == '') { %>
+                            <% industryCategory = 'N/A'%>
+                            <%} %>
+        
+                        <% if (member.industryCategory != '') { %>
+                        <% industryCategory = `${member.industryCategory}`%>
+                        <%} %>
+
+                        <%= industryCategory %>
+                    </td>
+                </tr>
+                
+                <!-- 8. registration fee paid -->
+                <tr>
+                    <td> Registration fee status </td>
+                    <td>
+                        <span class="badge badge-<%= member.registrationFeePaid === 1 ? 'success' : member.registrationFeePaid === 0 ? 'danger' : member.registrationFeePaid === -1 ? 'warning' : 'warning' %>">
+                            <%= member.registrationFeePaid === 1 ? 'Paid | Approved' : member.registrationFeePaid === 0 ? 'Paid | Pending approval' : member.registrationFeePaid === -1 ? 'Paid | Rejected' : 'Unpaid' %>
+                        </span>
+                    </td>
+                </tr>
+
+                <!-- 12. Verification status -->
+                <tr>
+                    <td> Verification status </td>
+                    <td>
+                        <span class="badge badge-<%= member.hasBeenVerified === 1 ? 'success' : member.hasBeenVerified === 0 ? 'danger' : 'warning' %>">
+                            <%= member.hasBeenVerified === 1 ? 'Verified' : member.hasBeenVerified === -1 ? 'Verification rejected' : 'Unverified' %>
+                        </span> 
+                    </td>
+                </tr>
+
+                    <!-- 13. Verifier's comment -->
+                <tr>
+                    <td> Verifier's comment </td>
+                    <td> 
+                        <% var verifierComment = '' %>
+                        <% if (member.verifierComment == '') { %>
+                            <% verifierComment = 'N/A'%>
+                            <%} %>
+        
+                        <% if ( member.verifierComment != '') { %>
+                        <% verifierComment = `${member.verifierComment}`%>
+                        <%} %>
+
+                        <%= verifierComment %> 
+                    </td>
+                </tr>
+
+            <!-- 12. Verification status -->
+            <tr>
+                <td> Approval status </td>
+                <td>
+                    <span class="badge badge-<%= member.hasBeenApproved === 1 ? 'success' : member.hasBeenApproved === 0 ? 'danger' : 'warning' %>">
+                        <%= member.hasBeenApproved === 1 ? 'Verified' : member.hasBeenApproved === -1 ? 'Approval rejected' : 'Unvapproved' %>
+                    </span> 
+                </td>
+            </tr>
+
+                    <!-- 14. Years of post NYSC experience -->
+                <tr>
+                    <td> Years of post NYSC experience </td>
+                    <td> 
+                        <% var yearsOfPostNyscExperience = '' %>
+                        <% if (member.yearsOfPostNyscExperience == '') { %>
+                            <% yearsOfPostNyscExperience = 'N/A'%>
+                            <%} %>
+        
+                        <% if (member.yearsOfPostNyscExperience != '') { %>
+                        <% yearsOfPostNyscExperience = `${member.yearsOfPostNyscExperience}`%>
+                        <%} %>
+
+                        <%= yearsOfPostNyscExperience %> 
+                    </td>
+                </tr>
+                <!-- 14. Years of treasury experience -->
+                <tr>
+                    <td> Years of treasury experience </td>
+                    <td> 
+                        <% var yearsOfTreasuryExperience = '' %>
+                        <% if (member.yearsOfTreasuryExperience == '') { %>
+                            <% yearsOfTreasuryExperience = 'N/A'%>
+                            <%} %>
+        
+                        <% if (member.yearsOfTreasuryExperience != '') { %>
+                        <% yearsOfTreasuryExperience = `${member.yearsOfTreasuryExperience}`%>
+                        <%} %>
+
+                        <%= yearsOfTreasuryExperience %> 
+                    </td>
+                </tr>
+                <!-- 14. address -->
+                <tr>
+                    <td> Address </td>
+                    <td> 
+                        <% var address = '' %>
+                        <% if (member.address == '') { %>
+                            <% address = 'N/A'%>
+                            <%} %>
+        
+                        <% if (member.address != '') { %>
+                        <% address = `${member.address}`%>
+                        <%} %>
+
+
+                        <%= address %> 
+                    </td>
+                </tr>
+                <!-- 14. state -->
+                <tr>
+                    <td> State </td>
+                    <td> 
+                        <% var state = '' %>
+                        <% if (typeof member.state == 'undefined') { %>
+                            <% state = 'N/A'%>
+                            <%} %>
+        
+                        <% if (typeof member.address != 'undefined') { %>
+                        <% address = `${member.state}`%>
+                        <%} %>
+
+                        <%= state %> 
+                    </td>
+                </tr>
+
+                        <!-- Attestation complete -->
+                <tr>
+                    <td> Attestation complete </td>
+                    <td>
+                        <span class="badge badge-<%= member.attestationComplete === 1 ? 'success' : member.attestationComplete === -1 ? 'danger' : member.attestationComplete === 0 ? 'warning' : 'warning' %>">
+                            <%= member.attestationComplete === 1 ? 'Complete' : member.attestationComplete === -1 ? 'Rejected' : member.attestationComplete === 0 ? 'Pending' : 'Unstarted' %>
+                        </span>
+                    </td>
+                </tr>
+                <!-- Certification type -->
+                <tr>
+                    <td> Certification type </td>
+                    <td> 
+                        <% var certificationType = '' %>
+                        <% if (member.certificationType == '') { %>
+                            <% certificationType = 'N/A'%>
+                            <%} %>
+        
+                        <% if (member.certificationType != '') { %>
+                        <% certificationType = `${member.certificationType}`%>
+                        <%} %>
+
+                        <%= certificationType %> 
+                    </td>
+                </tr>
+
+                        <!-- 9. Qualifications -->
+                <tr>
+                    <td>  Qualifications </td>
+                    <td>
+                        <% if (member.employmentHistory != '' ) { %>
+                            <% if ( member.employmentHistory.length !== 0 ) { %>
+                            <!-- Qualifications modal button -->
+                            <button class="btn btn-info btn-sm"
+                            data-toggle="modal" data-target="#qualificationsModal"> 
+                                View qualifications
+                            </button>
+                            <% } %>
+
+                            <!-- Qualifications Modal -->
+                            <div class="modal fade text-left" id="qualificationsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
+                            aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title" id="myModalLabel1">Qualifications</h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <% member.qualifications.forEach(item => { %>
+                                            <div class="modal-body">
+                                                <h6>Institution name : <%= item.institutionName %> </h6>
+                                                <h6>Degree obtained : <%= item.degreeOptained %> </h6>
+                                                <h6>from : <%= item.from %> </h6>
+                                                <h6>to : <%= item.to %> </h6>
+                                                <hr>
+                                            </div>
+                                        <% }) %>
+                                        
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <% } %> 
+
+                            <% if (member.employmentHistory == '') { %>
+                    
+                                <!-- employmentHistory modal button -->
+                                <button class="btn btn-info btn-warning btn-sm"
+                                 data-target="#"> 
+                                  Qualifications Not Available
+                                </button>
+                              <% } %>
+                            
+                    </td>         
+                </tr>
+                        <!-- 5. Treasury certification -->
+                <tr>
+                    <td> Treasury certification </td>
+                    <td>
+                        <a class="btn btn-info btn-sm" href="#" target="#">View certificate</a>
+                    </td>
+                </tr>
+    </tbody>
+</table>

@@ -1,0 +1,178 @@
+<table class="table table-hover table-striped white">
+
+    <!-- Table Head  -->
+    <thead>
+        <tr>
+            <th>Corporate member details</th>
+        </tr>
+    </thead>
+
+    <!-- Table Body  -->
+    <tbody>
+        <!-- Organisation name -->
+        <tr>
+            <td> Organisation name </td>
+            <td>
+                <%= corporate.organisationName %>
+            </td>
+        </tr>
+        <!-- 6. Organisation address -->
+        <tr>
+            <td> Organisation address </td>
+            <td>
+                <%= corporate.organisationAddress %>
+            </td>
+        </tr>
+        <!-- 7. Organisation type -->
+        <tr>
+            <td> Organisation type </td>
+            <td>
+                <%= corporate.organisationType %>
+            </td>
+        </tr>
+        <!-- 1. Contact person name -->
+        <tr>
+            <td> Contact person name </td>
+            <td>
+                <%= corporate.contactPersonName %>
+            </td>
+        </tr>
+
+        <!-- 2. Contact person email -->
+        <tr>
+            <td> Contact person email </td>
+            <td>
+                <%= corporate.contactOfficialEmail %>
+            </td>
+        </tr>
+
+        <!-- 3. Contact person address -->
+        <tr>
+            <td> Contact person email </td>
+            <td>
+                <%= corporate.contactPersonAddress %>
+            </td>
+        </tr>
+
+        <!-- 4. Contact person mobile number -->
+        <tr>
+            <td> Contact mobile number </td>
+            <td>
+                <%= corporate.contactPersonMobileNumber %>
+            </td>
+        </tr>
+        <!-- 8. registration fee paid -->
+        <tr>
+            <td> Registration fee status </td>
+            <td>
+                <span class="badge badge-<%= corporate.registrationFeePaid === 1 ? 'success' : corporate.registrationFeePaid === 0 ? 'danger' : 'warning' %>">
+                    <%= corporate.registrationFeePaid === 1 ? 'Status | Approved' : corporate.registrationFeePaid === 0 ? 'Unpaid' : 'Status | Unnaproved' %>
+                </span>
+            </td>
+        </tr>
+        <!-- 9. Objections -->
+        <tr>
+            <td>  Objections </td>
+            <td>
+                <span class="badge badge-<%= corporate.objections.length === 0 ? 'success' : 'danger' %>">
+                    <%= corporate.objections.length %>
+                </span>
+
+                <% if ( corporate.objections.length !== 0 ) { %>
+                  <!-- Objections modal button -->
+                  <button class="btn btn-info btn-sm ml-1"
+                  data-toggle="modal" data-target="#objectionsModal"> 
+                    view objections
+                  </button>
+                <% } %>
+
+                <!-- Objections Modal -->
+                <div class="modal fade text-left" id="objectionsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
+                 aria-hidden="true" style="margin-top: 50px;">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="myModalLabel1">Objections</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <% corporate.objections.forEach(item => { %>
+                                <div class="modal-body">
+                                    <h6>Date posted : <%= item.datePosted %> </h6>
+                                    <h6>Member ID : <%= item.memberId %> </h6>
+                                    <p>Reasons : <%= item.reasons %> </p>
+                                    <hr>
+                                </div>
+                            <% }) %>
+                            
+                            <div class="modal-footer">
+                                <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <!-- 10. Objection period -->
+        <tr>
+            <td> Objection period </td>
+            <td>
+                <%  let startDate, endDate;
+                    if (corporate.registrationFeeVerificationDate) {
+                        const day = corporate.registrationFeeVerificationDate.slice(5,7);
+                        const month = corporate.registrationFeeVerificationDate.slice(8,10);
+                        const year = corporate.registrationFeeVerificationDate.slice(11,15);
+
+                        startDate = new Date(`${month}/${day}/${year}`);
+                        const increaseDate = () => {
+                            let date = new Date(startDate);
+                            date = new Date(date.setDate(date.getDate() + 14 ));
+                            return date;
+                        };
+                        endDate = increaseDate();
+                    }
+                    
+                %>
+                <%= corporate.registrationFeeVerificationDate ? `${startDate.toDateString()} - ${endDate.toDateString()}` : 'not available' ; %>
+            </td>
+        </tr>
+        <!-- 11. Objection period status -->
+        <tr>
+            <td> Objection period status </td>
+            <td>
+                <span class="badge badge-<%= corporate.objectionPeriodElapsed === 1 ? 'success' : 'warning' %>">
+                    <%= corporate.objectionPeriodElapsed === 1 ? 'Elapsed' : 'Pending' %>
+                </span>
+            </td>
+        </tr>
+        <!-- 12. Verification status -->
+        <tr>
+            <td> Verification status </td>
+            <td>
+                <span class="badge badge-<%= corporate.hasBeenVerified === 1 ? 'success' : corporate.hasBeenVerified === 0 ? 'warning' : 'danger' %>">
+                    <%= corporate.hasBeenVerified === 1 ? 'Verified' : corporate.hasBeenVerified === 0 ? 'Unverified' : 'Verification rejected' %>
+                </span> 
+            </td>
+        </tr>
+        <!-- 13. Verifier's comment -->
+        <tr>
+            <td> Verifier's comment </td>
+            <td> <%= corporate.verifierComment %> </td>
+        </tr>
+        <!-- 14. Approval status -->
+        <tr>
+            <td> Approval status </td>
+            <td>
+                <span class="badge badge-<%= corporate.hasBeenApproved === 1 ? 'success' : corporate.hasBeenApproved === -1 ? 'danger' : 'warning' %>">
+                    <%= corporate.hasBeenApproved === 1 ? 'Approved' : corporate.hasBeenApproved === -1 ? 'Approval rejected' : 'Unnaproved' %>
+                </span> 
+            </td>
+        </tr>
+        <!-- 15. Approval status -->
+        <tr>
+            <td> Approver's comment </td>
+            <td> <%= corporate.approvalComment %> </td>
+        </tr>
+    </tbody>
+</table>

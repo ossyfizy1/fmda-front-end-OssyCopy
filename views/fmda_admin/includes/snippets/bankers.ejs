@@ -1,0 +1,7 @@
+<!-- Loop through data array and return full list of capabilities  -->
+<% data.forEach((item) => { %>
+    <label class="selectContainer"><%= item.name %>
+        <input type="checkbox" name="bankers" checked="checked" value="<%= item.name %>">
+        <span class="checkmark"></span>
+    </label>
+<% }); %>

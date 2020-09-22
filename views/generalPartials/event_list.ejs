@@ -1,0 +1,80 @@
+<!-- Table Content: Start -->
+<table class="table table-striped table-bordered zero-configuration table-hover">
+
+    <!-- Table Head  -->
+    <thead>
+        <tr>
+            <th class="d-none">s/n</th>
+            <!-- Only admins should be able to see the status of the event -->
+            <% if (type === 'admin') { %>
+            <th>Status</th>
+            <th>Fee Type</th>
+            <% } else { %>
+            <th>Type</th>
+            <% } %>
+            <th>Title</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>details</th>
+            <!-- Only admins should be able to see the status of the event -->
+            <% if (type === 'admin') 
+                { 
+            %>
+                <th>attendees</th>
+            <% 
+                }
+            %>
+        </tr>
+    </thead>
+
+    <!-- Table Body  -->
+    <tbody>
+        <% events.forEach((item, i) => {  %>
+            <tr>
+                <td class="d-none">
+                    <%= i %>
+                </td>
+                <% if (type === 'admin') { %>
+                <td>
+                    <span class="badge badge-<%= item.status === 1 ? 'success' : item.status === 0 ? 'warning' : 'warning' %>">
+                        <%= item.status === 1 ? 'Published' : item.status === 0 ? 'Unpublished' : '' %>
+                    </span>
+                </td>
+                <td>
+                    <%= item.type %>
+                </td>
+                <% } else { %>
+                    <td>
+                        <span class="badge badge-<%= item.type === 'Free' ? 'light' : 'primary' %>">
+                            <%= item.type %>
+                        </span>
+                    </td>
+                <% } %>
+                <td>
+                    <%= item.title %>
+                </td>
+                <td>
+                    <%= (new Date(+item.startDate)).toDateString() %>
+                </td>
+                <td>
+                    <%= (new Date(+item.endDate)).toDateString() %>
+                </td>
+                <td>
+                    <a href="/<%= type === 'admin' ? 'admin/events/' : `${type}_event_` %>details?eventId=<%=item.id%>&type=<%=item.type%>" class="btn btn-sm btn-primary"> View details</a>
+                </td>
+                <% if (type === 'admin') 
+                    { 
+                %>
+                <td>
+                    <a href="/<%= type === 'admin' ? 'admin/events/' : `${type}_event_` %>attendees?eventId=<%=item.id%>&type=<%=item.type%>" class="btn btn-sm btn-primary"> Attendees</a>
+                </td>
+                <% 
+                    }
+                %>
+            </tr>
+            <% }); %>
+    </tbody>
+</table>
+
+
+

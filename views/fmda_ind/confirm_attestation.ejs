@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+<!-- BEGIN: Head-->
+<%- include('ind_includes/head.ejs')%>
+    <!-- END: Head-->
+
+    <!-- BEGIN: Body-->
+
+    <body class="v-light vertical-nav fix-header fix-sidebar">
+
+        <!-- BEGIN: Header-->
+        <%- include('ind_includes/header.ejs')%>
+            <!-- END: Header-->
+
+            <!-- BEGIN: Content-->
+            <div class="app-content content">
+                <div class="content-header row">
+                </div>
+                <div class="content-wrapper">
+
+                    <!-- BEGIN: Main Menu-->
+                    <%- include('ind_includes/sidebar.ejs')%>
+                        <!-- END: Main Menu-->
+
+                        <div class="content-body">
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-content collpase show">
+                                            <form action="/ind_member_attestation/<%= token %>" method="POST" class="form-horizontal" style="padding: 50px;">
+                                                <!-- start of fourth step -->
+                                                <fieldset id="ourFieldset5">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <h>Attestation</h>
+                                                            <hr>
+                                                            <div>
+                                                                <p>
+                                                                    I hereby certify that Mr./Mrs./Miss
+                                                                    <u class="ml-1 mr-1">
+                                                                        <strong>
+                                                                        <%= firstName %>
+                                                                        <%= lastName %>
+                                                                        </strong>
+                                                                    </u> is an employee of
+                                                                                            <u>
+                                                                        <u class="ml-1 mr-1">
+                                                                            <strong>
+                                                                        <%= organisation %>
+                                                                    </strong>
+                                                                    </u>
+                                                                    </u>. Furthermore he/she is fit to be admitted as a member of the Financial Markets Dealers Association.
+                                                                </p>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <hr>
+                                                    <button name="status" type="submit" value='decline' class="btn btn-danger">Decline</button>
+                                                    <button name="status" type="submit" value='approve' class="btn btn-primary">Approve</button>
+                                                </fieldset>
+                                                <!-- start of fourth step -->
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- start of generalPartials/objection-->
+
+                        </div>
+                        <!-- END: Main content-->
+                </div>
+                <!--/ Recent Transactions -->
+
+
+
+
+            </div>
+            </div>
+            </div>
+            <!-- END: Content-->
+
+            <!-- BEGIN: Footer-->
+            <%- include('ind_includes/footer.ejs')%>
+            <!-- END: Footer-->
+
+
+    <!-- Common JS -->
+    <script src="new_assets/plugins/common/common.min.js"></script>
+    <!-- Custom script -->
+    <script src="new_assets/js/custom.min.js"></script>
+    <!-- Chartjs chart -->
+    <script src="new_assets/assets/plugins/chartjs/Chart.bundle.js"></script>
+    <!-- Custom dashboard script -->
+    <script src="new_assets/js/dashboard-1.js"></script>
+
+
+    </body>
+    <!-- END: Body-->
+
+</html>

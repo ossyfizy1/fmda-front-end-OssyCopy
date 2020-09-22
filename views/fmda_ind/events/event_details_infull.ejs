@@ -1,0 +1,270 @@
+<%
+    if (lookupEvent.isFree == true) 
+    {    
+%>
+    
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <td>Title</td>
+                <td><%= lookupEvent.title %></td>
+            </tr>
+            <tr>
+                <td>Description</td>
+                <td><%= lookupEvent.description %></td>
+            </tr>
+            <tr>
+                <td>Type</td>
+                <td><%= lookupEvent.type %></td>
+            </tr>
+            <tr>
+                <td>Max Number Of Paticipants</td>
+                <td><%= lookupEvent.maxNumberOfPaticipants %></td>
+            </tr>
+            <tr>
+                <td>participant Category</td>
+                <td><%= lookupEvent.participantCategory %></td>
+            </tr>
+            <tr>
+                <td>Requires Attendee Confirmation</td>
+                <td><%= lookupEvent.requiresAttendeeConfirmation %></td>
+            </tr>
+            <tr>
+                <td> Start Date </td>
+                <td><%= (new Date(+lookupEvent.startDate)).toDateString() %></td>
+            </tr>
+            <tr>
+                <td> End Date </td>
+                <td><%= (new Date(+lookupEvent.endDate)).toDateString() %></td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <!-- display obtainablePoints -->
+    <% 
+        var obtainablePointsLength = lookupEvent.obtainablePoints.length
+        if ( obtainablePointsLength != 0 ) 
+        { 
+    %>
+
+    
+
+    <div class="container" style="margin-top: 50px;">
+        <div class="row" style="margin-bottom: 5px;">
+            <h4 class="card-title">Points Obtainable</h4>    
+            <hr>
+        </div>
+        <div class="row">
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <%  
+                            lookupEvent.obtainablePoints.forEach(element => 
+                            {
+                                var PCategory = memberCompleteDetails.lookupMember.member.membershipCategory;
+                                if(element.pointName == PCategory.toLowerCase()){
+                        %>
+                            <td> <%= PCategory %> : <%= element.pointValue %> Point(s)</td>
+                        <% 
+                                }
+                            });
+                        %>
+                    </tr>
+                </tbody>
+            </table>
+        </div> 
+    </div>
+    <%
+        }
+    %>
+
+
+    <!-- display publish event -->
+    <p>
+        <% if ( lookupEvent.status !== 1 ) { %>
+            <a href="/admin/events/publish?eventId=<%=lookupEvent.id%>" class="btn btn-sm btn-primary create-member"> Publish event</a>
+        <% } %>
+    </p>
+
+    
+
+<%
+    }
+    else if (lookupEvent.isFree == false) 
+    {
+%>
+
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <td>Title</td>
+                <td><%= lookupEvent.title %></td>
+            </tr>
+            <tr>
+                <td>Description</td>
+                <td><%= lookupEvent.description %></td>
+            </tr>
+            <tr>
+                <td>Type</td>
+                <td>
+                    <%= lookupEvent.type %>
+                </td>
+            </tr>
+
+            <% 
+                if (lookupEvent.feeType == "Flat") 
+                {
+            %>
+                <td>Flat Fee Amount</td>
+                <td>&#8358; <%= lookupEventAmount %></td>
+            <%
+                }
+            %>
+
+            <tr>
+                <td>Max Number Of Paticipants</td>
+                <td><%= lookupEvent.maxNumberOfPaticipants %></td>
+            </tr>
+            <tr>
+                <td>participant Category</td>
+                <td><%= lookupEvent.participantCategory %></td>
+            </tr>
+            <tr>
+                <td>Requires Attendee Confirmation</td>
+                <td><%= lookupEvent.requiresAttendeeConfirmation %></td>
+            </tr>
+            <tr>
+                <td> Start Date </td>
+                <td><%= (new Date(+lookupEvent.startDate)).toDateString() %></td>
+            </tr>
+            <tr>
+                <td> End Date </td>
+                <td><%= (new Date(+lookupEvent.endDate)).toDateString() %></td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <!-- display custom fee -->
+    <% 
+        var customFeeLength = lookupEvent.customFee.length
+        if ( customFeeLength != 0 ) 
+        { 
+    %>
+    <div class="container" style="margin-top: 50px;">
+        <div class="row" style="margin-bottom: 5px;">
+            <h4 class="card-title">Custom Fee</h4>    
+            <hr>
+        </div>
+        <div class="row">
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <% 
+                            lookupEvent.customFee.forEach(element => 
+                            {
+                                var PCategory = memberCompleteDetails.lookupMember.member.membershipCategory;
+                                if(element.name == PCategory.toLowerCase()){
+                        %>
+                            <td> <%= PCategory %> : &#8358; <%= lookupEventAmount %> </td>
+                        <% 
+                                }
+                            });
+                        %>
+                    </tr>
+                </tbody>
+            </table>
+        </div> 
+    </div>
+    <%
+        }
+    %>
+
+
+    <!-- display discount % -->
+    <% 
+        var discountLength = lookupEvent.discounts.length
+        if ( discountLength != 0 ) 
+        { 
+    %>
+    <div class="container" style="margin-top: 50px;">
+        <div class="row" style="margin-bottom: 5px;">
+            <h4 class="card-title">Discount %</h4>    
+            <hr>
+        </div>
+        <div class="row">
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <%  
+                            lookupEvent.discounts.forEach(element => 
+                            {
+                                var PCategory = memberCompleteDetails.lookupMember.member.membershipCategory;
+                                if(element.discountName == PCategory.toLowerCase()){
+                        %>
+                            <td> <%= PCategory %> : <%= element.percentage %> %</td>
+                        <% 
+                                }
+                            });
+                        %>
+                    </tr>
+                </tbody>
+            </table>
+        </div> 
+    </div>
+    <%
+        }
+    %>
+
+
+    <!-- display obtainablePoints -->
+    <% 
+        var obtainablePointsLength = lookupEvent.obtainablePoints.length
+        if ( obtainablePointsLength != 0 ) 
+        { 
+    %>
+    <div class="container" style="margin-top: 50px;">
+        <div class="row" style="margin-bottom: 5px;">
+            <h4 class="card-title">Points Obtainable</h4>    
+            <hr>
+        </div>
+        <div class="row">
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <%  
+                            lookupEvent.obtainablePoints.forEach(element => 
+                            {
+                                var PCategory = memberCompleteDetails.lookupMember.member.membershipCategory;
+                                if(element.pointName == PCategory.toLowerCase()){
+                        %>
+                            <td> <%= PCategory %> : <%= element.pointValue %> Point(s)</td>
+                        <% 
+                                }
+                            });
+                        %>
+                    </tr>
+                </tbody>
+            </table>
+        </div> 
+    </div>
+    <%
+        }
+    %>
+
+
+    <!-- display publish event -->
+    <p>
+        <% if ( lookupEvent.status !== 1 ) { %>
+            <a href="/admin/events/publish?eventId=<%=lookupEvent.id%>" class="btn btn-sm btn-primary create-member"> Publish event</a>
+        <% } %>
+    </p>
+
+<%
+    }
+%>
+
+                                
+                                
+<!-- End table -->

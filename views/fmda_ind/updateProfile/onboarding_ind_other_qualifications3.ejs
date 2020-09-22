@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+  <!-- BEGIN: Head-->
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="FMDA dashboard, FMDA OnBoarding Process Form">
+    <meta name="keywords" content="FMDA dashboard, FMDA OnBoarding Process Form">
+    <meta name="author" content="fmda">
+    <title>FMDA OnBoarding Process Form </title>
+    <link rel="apple-touch-icon" href="app-assets/images/ico/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="app-assets/images/ico/favicon.png">
+    <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i%7CQuicksand:300,400,500,700" rel="stylesheet"> -->
+    <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
+
+    <!-- BEGIN: Vendor CSS-->
+    <!-- <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/material-vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/pickers/daterange/daterangepicker.css"> -->
+    <!-- END: Vendor CSS-->
+
+    <!-- BEGIN: Theme CSS-->
+    <link rel="stylesheet" type="text/css" href="app-assets/css/material.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/components.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/bootstrap-extended.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/material-extended.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/material-colors.min.css">
+    <!-- END: Theme CSS-->
+
+    <!-- BEGIN: Page CSS-->
+    <!-- <link rel="stylesheet" type="text/css" href="app-assets/css/core/menu/menu-types/material-horizontal-menu.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/plugins/forms/wizard.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/plugins/pickers/daterange/daterange.min.css"> -->
+    <!-- END: Page CSS-->
+
+    <!-- BEGIN: Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <!-- END: Custom CSS-->
+
+
+  </head>
+  <!-- END: Head-->
+
+  <!-- BEGIN: Body-->
+  <body class="horizontal-layout horizontal-menu horizontal-menu-padding material-horizontal-layout material-layout 2-columns  " data-open="click" data-menu="horizontal-menu" data-col="2-columns">
+
+    <div class="app-content container center-layout mt-2">
+      <div class="content-header row">
+        <div class="content-header-dark bg-img col-12">
+          <div class="row">
+            <div class="content-header-left col-md-9 col-12 mb-2">
+              <h3 class="content-header-title white">Membership Registration Form</h3>
+              <div class="row breadcrumbs-top">
+                <div class="breadcrumb-wrapper col-12">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item active">Other Professional Qualifications
+                    </li>
+                    <li style="margin-left: 50px"><a style="color: white" href="/logout">(Log Out)</a></li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+            <div class="content-header-right col-md-3 col-12">
+              <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown">
+                <!-- dropdown-toggle dropdown-menu-right -->
+                <!-- <div class="dropdown-menu"><a class="dropdown-item" href="component-alerts.html"> Alerts</a><a class="dropdown-item" href="material-component-cards.html"> Cards</a><a class="dropdown-item" href="component-progress.html"> Progress</a>
+                  <div class="dropdown-divider"></div><a class="dropdown-item" href="register-with-bg-image.html"> Register</a>
+                </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="content-wrapper">
+        <div class="content-body"><!-- Form wizard with number tabs section start -->
+
+
+      <!-- start progress bar -->
+      <div class="row">
+            <div class="col-md-12">
+
+      <div id="progressBar1" class="progressBar1">
+        <div class="col-md-12 progress-bar progress-bar-info progress-bar-striped" role="progressbar"
+        aria-valuenow="50" aria-valuemin="60" aria-valuemax="100" style="width:62%">
+          62% Completion
+        </div>
+      </div>
+
+        </div>
+    </div>
+      <!-- start progress bar -->
+
+
+
+<section id="number-tabs">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-content collapse show">
+                    <div class="card-body">
+
+
+                      
+                        <!-- upload cerificate -->
+                        <div class="col-md-12" style="margin-top: 30px; margin-bottom: 30px;">
+                            <label>Upload Professional Certificate Type</label>
+                            <input id="upload-input" type="file" name="upload" onchange="uploadCertificate()">
+                            <span id="uploadStatus" style="color: green;"></span>
+                        </div>
+                    
+                    
+                        <!-- script to upload cerificate -->
+                        <script>
+                          function uploadCertificate() {
+   
+                              // $('#uploadStatus').text("uploading file, processing...");
+                              // show that something is loading
+                              $('#uploadStatus').html("<b>please wait...<img src='img/preloader.gif' width='30px' /></b>");
+
+                               var data = new FormData();
+
+                               var theFileType;
+
+                               $.each($('#upload-input')[0].files, function(i, file) {
+                                   data.append('file-'+i, file);
+
+                                   console.log("file type: ", file.type);
+
+                                  //  get the file type
+                                   theFileType = file.type;
+                               });
+
+
+                              //  validate type
+                              if (theFileType == "pdf reader" || theFileType == "pdf" || theFileType == "application/pdf") {
+
+                              //  console.log("file: ", $("#upload-input").val());
+
+                                // use ".split("\\").pop()" to the fake path attached to it.
+                                var file_name = $("#upload-input").val().split("\\").pop();
+                                console.log("file_name: ", file_name);
+
+                                // save the file name into sessionStorage
+                                sessionStorage.setItem("uploadedFileNameOtherProCert", file_name);
+
+                                $.ajax({
+                                    url: '/ind_other_proffessional_qualifications_cert_upload',
+                                    data: data,
+                                    cache: false,
+                                    contentType: false,
+                                    processData: false,
+                                    method: 'POST',
+                                    type: 'POST', // For jQuery < 1.9
+                                    success: function(data){
+                                        // alert(data);
+                                        console.log(data);
+                                        
+                                        if (data.status == "successfully uploaded.") {
+                                                $('#uploadStatus').text(data.status);
+                                                $('#addMoreEH').show();
+                                        } else {
+                                                $('#uploadStatus').text(data.status);
+                                        }
+                                        
+                                    }
+                                });
+                              }
+                              else{
+
+                                console.log("the file type is not supported, pdf only");
+                                $('#uploadStatus').text("the file type is not supported, pdf only");
+                                $('#addMoreEH').hide();
+                                
+                              }
+
+
+                          }
+                        </script>
+
+
+                          <!-- Academic Qualifications Details  -->
+                          <form action="/update_ind_other_professional_qualifications" method="post" class="form-horizontal" enctype="multipart/form-data">
+                            <!-- start of third step -->
+                          <fieldset id="ourFieldset4">
+                                <div class="row" id="qualification">
+
+                                    <div class="col-md-12">
+                                      <!-- <div class="form-group">
+                                          <label>Certificate :</label>
+                                          <input type="file" id="sampleFile" onchange="certUpload()"/>
+                                          <p>upload progress here...</p>
+                                      </div> -->
+                                    </div>
+                                    <div class="col-md-12">
+                                      <hr>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="phoneNumber1"> Institution Name :</label>
+                                            <input type="text" class="form-control" id="institutionName" placeholder="Institution Name">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="phoneNumber1"> Qualification :</label>
+                                            <input type="text" class="form-control" id="qualificationType" placeholder="Qualification Type">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                      <div class="form-group">
+                                          <label>Year Attained :</label>
+                                          <input type='date' class="form-control" id="yearAttained" />
+                                      </div>
+                                    </div>
+                                </div>
+                                 
+
+                                  <div class="col-md-12">
+                                        <p id="addMoreEH" class="btn btn-default">add to list</p>
+                                  </div>
+
+
+                                    <!-- where to display the list of qualifications added -->
+                                    <div id="savedListOfQualiifications" class="row"></div>
+
+
+                                    <div class="col-md-12" style="margin-top: 30px">
+                                            <input type="submit" id="submit" class="btn btn-primary"/>
+                                    </div>
+
+
+                                  <br>
+                                  <br>
+
+                                  
+                                </div>
+                                     
+                            </fieldset>
+                          <!-- end of third step -->
+                          </form>
+                          <!-- end of first step 1-->
+
+
+                          <!-- jquery & ajax link -->
+                     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js "></script>
+
+                     
+                     <!-- for the fancy sweet alert box -->
+                    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+  
+                     <!-- to check if div with id savedListOfQualiifications is empty or not -->
+                    <script>
+                        $(document).ready(function(){
+                          
+                            if ($('#savedListOfQualiifications').is(':empty')){
+                                    $("#submit").hide()
+                                }
+                        });
+                    </script>
+
+
+                    <!-- add to list -->
+                    <script>
+                          $("#addMoreEH").click(function(){
+                            //  alert("add more o");
+
+
+                              // empty the upload
+                              $("#upload-input").val("");
+                              $('#uploadStatus').text("");
+
+                                var institutionName = $("#institutionName").val();
+                                var qualification = $("#qualificationType").val();
+                                var yearAttained = $("#yearAttained").val();
+
+                                console.log(institutionName, qualification, yearAttained)
+
+                                // add the folder path to uploaded files
+                                var certificateURL = "other_professional_certificate_upload/" + sessionStorage.getItem("uploadedFileNameOtherProCert");
+
+                                if(institutionName == '' || qualification == '' || yearAttained == ''){
+
+                                    // using sweet alert tutorial at https://sweetalert.js.org/
+                                    // swal(
+                                    //         {
+                                    //             title: "info!",
+                                    //             text: "kindly fill all fields...",
+                                    //             icon: "info",
+                                    //         },
+                                            
+                                    //     );
+
+                                    swal("kindly fill all fields!", {
+                                            buttons: false,
+                                            timer: 2000,  // disappears after 2 seconds
+                                        });
+
+
+                                  
+                                }
+                                else
+                                {
+                                    // convert it to object
+                                    var addAsObject = {
+                                        institutionName : institutionName,
+                                        qualification : qualification,
+                                        yearAttained : yearAttained,
+                                        certificateURL : certificateURL
+                                    }
+
+                                    //  call "/other_professional_qualificationList_individual" endpoint to add qualiifications
+                                    $.post("/update_other_professional_qualificationList_individual", addAsObject, function(data){
+                                        // alert(data);
+                                        $('#savedListOfQualiifications').html(data);
+
+                                        // empty the fields
+                                        $("#institutionName").val("");
+                                        $("#qualificationType").val("");
+                                        $("#yearAttained").val("");
+                                        
+
+                                        // show the submit button 
+                                        $("#submit").show();
+                                        
+                                    });
+
+                                }
+
+                          });
+
+                    </script>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Form wizard with number tabs section end -->
+
+<!-- Form wizard with icon tabs section start -->
+
+        </div>
+      </div>
+    </div>
+    <!-- END: Content-->
+
+
+
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="app-assets/vendors/js/ui/jquery.sticky.js"></script>
+    <script src="app-assets/vendors/js/extensions/jquery.steps.min.js"></script>
+    <script src="app-assets/vendors/js/pickers/dateTime/moment-with-locales.min.js"></script>
+    <script src="app-assets/vendors/js/pickers/daterange/daterangepicker.js"></script>
+    <script src="app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
+    <!-- END: Page Vendor JS-->
+
+    <!-- BEGIN: Theme JS-->
+    <script src="app-assets/js/core/app-menu.min.js"></script>
+    <script src="app-assets/js/core/app.min.js"></script>
+    <script src="app-assets/js/scripts/customizer.min.js"></script>
+    <script src="app-assets/js/scripts/footer.min.js"></script>
+    <!-- END: Theme JS-->
+
+    <!-- BEGIN: Page JS-->
+    <script src="app-assets/js/scripts/pages/material-app.min.js"></script>
+    <script src="app-assets/js/scripts/forms/wizard-steps.min.js"></script>
+    <!-- END: Page JS-->
+
+  </body>
+  <!-- END: Body-->
+</html>

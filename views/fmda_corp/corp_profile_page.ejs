@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- BEGIN: Head-->
+<%- include('corp_includes/head.ejs')%>
+
+<body class="v-light vertical-nav fix-header fix-sidebar">
+    <div id="preloader">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10"/></svg>
+        </div>
+    </div>
+    <div id="main-wrapper">
+        <!-- header -->
+        <%- include('corp_includes/header.ejs')%>
+        <!-- #/ header -->
+        <!-- sidebar -->
+        <%
+            var approved = memberCompleteDetails.lookupMember.corporate.hasBeenApproved 
+            if( approved == 1 ){
+        %>
+          <%- include('corp_includes/sidebar.ejs')%>
+        <%
+            }
+        %>
+        
+        <!-- #/ sidebar -->
+        <!-- content body -->
+        <div class="content-body">
+            <div class="container-fluid">
+
+
+
+              <section id="number-tabs">
+                <div class="row">
+
+                  <h3>Profile Info</h3>
+                  <hr>
+
+                    <div class="col-12">
+                        <div class="card">
+            
+                            <% var detailsToUse = memberCompleteDetails.lookupMember.corporate %>
+            
+                            <div class="card-content collapse show">
+                                <div class="card-body">
+            
+                                  <div class="jumbotron">
+                                    <div class="row">
+                                          
+                                      <div class="col-md-4 col-xs-12 col-sm-6 col-lg-4">
+                                        <div class="container" style="border-bottom:1px solid black">
+                                            <h2> <%= detailsToUse.organisationName %>  </h2>
+                                        </div>
+                                      </div>
+            
+                                          <div class="col-md-8 col-xs-12 col-sm-6 col-lg-8">
+                                              <ul class="container details">
+                                                <li><p>Organisation Name: <%= detailsToUse.organisationName %></p></li>
+                                                <li><p>Organisation Type: <%= detailsToUse.organisationType %></p></li>
+                                                <li><p>Organisation Address: <%= detailsToUse.organisationAddress %></p></li>
+                                                <li><p>Head Office Address: <%= detailsToUse.headOfficeAddress %></p></li>
+                                                <li><p>Contact Person Name: <%= detailsToUse.contactPersonName %></p></li>
+                                                <li><p>Contact Person Email: <%= detailsToUse.contactOfficialEmail %></p></li>
+                                                <li><p>Contact Person Address: <%= detailsToUse.contactPersonAddress %></p></li>
+                                                <li><p>Contact Person Number: <%= detailsToUse.contactPersonMobileNumber %></p></a>
+                                                <!-- <li><p>Company Official Number: <%= //detailsToUse.currentOrganisation %></p></li> -->
+                                                <li><p>Treasury Office Address: <%= detailsToUse.treasuryOfficeAddress %></p></li>
+                                                <li><p>Managing Director Or CEO: <%= detailsToUse.managingDirectorOrCEO %></p></li>
+                                                <!-- <li><p>Treasurer Name: <%= detailsToUse.treasurerName %></p></li> -->
+                                                <li><p>Treasurer Email: <%= detailsToUse.treasurerEmail %></p></li>
+                                                <li><p>Treasury Unit PhoneNumber: <%= detailsToUse.treasuryUnitPhoneNumber %></p></li>
+                                              </ul>
+                                              <!-- <button onclick="window.location.href = '/update_onboarding_ind'" style="float: right" class="btn btn-primary"> Edit </button> -->
+                                          </div>
+                                    </div>
+                                  </div>
+            
+                                    <div class="jumbotron">
+                                      <div class="row">
+                                          <div class="col-md-4 col-xs-12 col-sm-6 col-lg-4">
+                                              <div class="container" style="border-bottom:1px solid black">
+                                                  <h2> Membership Details </h2>
+                                              </div>
+                                          </div>
+                                          <div class="col-md-8 col-xs-12 col-sm-6 col-lg-8">
+                                            <ul class="container details">
+                                                
+                                                <!-- <li><p>Member Type: <%= //detailsToUse.memberType %></p></li> -->
+                                                <li><p>Member UUID: <%= detailsToUse.memberUUID %></p></li>
+                                                <!-- <li><p>Membership Category: <%= //detailsToUse.membershipCategory %></p></li> -->
+                                                <li><p>Membership Request Date: <%= detailsToUse.membershipRequestDate %></p></li>
+            
+                                                <br>
+                                                
+                                                <h5><u>Verification & Approval</u></h5>
+            
+                                                <%
+                                                    var verified = detailsToUse.hasBeenVerified 
+                                                    if( verified != 1 ){
+                                                      var verifiedStatus = "awating verification.";
+                                                %>
+                                                  <li><p>Membership verified: <%= verifiedStatus %></p></li>
+                                                <%
+                                                    }
+                                                    else
+                                                    {
+                                                      var verifiedStatus = "verified.";
+                                                %>
+                                                  <li><p>Membership verified: <%= verifiedStatus %></p></li>
+                                                <%
+                                                    } 
+                                                %>
+            
+            
+            
+                                                <%
+                                                    var approved = detailsToUse.hasBeenApproved 
+                                                    if( approved != 1 ){
+                                                      var approvedStatus = "awating approval.";
+                                                %>
+                                                <li><p>Membership Approved: <%= approvedStatus %></p></li>
+                                                <%
+                                                }
+                                                else
+                                                {
+                                                  var approvedStatus = "approved.";
+                                                %>
+                                                <li><p>Membership Approved: <%= approvedStatus %></p></li>
+                                                <%
+                                                    } 
+                                                %>
+              
+                                            </ul>
+                                          </div>
+                                      </div>
+                                    </div>
+            
+            
+            
+                                    <div class="jumbotron">
+                                      <div class="row">
+                                          <div class="col-md-4 col-xs-12 col-sm-6 col-lg-4">
+                                              <div class="container" style="border-bottom:1px solid black">
+                                                  <h2> Registration Fee </h2>
+                                              </div>
+                                          </div>
+                                          <div class="col-md-8 col-xs-12 col-sm-6 col-lg-8"> 
+                                            <ul class="container details">
+                                                
+                                                <%
+                                                    var registrationFeePaid = detailsToUse.registrationFeePaid 
+                                                    if( registrationFeePaid != 1 ){
+                                                      var registrationFeePaidStatus = "awating payment verification.";
+                                                %>
+                                                <li><p>Payment Status: <%= registrationFeePaidStatus %></p></li>
+                                                <li><p><button onclick="window.location.href = '/corp_payment'" style="float: right" class="btn btn-primary"> Provide Payment Details </button></p></li>
+                                                <%
+                                                }
+                                                else{
+                                                  var registrationFeePaidStatus = "verified.";
+                                                %>
+                                                <li><p>Payment Status: <%= registrationFeePaidStatus %></p></li>
+                                                <%
+                                                    } 
+                                                %>
+              
+                                            </ul>
+                                             
+                                          </div>
+                                      </div>
+                                    </div>
+                                    
+                                    
+            
+            
+            
+                                </div>
+                            </div>
+            
+            
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+
+                
+                
+            </div>
+            <!-- #/ container -->
+        </div>
+        <!-- #/ content body -->
+
+        <!-- footer -->
+        <!-- BEGIN: Footer-->
+        <%- include('corp_includes/footer.ejs')%>
+    </div>
+
+    <!-- Common JS -->
+    <script src="new_assets/plugins/common/common.min.js"></script>
+    <!-- Custom script -->
+    <script src="new_assets/js/custom.min.js"></script>
+    <!-- Chartjs chart -->
+    <script src="new_assets/assets/plugins/chartjs/Chart.bundle.js"></script>
+    <!-- Custom dashboard script -->
+    <script src="new_assets/js/dashboard-1.js"></script>
+
+    
+    <!-- BEGIN: Scripts-->
+    <%- include('corp_includes/scripts.ejs', {})%>
+    <script src="../app-assets/vendors/js/tables/datatable/datatables.min.js"></script>
+    <script src="../app-assets/js/scripts/pages/material-app.min.js"></script>
+    <script src="../app-assets/js/scripts/tables/material-datatable.min.js"></script>
+
+</body>
+
+</html>

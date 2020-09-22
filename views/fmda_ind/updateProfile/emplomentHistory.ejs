@@ -1,0 +1,69 @@
+
+<div class="col-md-12" style="margin-top: 30px">
+    <p>List of your employment history</p>            
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>organisation name:</th>
+                <th>position held</th>
+                <th>start date</th>
+                <th>end date</th>
+                <th>responsibilities</th>
+                <!-- <th></th> -->
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+
+                <% 
+
+                    var employmentHistoryListGotten = employmentHistoryList;
+
+                    for (let index = 0; index < employmentHistoryListGotten.length; index++) 
+                    {
+                        const element = employmentHistoryListGotten[index];
+                %>     
+
+                <tr>
+                    <td class="getTheClass"> <%= element.organisationName %> </td>
+                    <td><%= element.positionHeld %></td>
+                    <td><%= element.startDate %></td>
+                    <td><%= element.endDate %></td>
+                    <td><%= element.responsibilities %></td>
+                    <!-- <td><input class="inputField" name="name" type="text" class="form-control" value="<%= element.organisationName %>"></td> -->
+                    <td><p class="deleteButton btn btn-default" id="<%= element.organisationName %>"  value="<%= element.organisationName %>">remove</p></td>
+                </tr>
+
+                <% 
+                    }
+                %>
+ 
+            </tbody>
+        </table>
+
+
+        <!-- get the id value of the button clicked -->
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+        <script type="text/javascript">
+            
+
+            const buttons = document.querySelectorAll('.deleteButton')
+            buttons.forEach(item => {
+                item.addEventListener('click', e => {
+                    console.log(e.target.id);
+
+                    var removeByName = e.target.id;
+                    // call "/removeEmplomentHistory_individual" endpoint to delete
+                    $.post("/update_removeEmplomentHistory_individual", {"removeByName" : removeByName}, function(data){
+                        // alert(data);
+                        $('#savedListOffEmploymentHistory').html(data);
+                    });
+
+                });
+            });
+
+                   
+
+
+        </script>
+</div>

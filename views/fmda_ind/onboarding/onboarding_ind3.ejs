@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+
+  <!-- BEGIN: Head-->
+  <%- include('onboarding_includes/head.ejs')%>
+  <!-- END: Head-->
+
+  <!-- BEGIN: Body-->
+  <body class="horizontal-layout horizontal-menu horizontal-menu-padding material-horizontal-layout material-layout 2-columns  " data-open="click" data-menu="horizontal-menu" data-col="2-columns">
+
+    <div class="app-content container center-layout mt-2">
+
+      <!-- BEGIN: Header -->
+      <% pageInfo = 'Institutions'; %>
+      <%- include('onboarding_includes/header.ejs')%>
+      <!-- END: Header -->
+
+      <div class="content-wrapper">
+        <div class="content-body"><!-- Form wizard with number tabs section start -->
+
+
+      <!-- start progress bar -->
+      <div class="row">
+            <div class="col-md-12">
+
+      <div id="progressBar1" class="progressBar1">
+        <div class="col-md-12 progress-bar progress-bar-info progress-bar-striped" role="progressbar"
+        aria-valuenow="50" aria-valuemin="60" aria-valuemax="100" style="width:60%">
+          60% Completion
+        </div>
+      </div>
+
+        </div>
+    </div>
+      <!-- start progress bar -->
+
+
+
+<section id="number-tabs">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-content collapse show">
+                    <div class="card-body">
+
+                          <!-- first step -->
+                          <form action="/ind_qualifications<%= action === 'update' ? '?action=update' : '' ; %>" method="post" class="form-horizontal" enctype="multipart/form-data">
+                            <!-- start of third step -->
+                          <fieldset id="ourFieldset4">
+                                <div class="row" id="qualification">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="phoneNumber1"> Institution Name :</label>
+                                            <input type="text" class="form-control" id="institutionName" placeholder="Institution Name">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="phoneNumber1"> Heighest Degree Obtained :</label>
+                                            <input type="text" class="form-control" id="degreeOptained" placeholder="Degree">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                      <div class="form-group">
+                                          <label>From :</label>
+                                          <input type='date' class="form-control" placeholder="Start Date" id="from" />
+                                      </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                      <div class="form-group">
+                                          <label>To :</label>
+                                          <input type='date' class="form-control" placeholder="Start Date" id="to" />
+                                      </div>
+                                    </div>
+                                  </div>
+                                 
+
+                                  <div class="col-md-12">
+                                        <p id="addMoreEH" class="btn btn-default">add to list</p>
+                                  </div>
+
+
+                                    <!-- where to display the list of qualifications added -->
+                                    <div id="savedListOfQualiifications" class="row"></div>
+
+
+                                    <div class="col-md-12" style="margin-top: 30px">
+                                            <input type="submit" id="submit" class="btn btn-primary"/>
+                                    </div>
+
+
+                                  <br>
+                                  <br>
+
+                                  
+                                </div>
+                                     
+                            </fieldset>
+                          <!-- end of third step -->
+                          </form>
+                          <!-- end of first step 1-->
+
+
+                          <!-- jquery & ajax link -->
+                     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js "></script>
+
+                     
+                     <!-- for the fancy sweet alert box -->
+                    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+                     <!-- to check if div with id savedListOfQualiifications is empty or not -->
+                    <script>
+                        $(document).ready(function(){
+                          
+                            if ($('#savedListOfQualiifications').is(':empty')){
+                                    $("#submit").hide()
+                                }
+                        });
+                    </script>
+
+
+                    <!-- add to list -->
+                    <script>
+                          $("#addMoreEH").click(function(){
+                            //  alert("add more o");
+
+                                var institutionName = $("#institutionName").val();
+                                var degreeOptained = $("#degreeOptained").val();
+                                var from = $("#from").val();
+                                var to = $("#to").val();
+
+                                if(institutionName == '' || degreeOptained == '' || from == '' || to == ''){
+
+                                    // using sweet alert tutorial at https://sweetalert.js.org/
+                                    // swal(
+                                    //         {
+                                    //             title: "info!",
+                                    //             text: "kindly fill all fields...",
+                                    //             icon: "info",
+                                    //         },
+                                            
+                                    //     );
+
+                                    swal("kindly fill all fields!", {
+                                            buttons: false,
+                                            timer: 2000,  // disappears after 2 seconds
+                                        });
+
+
+                                  
+                                }
+                                else
+                                {
+                                    // convert it to object
+                                    var addAsObject = {
+                                        institutionName : institutionName,
+                                        degreeOptained : degreeOptained,
+                                        from : from,
+                                        to : to
+                                    }
+
+                                    //  call "/qualificationList_individual" endpoint to add qualiifications
+                                    $.post("/qualificationList_individual", addAsObject, function(data){
+                                        // alert(data);
+                                        $('#savedListOfQualiifications').html(data);
+
+                                        // empty the fields
+                                        $("#institutionName").val("");
+                                        $("#degreeOptained").val("");
+                                        $("#from").val("");
+                                        $("#to").val("");
+
+                                        // show the submit button 
+                                        $("#submit").show();
+                                        
+                                    });
+
+                                }
+
+                          });
+
+                    </script>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Form wizard with number tabs section end -->
+
+<!-- Form wizard with icon tabs section start -->
+
+        </div>
+      </div>
+    </div>
+    <!-- END: Content-->
+
+   <!-- BEGIN: Scripts-->
+   <%- include('onboarding_includes/scripts.ejs')%>
+   <!-- END: Scripts-->
+
+  </body>
+  <!-- END: Body-->
+</html>

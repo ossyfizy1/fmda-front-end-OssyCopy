@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- BEGIN: Head-->
+<%- include('corp_includes/head.ejs')%>
+
+<body class="v-light vertical-nav fix-header fix-sidebar">
+    <div id="preloader">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10"/></svg>
+        </div>
+    </div>
+    <div id="main-wrapper">
+        <!-- header -->
+        <%- include('corp_includes/header.ejs')%>
+        <!-- #/ header -->
+        <!-- sidebar -->
+        <%- include('corp_includes/sidebar.ejs')%>
+        <!-- #/ sidebar -->
+        <!-- content body -->
+        <div class="content-body">
+            <div class="container-fluid">
+
+                <div id="horizontal-form-layouts">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                    
+                                <form class="form form-horizontal n" action="/corp_new_dealer" method="POST">
+                                    <div class="form-body">
+
+                                    <!-- form section : About user  -->
+                                    <br>
+                                    <h4 class="form-section" align="center"> New Dealer Request Form </h4>
+                                    <hr>
+                                    <!-- form row  -->
+                                    <div class="row">
+                                        <!-- 1. Full Name  -->
+                                        <div class="col-md-6">
+                                            <div class="form-group col-md-9 mx-auto">
+                                                <label for="fullName">Full Name</label>  
+                                                <input type="text" id="fullName" required class="form-control border-primary" placeholder="Type Full Name" name="fullName">
+                                            </div>
+                                        </div>
+                                        <!-- 2. Email -->
+                                        <div class="col-md-6">
+                                            <div class="form-group col-md-9 mx-auto">
+                                                <label for="email">Email</label>    
+                                                <input type="text" id="email" required class="form-control border-primary" placeholder="Type Email Address" name="email">
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <div class="row">
+                                        <!-- 3. Designation -->
+                                        <div class="col-md-6">
+                                            <div class="form-group col-md-9 mx-auto">
+                                                <label for="designation">Designation</label>
+                                                <input type="text" id="designation" required class="form-control border-primary" placeholder="Type Designation" name="designation">
+                                            </div>
+                                        </div>
+                                        <!-- 4. Desk -->
+                                        <div class="col-md-6">
+                                            <div class="form-group col-md-9 mx-auto">
+                                                <label for="desk">Desk</label>                     
+                                                <input type="text" id="desk" required class="form-control border-primary" placeholder="Type Desk" name="desk">
+                                        </div>
+                                        </div>
+                                        <!--4. Bank-->
+                                        <!-- <div class="col-md-6">
+                                            <div class="form-group col-md-9 mx-auto">
+                                                <label for="bank">Bank</label>
+                                                <select name="bank" id="bank" class="form-control" required>
+                                                    <option value="" disabled selected >Select bank</option>
+                                                    <% for(i = 0; i < financialInstitutions.length; i++) { %>
+                                                    <option value="<%= financialInstitutions[i].name %>"><%= financialInstitutions[i].name %></option>
+                                                    <% } %> 
+                                                </select>
+                                                </div>
+                                            </div>
+                                        </div> -->
+
+                                        <hr>
+                                                                    
+                                        <!-- Submit Form -->
+                                        <div class="col-md-6" style="margin-left: 60px; margin-top: 50px; margin-bottom: 50px;">
+                                            <button type="submit" class="btn btn-primary"> Submit Dealer </button>
+                                        </div>
+
+                                </form>
+                                <!-- Form End  -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <!-- #/ container -->
+        </div>
+        <!-- #/ content body -->
+
+        <!-- footer -->
+        <!-- BEGIN: Footer-->
+        <%- include('corp_includes/footer.ejs')%>
+    </div>
+
+    <!-- Common JS -->
+    <script src="new_assets/plugins/common/common.min.js"></script>
+    <!-- Custom script -->
+    <script src="new_assets/js/custom.min.js"></script>
+    <!-- Chartjs chart -->
+    <script src="new_assets/assets/plugins/chartjs/Chart.bundle.js"></script>
+    <!-- Custom dashboard script -->
+    <script src="new_assets/js/dashboard-1.js"></script>
+
+
+    <!-- BEGIN: Scripts -->
+    <%- include('corp_includes/scripts.ejs')%>
+
+    
+</body>
+
+</html>

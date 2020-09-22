@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+  <!-- BEGIN: Head-->
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="FMDA dashboard, FMDA OnBoarding Process Form">
+    <meta name="keywords" content="FMDA dashboard, FMDA OnBoarding Process Form">
+    <meta name="author" content="fmda">
+    <title>FMDA OnBoarding Process Form </title>
+    <link rel="apple-touch-icon" href="app-assets/images/ico/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="app-assets/images/ico/favicon.png">
+    <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i%7CQuicksand:300,400,500,700" rel="stylesheet"> -->
+    <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
+
+    <!-- BEGIN: Vendor CSS-->
+    <!-- <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/material-vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/pickers/daterange/daterangepicker.css"> -->
+    <!-- END: Vendor CSS-->
+
+    <!-- BEGIN: Theme CSS-->
+    <link rel="stylesheet" type="text/css" href="app-assets/css/material.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/components.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/bootstrap-extended.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/material-extended.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/material-colors.min.css">
+    <!-- END: Theme CSS-->
+
+    <!-- BEGIN: Page CSS-->
+    <!-- <link rel="stylesheet" type="text/css" href="app-assets/css/core/menu/menu-types/material-horizontal-menu.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/plugins/forms/wizard.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/plugins/pickers/daterange/daterange.min.css"> -->
+    <!-- END: Page CSS-->
+
+    <!-- BEGIN: Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <!-- END: Custom CSS-->
+
+  </head>
+  <!-- END: Head-->
+
+  <!-- BEGIN: Body-->
+  <body class="horizontal-layout horizontal-menu horizontal-menu-padding material-horizontal-layout material-layout 2-columns  " data-open="click" data-menu="horizontal-menu" data-col="2-columns">
+
+    <div class="app-content container center-layout mt-2">
+      <div class="content-header row">
+        <div class="content-header-dark bg-img col-12">
+          <div class="row">
+            <div class="content-header-left col-md-9 col-12 mb-2">
+              <h3 class="content-header-title white">Membership Registration Form</h3>
+              <div class="row breadcrumbs-top">
+                <div class="breadcrumb-wrapper col-12">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item active">Employment History
+                    </li>
+                    <li style="margin-left: 50px"><a style="color: white" href="/logout">(Log Out)</a></li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+            <div class="content-header-right col-md-3 col-12">
+              <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown">
+                <!-- dropdown-toggle dropdown-menu-right -->
+                <!-- <div class="dropdown-menu"><a class="dropdown-item" href="component-alerts.html"> Alerts</a><a class="dropdown-item" href="material-component-cards.html"> Cards</a><a class="dropdown-item" href="component-progress.html"> Progress</a>
+                  <div class="dropdown-divider"></div><a class="dropdown-item" href="register-with-bg-image.html"> Register</a>
+                </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="content-wrapper">
+        <div class="content-body"><!-- Form wizard with number tabs section start -->
+
+
+      <!-- start progress bar -->
+      <div class="row">
+            <div class="col-md-12">
+
+      <div id="progressBar1" class="progressBar1">
+        <div class="col-md-12 progress-bar progress-bar-info progress-bar-striped" role="progressbar"
+        aria-valuenow="50" aria-valuemin="20" aria-valuemax="100" style="width:20%">
+          20% Completion
+        </div>
+      </div>
+
+        </div>
+    </div>
+      <!-- start progress bar -->
+
+
+
+<section id="number-tabs">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-content collapse show">
+                    <div class="card-body">
+
+                          <!-- first step -->
+                          <form action="/update_ind_professionalInformation" method="post" class="form-horizontal" enctype="multipart/form-data">
+                            <fieldset id="ourFieldset2">
+                                <div class="row">
+                                    
+                                    <!-- <div class="col-md-12" style="margin-top: 20px">
+                                        <div class="form-group">
+                                            <label for="phoneNumber1"> Treasury Certification (pdf) :</label>
+                                            <input name="treasuryCertificate" type="file" id="treasuryCertificate" placeholder="treasury certification" required>
+                                        </div>
+                                        
+                                        <hr>
+                                        
+                                    </div> -->
+
+                                    
+                                    <!-- to hold employment history -->
+                                    <div class="row" style="margin-top: 20px; margin-left: 10px">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="phoneNumber1"> Name of Organization :</label>
+                                                <input id="organisationName" type="text" class="form-control" placeholder="Name of Organization">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="phoneNumber1"> Position Held :</label>
+                                                <input id="positionHeld" type="text" class="form-control" placeholder="Position Held">
+                                            </div>
+                                        </div>
+    
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Start Date :</label>
+                                                <input id="startDate" type='date' class="form-control" placeholder="Start Date" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>End Date :</label>
+                                                <input id="endDate" type='date' class="form-control" placeholder="Start Date" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="phoneNumber1"> Major Responsibilities :</label>
+                                                <input id="responsibilities" type="text" class="form-control"  placeholder="Major Responsibilities">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                                <p id="addMoreEH" class="btn btn-default">Add more</p>
+                                        </div>
+
+
+                                        <!-- where to display the list of List Off EmploymentHistory added -->
+                                        <div id="savedListOffEmploymentHistory" class="row"></div>
+
+
+                                        <div class="col-md-12" style="margin-top: 30px">
+                                                <input type="submit" id="submit" value="Save" class="btn btn-primary"/>
+                                        </div>
+                                    </div>
+
+                                    
+                                </div>
+
+                            </fieldset>
+                          </form>
+                          <!-- end of first step 1-->
+
+
+                          <!-- jquery & ajax link -->
+                     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js "></script>
+
+                     <!-- for the fancy sweet alert box -->
+                    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+                    <!-- to check if div with id savedListOffEmploymentHistory is empty or not -->
+                    <script>
+                        $(document).ready(function(){
+                          
+                            if ($('#savedListOffEmploymentHistory').is(':empty')){
+                                    $("#submit").hide()
+                                }
+                        });
+                    </script>
+
+
+                    <!-- add to list -->
+                    <script>
+                          $("#addMoreEH").click(function(){
+                            //  alert("add more o");
+
+                                var organisationName = $("#organisationName").val();
+                                var positionHeld = $("#positionHeld").val();
+                                var startDate = $("#startDate").val();
+                                var endDate = $("#endDate").val();
+                                var responsibilities = $("#responsibilities").val();
+
+                                if(organisationName == '' || positionHeld == '' || startDate == '' || endDate == '' || responsibilities == ''){
+
+                                // using sweet alert tutorial at https://sweetalert.js.org/
+                                // swal(
+                                //         {
+                                //             title: "info!",
+                                //             text: "kindly fill all fields...",
+                                //             icon: "info",
+                                //         },
+                                        
+                                //     );
+
+                                swal("kindly fill all fields!", {
+                                        buttons: false,
+                                        timer: 2000,  // disappears after 2 seconds
+                                    });
+
+
+                                  
+                                }
+                                else
+                                {
+                                    // convert it to object
+                                    var addAsObject = {
+                                        organisationName : organisationName,
+                                        positionHeld : positionHeld,
+                                        startDate : startDate,
+                                        endDate : endDate,
+                                        commaResponsibilities : responsibilities,
+                                    }
+
+                                    //  call "/employmentHistoryList_individual" endpoint to add emplyoment history
+                                    $.post("/update_employmentHistoryList_individual", addAsObject, function(data){
+                                        // alert(data);
+                                        $('#savedListOffEmploymentHistory').html(data);
+
+                                        // empty the fields
+                                        $("#organisationName").val("");
+                                        $("#positionHeld").val("");
+                                        $("#startDate").val("");
+                                        $("#endDate").val("");
+                                        $("#responsibilities").val("");
+
+                                        // show the submit button 
+                                        $("#submit").show();
+                                        
+                                    });
+
+
+                                  }
+
+                          });
+
+                    </script>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Form wizard with number tabs section end -->
+
+<!-- Form wizard with icon tabs section start -->
+
+        </div>
+      </div>
+    </div>
+    <!-- END: Content-->
+
+
+
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="app-assets/vendors/js/ui/jquery.sticky.js"></script>
+    <script src="app-assets/vendors/js/extensions/jquery.steps.min.js"></script>
+    <script src="app-assets/vendors/js/pickers/dateTime/moment-with-locales.min.js"></script>
+    <script src="app-assets/vendors/js/pickers/daterange/daterangepicker.js"></script>
+    <script src="app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
+    <!-- END: Page Vendor JS-->
+
+    <!-- BEGIN: Theme JS-->
+    <script src="app-assets/js/core/app-menu.min.js"></script>
+    <script src="app-assets/js/core/app.min.js"></script>
+    <script src="app-assets/js/scripts/customizer.min.js"></script>
+    <script src="app-assets/js/scripts/footer.min.js"></script>
+    <!-- END: Theme JS-->
+
+    <!-- BEGIN: Page JS-->
+    <script src="app-assets/js/scripts/pages/material-app.min.js"></script>
+    <script src="app-assets/js/scripts/forms/wizard-steps.min.js"></script>
+    <!-- END: Page JS-->
+
+  </body>
+  <!-- END: Body-->
+</html>

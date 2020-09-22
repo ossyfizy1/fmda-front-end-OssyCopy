@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- BEGIN: Head-->
+<%- include('../ind_includes/head.ejs')%>
+
+<body class="v-light vertical-nav fix-header fix-sidebar">
+    <div id="preloader">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10"/></svg>
+        </div>
+    </div>
+    <div id="main-wrapper">
+        <!-- header -->
+        <%- include('../ind_includes/header.ejs')%>
+        <!-- #/ header -->
+
+        <% if(memberCompleteDetails.lookupMember.member.attestationComplete == 0 || memberCompleteDetails.lookupMember.member.hasBeenVerified == 0 || memberCompleteDetails.lookupMember.member.hasBeenApproved == 0 ){ %>
+        <!-- sidebar -->
+        <%- //include('../ind_includes/sidebar.ejs')%>
+        <% } else { %> 
+        <%- include('../ind_includes/sidebar.ejs')%>
+        <% } %> 
+        <!-- #/ sidebar -->
+        <!-- content body -->
+        <div class="content-body">
+            
+
+          <div class="card-body">
+
+
+            <!-- Profile info -->
+            <% var detailsToUse = memberCompleteDetails.lookupMember.member %>
+
+
+            <div class="jumbotron">
+              <div class="row">
+                  <div class="col-md-4 col-xs-12 col-sm-6 col-lg-4">
+                      <img src="<%= detailsToUse.profilePhoto %>" width="150px" height="150px" alt="stack photo" class="img">
+                  </div>
+                  <div class="col-md-8 col-xs-12 col-sm-6 col-lg-8">
+                      <div class="container" style="border-bottom:1px solid black">
+                        <h2><b><%= detailsToUse.firstName %> <%= detailsToUse.lastName %></b></h2>
+                      </div>
+                        <hr>
+                      <ul class="container details">
+                        <li><p><b>Gender</b>: <%= detailsToUse.gender %></p></li>
+                        <li><p><b>Address</b>: <%= detailsToUse.address %></p></li>
+                        <li><p><b>Email</b>: <%= userID_email %></p></li>
+                        <li><p><b>Number</b>: <%= detailsToUse.mobileNumber %></p></a>
+                        <li><p><b>Organization</b>: <%= detailsToUse.currentOrganisation %></p></li>
+                        <li><p><b>Industry Category</b>: <%= detailsToUse.industryCategory %></p></li>
+                        <li><p><b>Industry Type</b>: <%= detailsToUse.industryType %></p></li>
+                        <li><p><b>Certification Type</b>: <%= detailsToUse.certificationType %></p></li>
+                        <li><p><b>Years Of Treasury Experience</b>: <%= detailsToUse.yearsOfTreasuryExperience %></p></a>
+                        <li><p><b>Years Of Post Nysc Experience</b>: <%= detailsToUse.yearsOfPostNyscExperience %></p></a>
+                      </ul>
+                      <%
+                          var approved = detailsToUse.hasBeenApproved 
+                          if( approved != 1 ){
+                      %>
+                      <a href = '/onboarding_ind?action=update' class="btn btn-primary float-right"> Edit </a>
+                      <% } %>
+                  </div>
+              </div>
+            </div>
+
+
+            <div class="jumbotron">
+              <div class="row">
+                  <div class="col-md-4 col-xs-12 col-sm-6 col-lg-4">
+                      <div class="container" style="border-bottom:1px solid black">
+                          <h2> Employment History</h2>
+                      </div>
+                  </div>
+                  <div class="col-md-8 col-xs-12 col-sm-6 col-lg-8">
+                    <p>Treasury Certification: 
+                      <a href="ind_uploads/<%= detailsToUse.treasuryCertification %>" class="btn btn-primary" download> Download Treasury Certification </a>
+                    </p>
+
+                    <ul class="container details">
+                        <%
+                          detailsToUse.employmentHistory.forEach(element => {
+                        %>
+                        
+
+                        <li><p>Organization Name: <%= element.organisationName %></p></li>
+                        <li><p>Position Held: <%= element.positionHeld %></p></li>
+                        <li><p>Responsibilities: <%= element.responsibilities %></p></li>
+                        <li><p>Start Date: <%= element.startDate %></p></li>
+                        <li><p>End Date: <%= element.endDate %></p></li>
+                        
+                        
+                        <hr>
+                        
+                        <button style="margin-bottom: 40px;" onclick="window.location.href = '/ind_delete_emp_history?userId=<%= userID_email %>&startDate=<%= element.startDate %>&endDate=<%= element.endDate %>'" style="float: left" class="btn btn-danger"> Remove </button>
+
+                        <%
+                          });
+                        %>
+
+                    </ul>
+                    <button onclick="window.location.href = '/update_ind_professionalInformation'" style="float: right" class="btn btn-primary"> Add More </button>
+                  </div>
+              </div>
+            </div>
+
+
+            
+            <div class="jumbotron">
+                <div class="row">
+                    <div class="col-md-4 col-xs-12 col-sm-6 col-lg-4">
+                        <div class="container" style="border-bottom:1px solid black">
+                            <h2> Academic Qualifications</h2>
+                        </div>
+                    </div>
+                    <div class="col-md-8 col-xs-12 col-sm-6 col-lg-8">
+                      <ul class="container details">
+                          <%
+                            detailsToUse.qualifications.forEach(element => {
+                          %>
+                          
+
+                          <li><p>Degree Optained: <%= element.degreeOptained %></p></li>
+                          <li><p>Institution Name: <%= element.institutionName %></p></li>
+                          <li><p>From: <%= element.from %></p></li>
+                          <li><p>To: <%= element.to %></p></li>
+                          <li><p>Academic Certificate: 
+                              <a href="<%= element.certificateURL %>" class="btn btn-primary" download> Download Academic Certification </a>
+                            </p>
+                          </li>
+                          
+                          <hr>
+
+                          <button style="margin-bottom: 40px;" onclick="window.location.href = '/ind_delete_qualifications?userId=<%= userID_email %>&certUrl=<%= element.certificateURL %>'" style="float: left" class="btn btn-danger"> Remove </button>
+
+                          <%
+                            });
+                          %>
+
+                      </ul>
+                      <button  onclick="window.location.href = '/update_ind_qualifications'" style="float: right" class="btn btn-primary"> Add More </button>
+                    </div>
+                </div>
+              </div>
+
+
+
+
+              <div class="jumbotron">
+                <div class="row">
+                    <div class="col-md-4 col-xs-12 col-sm-6 col-lg-4">
+                        <div class="container" style="border-bottom:1px solid black">
+                            <h2> Other Professional Qualifications</h2>
+                        </div>
+                    </div>
+                    <div class="col-md-8 col-xs-12 col-sm-6 col-lg-8">
+                      <ul class="container details">
+                          <%
+                            detailsToUse.otherProfessionalQualifications.forEach(element => {
+                          %>
+                          
+
+                          <li><p>Degree Optained: <%= element.qualification %></p></li>
+                          <li><p>Institution Name: <%= element.institutionName %></p></li>
+                          <li><p>Year Attained: <%= element.yearAttained %></p></li>
+                          <li><p>Professional Certificate: 
+                              <a href="<%= element.certificateURL %>" class="btn btn-primary" download> Download Academic Certification </a>
+                            </p>
+                          </li>
+                          
+                          <hr>
+
+                          <button style="margin-bottom: 40px;" onclick="window.location.href = '/ind_delete_other_professional_qualifications?userId=<%= userID_email %>&certUrl=<%= element.certificateURL %>'" style="float: left" class="btn btn-danger"> Remove </button>
+
+                          <%
+                            });
+                          %>
+
+                      </ul>
+                      <button  onclick="window.location.href = '/update_ind_other_professional_qualifications'" style="float: right" class="btn btn-primary"> Add More </button>
+                    </div>
+                </div>
+              </div>
+
+
+              
+              <!-- Attestation -->
+              <div class="jumbotron">
+                <div class="row">
+                    <div class="col-md-4 col-xs-12 col-sm-6 col-lg-4">
+                        <div class="container" style="border-bottom:1px solid black">
+                            <h2> Attestation </h2>
+                        </div>
+                    </div>
+                    <div class="col-md-8 col-xs-12 col-sm-6 col-lg-8">
+                      <ul class="container details">
+                          
+                        <li><p>Attestation Completed: <%= detailsToUse.attestationComplete === 1 ? 'Approved' : 'Pending'; %></p></li>
+
+                      </ul>
+
+                     <!-- <button onclick="window.location.href = '/ind_attestation?action=update'" style="float: right" class="btn btn-primary"> Edit </button> -->
+                     
+                    </div>
+                </div>
+              </div>
+
+
+             
+              <div class="jumbotron">
+                <div class="row">
+                    <div class="col-md-4 col-xs-12 col-sm-6 col-lg-4">
+                        <div class="container" style="border-bottom:1px solid black">
+                            <h2> Membership Details </h2>
+                        </div>
+                    </div>
+                    <div class="col-md-8 col-xs-12 col-sm-6 col-lg-8">
+                      <ul class="container details">
+                          
+                          <li><p>Member Type: <%= detailsToUse.memberType %></p></li>
+                          <li><p>Member UUID: <%= detailsToUse.memberUUID %></p></li>
+                          <li><p>Membership Category: <%= detailsToUse.membershipCategory %></p></li>
+                          <li><p>Membership Request Date: <%= detailsToUse.membershipRequestDate %></p></li>
+
+                          <br>
+                          
+                          <h5><u>Verification & Approval</u></h5>
+
+                          <%
+                              var verified = detailsToUse.hasBeenVerified 
+                              if( verified != 1 ){
+                                var verifiedStatus = "awating verification.";
+                          %>
+                            <li><p>Membership verified: <%= verifiedStatus %></p></li>
+                          <%
+                              }
+                              else
+                              {
+                                var verifiedStatus = "verified.";
+                          %>
+                            <li><p>Membership verified: <%= verifiedStatus %></p></li>
+                          <%
+                              } 
+                          %>
+
+
+
+                          <%
+                              var approved = detailsToUse.hasBeenApproved 
+                              if( approved != 1 ){
+                                var approvedStatus = "awating approval.";
+                          %>
+                          <li><p>Membership Approved: <%= approvedStatus %></p></li>
+                          <%
+                          }
+                          else
+                          {
+                            var approvedStatus = "approved.";
+                          %>
+                          <li><p>Membership Approved: <%= approvedStatus %></p></li>
+                          <br>
+                          <button onclick="window.location.href = '/ind_view_certicicate'" style="float: right" class="btn btn-primary"> View Certificate. </button> 
+
+                          <%
+                              } 
+                          %>
+
+
+                      </ul>
+                    </div>
+                </div>
+              </div>
+
+
+             
+              <div class="jumbotron">
+                <div class="row">
+                    <div class="col-md-4 col-xs-12 col-sm-6 col-lg-4">
+                        <div class="container" style="border-bottom:1px solid black">
+                            <h2> Registration Fee</h2>
+                        </div>
+                    </div>
+                    <div class="col-md-8 col-xs-12 col-sm-6 col-lg-8">
+                      <ul class="container details">
+                          <li><p>Registration fee status: <%= detailsToUse.registrationFeePaid === 1 ? 'Paid | Approved' : detailsToUse.registrationFeePaid === 0 ? 'Paid | Pending approval' : detailsToUse.registrationFeePaid === -1 ? 'Paid | Rejected' : 'Unpaid' %></p></li>
+                          
+                      </ul>
+
+                      <%
+                        if (detailsToUse.registrationFeePaid === -1) {
+                      %>
+                        <button onclick="window.location.href = '/ind_payment_for_member?action=update'" style="float: right" class="btn btn-primary"> Provide Payment Details </button> 
+                      <%
+                        }
+                      %>
+                      
+
+
+                    </div>
+                </div>
+              </div>
+              
+              
+
+
+
+          </div>
+      </div>
+
+
+  </div>
+
+
+
+        </div>
+        <!-- #/ content body -->
+        <!-- footer -->
+        <!-- BEGIN: Footer-->
+        <%- include('../ind_includes/footer.ejs')%>
+    </div>
+    <!-- Common JS -->
+    <script src="new_assets/plugins/common/common.min.js"></script>
+    <!-- Custom script -->
+    <script src="new_assets/js/custom.min.js"></script>
+    <script src="new_assets/plugins/tables/js/jquery.dataTables.min.js"></script>
+    <script src="new_assets/plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
+    <script src="new_assets/plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
+</body>
+
+</html>

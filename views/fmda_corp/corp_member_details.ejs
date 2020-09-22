@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- BEGIN: Head-->
+<%- include('corp_includes/head.ejs')%>
+
+<body class="v-light vertical-nav fix-header fix-sidebar">
+    <div id="preloader">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10"/></svg>
+        </div>
+    </div>
+    <div id="main-wrapper">
+        <!-- header -->
+        <%- include('corp_includes/header.ejs')%>
+        <!-- #/ header -->
+        <!-- sidebar -->
+        <%- include('corp_includes/sidebar.ejs')%>
+        <!-- #/ sidebar -->
+        <!-- content body -->
+        <div class="content-body">
+            <div class="container-fluid">
+
+
+                <section id="material-datatables">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card mb-0">
+                                
+
+                                <!-- <%= member; %> -->
+
+                                <div class="card-content collapse show">
+                                    <div class="card-body">
+                                
+
+                                      <!-- Table Content: Start -->
+                                        <table class="table table-hover table-striped white">
+
+                                            <!-- Table Head  -->
+                                            <thead>
+                                                <tr>
+                                                    <th>Member Details</th>
+                                                </tr>
+                                            </thead>
+
+                                            <!-- Table Body  -->
+                                            <tbody>
+                                                <!-- 1. full name -->
+                                                <tr>
+                                                    <td> Full name </td>
+                                                    <td>
+                                                        <%= `${member.firstName} ${member.lastName}` %>
+                                                    </td>
+                                                </tr>
+
+                                                <!-- 2. Email -->
+                                                <tr>
+                                                    <td> Personal email </td>
+                                                    <td>
+                                                        <%= member.personalEmail %>
+                                                    </td>
+                                                </tr>
+
+                                                <!-- 2. Member ID -->
+                                                <tr>
+                                                    <td> Member ID </td>
+                                                    <td>
+                                                        <%= member.memberUUID %>
+                                                    </td>
+                                                </tr>
+
+                                                <!-- 2. Last login date -->
+                                                <tr>
+                                                    <td> Last login date </td>
+                                                    <td>
+                                                        <%= member.lastLoginDate %>
+                                                    </td>
+                                                </tr>
+
+                                                <!-- 3. mobileNumber -->
+                                                <tr>
+                                                    <td> Mobile number </td>
+                                                    <td>
+                                                        <%= member.mobileNumber %>
+                                                    </td>
+                                                </tr>
+
+                                                <!-- 4. Gender -->
+                                                <tr>
+                                                    <td> Gender </td>
+                                                    <td>
+                                                        <%= member.gender %>
+                                                    </td>
+                                                </tr>
+
+                                                <!-- 6. Member type -->
+                                                <tr>
+                                                    <td> Member type </td>
+                                                    <td>
+                                                        <%= member.memberType %>
+                                                    </td>
+                                                </tr>
+                                                <!-- 7. membershipCategory -->
+                                                <tr>
+                                                    <td> Membership category </td>
+                                                    <td>
+                                                        <%= member.membershipCategory %>
+                                                    </td>
+                                                </tr>
+
+                                                <!-- 5. Current organisation -->
+                                                <tr>
+                                                    <td> Current organisation </td>
+                                                    <td>
+                                                        <%= member.currentOrganisation %>
+                                                    </td>
+                                                </tr>
+
+                                                <!-- 9. Employment history -->
+                                                <tr>
+                                                    <td>  Employment history </td>
+                                                    <td>
+                                                        <% if ( member.employmentHistory.length !== 0 ) { %>
+                                                        <!-- employmentHistory modal button -->
+                                                        <button class="btn btn-info btn-sm"
+                                                        data-toggle="modal" data-target="#employmentHistoryModal"> 
+                                                            view employment history
+                                                        </button>
+                                                        <% } %>
+
+                                                        <!-- Employment history Modal -->
+                                                        <div class="modal fade text-left" id="employmentHistoryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
+                                                        aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h4 class="modal-title" id="myModalLabel1">Employment history</h4>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <% member.employmentHistory.forEach(item => { %>
+                                                                        <div class="modal-body">
+                                                                            <h6>Organisation name : <%= item.organisationName %> </h6>
+                                                                            <h6>Position held : <%= item.positionHeld %> </h6>
+                                                                            <h6>Duration : <%= `${item.startDate} - ${item.endDate}` %> </h6>
+                                                                            <h6>Responsibilities : <%= item.responsibilities %> </h6>
+                                                                            <hr>
+                                                                        </div>
+                                                                    <% }) %>
+                                                                    
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                                <!-- 6. Industry type -->
+                                                <tr>
+                                                    <td> Industry type </td>
+                                                    <td>
+                                                        <%= member.industryType %>
+                                                    </td>
+                                                </tr>
+
+                                                <!-- 7. Industry category -->
+                                                <tr>
+                                                    <td> Industry category </td>
+                                                    <td>
+                                                        <%= member.industryCategory %>
+                                                    </td>
+                                                </tr>
+
+                                                <!-- 8. registration fee paid -->
+                                                <tr>
+                                                    <td> Registration fee status </td>
+                                                    <td>
+                                                        <span class="badge badge-<%= member.registrationFeePaid === 1 ? 'success' : member.registrationFeePaid === 0 ? 'danger' : member.registrationFeePaid === -1 ? 'warning' : 'warning' %>">
+                                                            <%= member.registrationFeePaid === 1 ? 'Paid | Approved' : member.registrationFeePaid === 0 ? 'Paid | Pending approval' : member.registrationFeePaid === -1 ? 'Paid | Rejected' : 'Unpaid' %>
+                                                        </span>
+                                                    </td>
+                                                </tr>
+
+                                                <!-- 12. Verification status -->
+                                                <tr>
+                                                    <td> Verification status </td>
+                                                    <td>
+                                                        <span class="badge badge-<%= member.hasBeenVerified === 1 ? 'success' : member.hasBeenVerified === 0 ? 'danger' : 'warning' %>">
+                                                            <%= member.hasBeenVerified === 1 ? 'Verified' : member.hasBeenVerified === -1 ? 'Verification rejected' : 'Unverified' %>
+                                                        </span> 
+                                                    </td>
+                                                </tr>
+                                                <!-- 13. Verifier's comment -->
+                                                <tr>
+                                                    <td> Verifier's comment </td>
+                                                    <td> <%= member.verifierComment %> </td>
+                                                </tr>
+                                                <!-- 12. Verification status -->
+                                                <tr>
+                                                    <td> Approval status </td>
+                                                    <td>
+                                                        <span class="badge badge-<%= member.hasBeenApproved === 1 ? 'success' : member.hasBeenApproved === 0 ? 'danger' : 'warning' %>">
+                                                            <%= member.hasBeenApproved === 1 ? 'Verified' : member.hasBeenApproved === -1 ? 'Approval rejected' : 'Unvapproved' %>
+                                                        </span> 
+                                                    </td>
+                                                </tr>
+                                                <!-- 14. Years of post NYSC experience -->
+                                                <tr>
+                                                    <td> Years of post NYSC experience </td>
+                                                    <td> <%= member.yearsOfPostNyscExperience %> </td>
+                                                </tr>
+                                                <!-- 14. Years of treasury experience -->
+                                                <tr>
+                                                    <td> Years of treasury experience </td>
+                                                    <td> <%= member.yearsOfTreasuryExperience %> </td>
+                                                </tr>
+                                                <!-- 14. address -->
+                                                <tr>
+                                                    <td> Address </td>
+                                                    <td> <%= member.address %> </td>
+                                                </tr>
+                                                <!-- 14. state -->
+                                                <tr>
+                                                    <td> State </td>
+                                                    <td> <%= member.state %> </td>
+                                                </tr>
+                                                <!-- Attestation complete -->
+                                                <tr>
+                                                    <td> Attestation complete </td>
+                                                    <td>
+                                                        <span class="badge badge-<%= member.attestationComplete === 1 ? 'success' : member.attestationComplete === -1 ? 'danger' : member.attestationComplete === 0 ? 'warning' : 'warning' %>">
+                                                            <%= member.attestationComplete === 1 ? 'Complete' : member.attestationComplete === -1 ? 'Rejected' : member.attestationComplete === 0 ? 'Pending' : 'Unstarted' %>
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                                <!-- Certification type -->
+                                                <tr>
+                                                    <td> Certification type </td>
+                                                    <td> <%= member.certificationType %> </td>
+                                                </tr>
+                                                <!-- 9. Qualifications -->
+                                                <tr>
+                                                    <td>  Qualifications </td>
+                                                    <td>
+                                                        <% if ( member.employmentHistory.length !== 0 ) { %>
+                                                        <!-- Qualifications modal button -->
+                                                        <button class="btn btn-info btn-sm"
+                                                        data-toggle="modal" data-target="#qualificationsModal"> 
+                                                            View qualifications
+                                                        </button>
+                                                        <% } %>
+
+                                                        <!-- Qualifications Modal -->
+                                                        <div class="modal fade text-left" id="qualificationsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
+                                                        aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h4 class="modal-title" id="myModalLabel1">Qualifications</h4>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <% member.qualifications.forEach(item => { %>
+                                                                        <div class="modal-body">
+                                                                            <h6>Institution name : <%= item.institutionName %> </h6>
+                                                                            <h6>Degree obtained : <%= item.degreeOptained %> </h6>
+                                                                            <h6>from : <%= item.from %> </h6>
+                                                                            <h6>to : <%= item.to %> </h6>
+                                                                            <hr>
+                                                                        </div>
+                                                                    <% }) %>
+                                                                    
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <!-- 5. Treasury certification -->
+                                                <tr>
+                                                    <td> Treasury certification </td>
+                                                    <td>
+                                                        <a class="btn btn-info btn-sm" href="../../treasuryCertificate_uploads/<%= member.treasuryCertification %>" target="_blank">View certificate</a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <!-- Table Content: End -->
+
+
+                                
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+            </section>
+            
+                
+            </div>
+            <!-- #/ container -->
+        </div>
+        <!-- #/ content body -->
+
+        <!-- footer -->
+        <!-- BEGIN: Footer-->
+        <%- include('corp_includes/footer.ejs')%>
+    </div>
+
+    <!-- Common JS -->
+    <script src="new_assets/plugins/common/common.min.js"></script>
+    <!-- Custom script -->
+    <script src="new_assets/js/custom.min.js"></script>
+    <!-- Chartjs chart -->
+    <script src="new_assets/assets/plugins/chartjs/Chart.bundle.js"></script>
+    <!-- Custom dashboard script -->
+    <script src="new_assets/js/dashboard-1.js"></script>
+
+
+    <!-- BEGIN: Scripts-->
+    <%- include('corp_includes/scripts.ejs', {})%>
+    <script src="../app-assets/vendors/js/tables/datatable/datatables.min.js"></script>
+    <script src="../app-assets/js/scripts/pages/material-app.min.js"></script>
+    <script src="../app-assets/js/scripts/tables/material-datatable.min.js"></script>
+
+    
+</body>
+
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>FMDA</title>
+  <!-- Favicon icon -->
+  <link rel="icon" type="image/png" sizes="16x16" href="../../img/fmdalogo.png">
+  <link href="../../new_assets/css/style.css" rel="stylesheet">
+  <link href="../../new_assets/plugins/tables/css/datatable/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <link href="../../new_assets/css/mycss.css" rel="stylesheet">
+  <script src="../../new_assets/js/modernizr-3.6.0.min.js"></script>
+</head>
+
+<body class="v-light vertical-nav fix-header fix-sidebar">
+  <div id="preloader">
+    <div class="loader">
+      <svg class="circular" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" /></svg>
+    </div>
+  </div>
+  <div id="main-wrapper">
+    <!-- header -->
+    <%- include('../includes/sub-sections/dashboard-header.ejs')%>
+    <!-- #/ header -->
+
+    <!-- sidebar -->
+    <%- include('../includes/sub-sections/dashboard-sidebar.ejs', {})%>
+    <!-- #/ sidebar -->
+    <!-- content body -->
+    <div class="content-body">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="" id="horz-layout-colored-controls"> Add A Participant To <%= group.name%> </h2>
+                        <hr>
+                    </div>
+                    <div class="card-content collpase show">
+                        <div class="card-body">
+                            <form id="userForm2"  method="POST" action="/admin/workGroup//view_groupMemberAddPage?id=<%=group.id%>">
+                                <div class="form-body">
+
+                                    <h4 class="form-section" align="center"> Enter New Participant's Details </h4>
+
+                <!-- this doesnt match the inputs i have put in the thing-->
+                                    <div class ="row"> 
+                                        <div class="col-md-6">
+                                            <div class="form-group row col-md-9 mx-auto">
+                                                <label for="contactPersonAddress"> Group Admin ID </label>
+                                                <input id="description" required type="textarea" class="form-control" value="" name="groupid" placeholder="Enter Group Admin ID">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group row col-md-9 mx-auto">
+                                                <label for="contactPersonAddress">  Membership ID </label>
+                                                <input id="groupid" type="textarea" required class="form-control" value="" name="memberUUID" placeholder="Enter Membership ID">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <fieldset class = "form-group">
+                                    <div class = "row">
+                                        <div class="col-md-6">
+                                        <div class="form-group row col-md-9 mx-auto">
+                                            <div>
+                                            <label for="isAdmin">  Is Admin: </label>
+                                            </div>
+                                            <div class = "pl-2">
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="boolean" id="inlineRadio1" value="true">
+                                                    <label class="form-check-label" for="inlineRadio1">True</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="boolean" id="inlineRadio2" value="false">
+                                                    <label class="form-check-label" for="inlineRadio2">False</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>              
+                                    </div>
+                                    </fieldset>
+                            
+                             
+
+                                <!-- Submit button  -->
+                                <div class="row" style="margin-top: 100px;">
+                                    <div class="col-md-12">
+                                        <div class="form-group row col-md-9 mx-5">
+                                            <button id="response2" type="submit" class="btn btn-primary">
+                                                Add participant
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
+                            <!-- Form end  -->
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+      
+    </div>
+    <!-- #/ content body -->
+    <!-- footer -->
+    <%- include('../includes/sub-sections/dashboard-footer.ejs', {})%>   
+    <!-- #/ footer -->
+  </div>
+  <!-- Common JS -->
+  <script src="../../new_assets/plugins/common/common.min.js"></script>
+  <script src="../../new_assets/plugins/tables/js/jquery.dataTables.min.js"></script>
+  <script src="../../new_assets/plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
+  <script src="../../new_assets/plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
+  <!-- Custom script -->
+  <script src="../../new_assets/js/custom.min.js"></script>
+  <!-- Custom dashboard script -->
+  <script src="../../new_assets/js/dashboard-1.js"></script>
+</body>
+
+</html>

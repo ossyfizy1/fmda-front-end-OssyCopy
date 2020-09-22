@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+  <!-- BEGIN: Head-->
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="FMDA dashboard, FMDA Register">
+    <meta name="keywords" content="FMDA dashboard, FMDA Register">
+    <meta name="author" content="fmda">
+    <title>FMDA Register (Individual) </title>
+    <link rel="apple-touch-icon" href="app-assets/images/ico/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="app-assets/images/ico/favicon.png">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i%7CQuicksand:300,400,500,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- BEGIN: Vendor CSS-->
+    <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/material-vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/forms/icheck/icheck.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/forms/icheck/custom.css">
+    <!-- END: Vendor CSS-->
+
+    <!-- BEGIN: Theme CSS-->
+    <link rel="stylesheet" type="text/css" href="app-assets/css/material.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/components.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/bootstrap-extended.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/material-extended.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/material-colors.min.css">
+    <!-- END: Theme CSS-->
+
+    <!-- BEGIN: Page CSS-->
+    <link rel="stylesheet" type="text/css" href="app-assets/css/core/menu/menu-types/material-vertical-content-menu.min.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/pages/login-register.min.css">
+    <!-- END: Page CSS-->
+
+    <!-- BEGIN: Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <!-- END: Custom CSS-->
+
+
+    <!-- new style added -->
+  <!-- <link rel="stylesheet" type="text/css" href="../new_assets/scss/login.min.css"> -->
+  <link rel="stylesheet" type="text/css" href="../new_assets/plugins/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="../new_assets/icons/font-awesome/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
+    
+
+  </head>
+  <!-- END: Head-->
+
+  <!-- BEGIN: Body-->
+  <body class="vertical-layout vertical-content-menu material-vertical-layout material-layout 1-column  bg-full-screen-image" data-open="click" data-menu="vertical-content-menu" data-col="1-column">
+    <!-- BEGIN: Content-->
+    <div class="app-content content">
+      <div class="content-header row">
+      </div>
+      <div class="content-wrapper">
+        <div class="content-body">
+<section class="flexbox-container">
+    <div class="col-12 d-flex align-items-center justify-content-center">
+        <div class="col-lg-12 col-md-8 col-10 box-shadow-2 p-0">
+            <div class="card border-grey border-lighten-3 px-1 py-1 m-0">
+                <div class="card-header border-0 pb-0">
+                    <div class="card-title text-center">
+                        <img src="app-assets/images/logo/register.png" alt="branding logo">
+                    </div>
+                </div>
+                <div class="card-content">
+
+                    <p class="card-subtitle line-on-side text-muted text-center font-small-3 mx-2 my-1"><span>Confirmatory Update</span></p>
+                    <div class="card-body">
+
+                        <div class="col-md-12">
+
+                        
+                        <form action="/confirmatory_update" method="post" class="form-horizontal" enctype="multipart/form-data">
+                            <div class="col-md-12 form-group position-relative">
+                                <select required name="memberType" id="memberType" class="form-control">
+                                    <option value="">Member Type:</option>
+                                    <% 
+                                        var mType = memberTypes
+                                        for(i = 0; i < mType.length; i++)
+                                            {
+                                    %>
+                                    <option value="<%= mType[i].type %>"><%= mType[i].type %></option>
+                                    <% 
+                                            } 
+                                    %> 
+                                </select>
+                            </div>
+                            <div class="col-md-12 form-group position-relative">
+                                <!--<select required name="certificationType" id="certificationType" class="form-control">-->
+                                    <!--<option value="">Certification Type:</option>-->
+                                    <% 
+                                        // var tType = treasureCertificationType
+                                        // for(i = 0; i < tType.length; i++)
+                                        //     {
+                                    %>
+                                    <!--<option value="<%= //tType[i].name %>"><%= //tType[i].name %></option>-->
+                                    <% 
+                                            // } 
+                                    %> 
+                                    <!--</select>-->
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label>Select Your Certification Type(s) & Upload Respective Certificate:</label>
+                                            <hr>
+                                        </div>
+
+                                    <% 
+                                        var tType = treasureCertificationType
+                                        for(i = 0; i < tType.length; i++)
+                                            {
+                                    %>
+                                        <div class="col-md-3">
+                                            <input type="checkbox" name="certificationType" id="certificationType" value="<%= tType[i].name %>" /> <%= tType[i].name %>    
+                                        </div>
+                                    <% 
+                                            } 
+                                    %> 
+                                    </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 form-group position-relative">
+                                    <label>Certification Type 1 (pdf)</label>
+                                    <input name="treasuryCertification" type="file" class="form-control" id="treasuryCertification" placeholder="Treasury Certification">
+                                </div>
+                                
+                                <div class="col-md-3 form-group position-relative">
+                                    <label style="margin-top: 20px;">Certification Type 2 (pdf)</label>
+                                    <input name="treasuryCertification" type="file" class="form-control" id="treasuryCertification" placeholder="Treasury Certification">
+                                </div>
+                                
+                                <div class="col-md-3 form-group position-relative">
+                                    <label style="margin-top: 20px;">Certification Type 3 (pdf)</label>
+                                    <input name="treasuryCertification" type="file" class="form-control" id="treasuryCertification" placeholder="Treasury Certification">
+                                </div>
+                                
+                                <div class="col-md-3 form-group position-relative">
+                                    <label style="margin-top: 20px;">Certification Type 4 (pdf)</label>
+                                    <input name="treasuryCertification" type="file" class="form-control" id="treasuryCertification" placeholder="Treasury Certification">
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <div class="row">
+                                <div class="col-md-12 form-group position-relative">
+                                    <label style="margin-top: 20px;">Comprehensive CV (pdf)</label>
+                                    <input name="treasuryCertification" type="file" class="form-control" id="treasuryCertification" placeholder="Treasury Certification">
+                                </div>
+                            </div>
+                            
+
+                            <fieldset class="form-group position-relative">
+                                <select required name="industryCategory" id="iCType" onchange="industryCat()" class="form-control">
+                                    <option value="">Industry Category:</option>
+                                    <% 
+                                        var iCType = industriesCategory
+                                        for(i = 0; i < iCType.length; i++)
+                                            {
+                                    %>
+                                    <option value="<%= iCType[i].industryName %>"><%= iCType[i].industryName %></option>
+                                    <% 
+                                            } 
+                                    %> 
+                                </select>
+                                
+
+                                <!-- jquery & ajax link -->
+                                <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js "></script>
+
+                                <script>
+                                    function industryCat() 
+                                    {
+
+                                            // upon industry category selection, always empty the dropdown selection with id = "industryTypeDisplay" for industry type dropdown
+                                            $("#industryTypeDisplay").empty();
+
+                                            var mySelection = $("#iCType").val();
+                                            // alert( mySelection + " was clicked");
+
+                                            $.ajax({
+                                                        type: 'POST',
+                                                        url: '/industriesTypesList', 
+                                                        data: {"mySelection" : mySelection}  // This will send the form data to the php page
+                                                    })
+                                                    .done(function(data){
+                                                        
+                                                        // show the response
+                                                        // $('#response').html(data);
+                                                        // alert(data.response);
+
+                                                        var industryTypesGottenPerselection = data.response
+                                                        // alert(industryTypesGottenPerselection);
+                                                        // alert(industryTypesGottenPerselection.length);
+
+                                                        for (let index = 0; index < industryTypesGottenPerselection.length; index++) {
+                                                            const element = industryTypesGottenPerselection[index];
+                                                            // alert(element);
+                                                            
+                                                            $("<option>" + element + "</option>").appendTo("#industryTypeDisplay");
+                                                        }
+                                                        
+                                                    })
+                                                    .fail(function() {
+                                                    
+                                                        // just in case posting your form failed
+                                                        alert( "Posting failed." );
+                                                        
+                                                    });
+
+                                    }
+                                </script>
+                            </fieldset>
+                            <fieldset class="form-group position-relative">
+                                <label>Industry Type:</label>
+                                <select name="industryType" id="industryTypeDisplay" class="form-control">
+                                    <!-- <option value="0">Industry Type:</option>
+                                    <option value="1">fmda</option> -->
+                                    <option id="demo"></option>
+                                </select>
+                            </fieldset>
+                            <div class="form-group position-relative">
+                                <!-- Button trigger modal -->
+                                <button type="submit" class="btn btn-light block btn-lg" data-toggle="modal" data-target="#inlineForm" onclick="validateAllFields()">
+                                    Continue
+                                </button>
+                            </div>
+                            </div>
+                        </form>
+
+                        </div>
+
+
+                        <!-- for the fancy sweet alert box -->
+                        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+                        <!-- validateAllFields onClick function -->
+                        <script>
+                            function validateAllFields() {
+
+                                var memberType = $("#memberType").val();
+                                var certificationType = $("#certificationType").val();
+                                var treasuryCertification = $("#treasuryCertification").val();
+                                var industryCategory = $("#iCType").val();
+                                var industryType = $("#industryTypeDisplay").val();
+
+                                if(memberType == '' || certificationType == '' || treasuryCertification == '' || industryCategory == '' || industryType == ''){
+
+                                    // using sweet alert tutorial at https://sweetalert.js.org/
+                                    // swal(
+                                    //         {
+                                    //             title: "info!",
+                                    //             text: "kindly fill all fields...",
+                                    //             icon: "info",
+                                    //         },
+                                            
+                                    //     );
+
+                                    swal("kindly fill all fields!", {
+                                            buttons: false,
+                                            timer: 2000,  // disappears after 2 seconds
+                                        });
+
+
+                                    
+                                    }
+
+                            }
+                        </script>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+        </div>
+      </div>
+    </div>
+    <!-- END: Content-->
+
+
+    <!-- BEGIN: Vendor JS-->
+    <script src="app-assets/vendors/js/material-vendors.min.js"></script>
+    <!-- BEGIN Vendor JS-->
+
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="app-assets/vendors/js/ui/headroom.min.js"></script>
+    <script src="app-assets/vendors/js/forms/validation/jqBootstrapValidation.js"></script>
+    <script src="app-assets/vendors/js/forms/icheck/icheck.min.js"></script>
+    <!-- END: Page Vendor JS-->
+
+    <!-- BEGIN: Theme JS-->
+    <script src="app-assets/js/core/app-menu.min.js"></script>
+    <script src="app-assets/js/core/app.min.js"></script>
+    <!-- END: Theme JS-->
+
+    <!-- BEGIN: Page JS-->
+    <script src="app-assets/js/scripts/pages/material-app.min.js"></script>
+    <script src="app-assets/js/scripts/forms/form-login-register.min.js"></script>
+    <!-- END: Page JS-->
+
+  </body>
+  <!-- END: Body-->
+</html>

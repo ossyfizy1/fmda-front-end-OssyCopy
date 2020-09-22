@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Financial Market Dealers Association.">
+  <meta name="author" content="Softworks">
+
+  <link rel="stylesheet" type="text/css" href="new_assets/scss/login.min.css">
+  <link rel="stylesheet" type="text/css" href="new_assets/plugins/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="new_assets/icons/font-awesome/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
+
+  <title>Financial Market Dealers Association</title>
+    <!-- Favicon icon -->
+  <link rel="icon" type="image/png" sizes="16x16" href="img/fmdalogo.png">
+</head>
+
+<body>
+
+<div class="container" id="container">
+	<div class="form-container sign-up-container">
+    <form id="my_radio_box" action="" method="post">
+      <div class="card-title text-center">
+        <img src="app-assets/images/logo/register.png" alt="branding logo">
+      </div>
+			<h1>Create Account</h1>
+          <ul class="simple-radio" id="sr1">
+            <li>
+              <input type="radio" name="my_options" value="Individual">
+              <div class="check"><span class="no"></span><span class="yes">&#10003;</span></div><p>Individual</p>
+            </li>
+            <li>
+              <input type="radio" name="my_options" value="Corporate">
+              <div class="check"><span class="no">&nbsp;</span><span class="yes">&#10003;</span></div><p>Corporate</p>
+            </li>
+          </ul>
+      </br>
+      </br>
+
+            
+
+
+
+        </form>        
+	</div>
+	<div class="form-container sign-in-container">
+    <form action="/login" method="POST">
+      <div class="card-title text-center">
+        <img src="app-assets/images/logo/register.png" alt="branding logo">
+      </div>
+			<h1>Sign in</h1>
+			<!-- <div class="social-container">
+				<a href="#" class="social"><i class="fa fa-facebook"></i></a>
+				<a href="#" class="social"><i class="fa fa-google-plus"></i></a>
+				<a href="#" class="social"><i class="fa fa-linkedin"></i></a>
+			</div>
+			<span>or use your account</span> -->
+			<input name="userID" type="text" class="form-control" id="user-name" placeholder="E-mail / Membership-id" required />
+            <input name="password" type="password" class="form-control" id="myInput" placeholder="Enter Password" required />
+			<a href="/passwordReset">Forgot your password?</a>
+            <button type="submit">Login</button>
+        </form>
+
+        <form action="/login" method="POST" class="form-horizontal" novalidate>
+                <fieldset class="form-group position-relative has-icon-left">
+                    <input name="userID" type="text" class="form-control" id="user-name" placeholder="E-mail / Membership-id" required>
+                    <div class="form-control-position">
+                        <i ></i>
+                    </div>
+                </fieldset>
+                <fieldset class="form-group position-relative has-icon-left">
+                    <input name="password" type="password" class="form-control" id="myInput" placeholder="Enter Password" required>
+                    <input type="checkbox" onclick="showPassword()"> Show Password
+                    <div class="form-control-position">
+                        <i ></i>
+                    </div>
+                </fieldset>
+                <div class="form-group row">
+                    <div class="col-sm-6 col-12 text-center text-sm-left pr-0">
+                        <fieldset>
+                            <!-- <input type="checkbox" id="remember-me" class="chk-remember">
+                            <label for="remember-me"> Remember Me</label> -->
+                        </fieldset>
+                    </div>
+                    <div class="col-sm-6 col-12 float-sm-left text-center text-sm-right"><a href="/passwordReset" class="card-link">Forgot Password?</a></div>
+                </div>
+                <button type="submit" class="btn btn-outline-dark btn-block">Login</button>
+
+                <!-- to show password -->
+                <script>
+                    function showPassword() {
+                        var x = document.getElementById("myInput");
+                        if (x.type === "password") {
+                        x.type = "text";
+                        } else {
+                        x.type = "password";
+                        }
+                    }
+                </script>
+        </form>
+	</div>
+	<div class="overlay-container">
+		<div class="overlay">
+			<div class="overlay-panel overlay-left">
+        <div class="card-title text-center">
+          <img src="app-assets/images/logo/register.png" alt="branding logo">
+        </div>
+				<h1>Welcome Back!</h1>
+				<p>To keep connected with us please login with your personal info</p>
+				<button class="ghost" id="signIn">Sign In</button>
+			</div>
+			<div class="overlay-panel overlay-right">
+				<h1>FMDA Membership Portal!</h1>
+				<p>Enter your personal details and start your journey with us.</p>
+				<button class="ghost" id="signUp">Sign Up</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+  
+  <script src="new_assets/js/mycustom.js"></script>
+
+
+
+</body>
+<!-- <script>
+  // similar behavior as an HTTP redirect
+  //window.location.replace("template-vertical-nav/index.html");
+</script> -->
+
+</html>

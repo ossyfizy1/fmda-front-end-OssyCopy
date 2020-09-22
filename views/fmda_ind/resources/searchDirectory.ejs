@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+
+  <!-- BEGIN: Head-->
+  <%- include('../ind_includes/head.ejs')%>
+  <!-- END: Head-->
+
+    <!-- BEGIN: Body-->
+
+    <body class="vertical-layout vertical-content-menu material-vertical-layout material-layout 2-columns   fixed-navbar" data-open="click" data-menu="vertical-content-menu" data-col="2-columns">
+
+        <!-- BEGIN: Header-->
+        <%- include('../ind_includes/header.ejs')%>
+            <!-- END: Header-->
+
+            <!-- BEGIN: Content-->
+            <div class="app-content content">
+                <div class="content-header row">
+                </div>
+                <div class="content-wrapper">
+
+                    <!-- BEGIN: Main Menu-->
+                    <%- include('../ind_includes/sidebar.ejs')%>
+                        <!-- END: Main Menu-->
+
+                        <div class="content-body">
+
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card">
+                    
+                                        <div class="card-content collpase show">
+                                            <div class="card-body">
+                                                <form id="userForm" method="POST" action="/ind_member_directories">
+                                                    <div class="form-body">
+                    
+                                                        <h2 class="form-section" align="center">Search For Members</h2>
+                                                        
+                                                        <div class = "row">
+                                                            <div class="col-md-6">
+                                                                <div class="form-group row col-md-9 mx-auto">
+                                                                    <label for="organisationName1">Enter ID</label>
+                                                                    <input type="text" id="id" required class="form-control"  name="id" placeholder="Enter ID" required>
+                                                                </div>
+                                                            </div>
+                    
+                                                            
+                                                        </div>
+                                                        
+                                                        <!-- Submit button  -->
+                                                        <div class="row" style="margin-top: 50px;">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group row col-md-9 mx-5">
+                                                                    <button id="response2" class="btn btn-primary">
+                                                                        Search For Member
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                    
+                                                </form>
+                                                <!-- Form end  -->
+
+                                                
+                    
+                    
+                                            </div>
+
+
+
+                    
+                    
+                                        </div>
+                                    </div>
+
+
+
+
+                                </div>
+                            </div>
+                </div>
+            </div>
+            </div>
+            <!-- END: Content-->
+
+            <!-- BEGIN: Footer-->
+            <%- include('../ind_includes/footer.ejs')%>
+                <!-- END: Footer-->
+
+                <!-- BEGIN: Scripts -->
+                <%- include('../ind_includes/scripts.ejs')%>
+                    <!-- END: Scripts -->
+
+    </body>
+    <!-- END: Body-->
+
+</html>

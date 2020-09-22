@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- BEGIN: Head-->
+<%- include('corp_includes/head.ejs')%>
+
+<body class="v-light vertical-nav fix-header fix-sidebar">
+    <div id="preloader">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10"/></svg>
+        </div>
+    </div>
+    <div id="main-wrapper">
+        <!-- header -->
+        <%- include('corp_includes/header.ejs')%>
+        <!-- #/ header -->
+        <!-- sidebar -->
+        <%- include('corp_includes/sidebar.ejs')%>
+        <!-- #/ sidebar -->
+        <!-- content body -->
+        <div class="content-body">
+            <div class="container-fluid">
+                <div class="row page-titles">
+                    <div class="col p-0">
+
+
+                        <%= //JSON.stringify(getDashBoardFields.resourcesDirectories.lookupMemberDirectories) %> 
+
+                        <%= JSON.stringify(getDashBoardFields.memberInvoices) %> 
+
+                        <!-- <h1 class="welcome-text-heading">Hello, <span>Welcome</span></h1> -->
+                        <!-- <h5 class="welcome-text-subheading">Here are all Your Upcoming Events </h5> -->
+                    </div>
+                    <div class="col p-0">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a>
+                            </li>
+                            <li class="breadcrumb-item active">Dashboard</li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="text-center m-t-10"><i class="fa fa-bookmark-o f-s-50 text-primary"></i>
+                                    <h2 class="m-t-15 m-b-0"> Resources Directories</h2>
+                                    <p class="f-s-12"><%= getDashBoardFields.number_of_resourcesDirectories %> </p><a href="/corp_member_directories" class="btn btn-primary btn-flat p-l-30 p-r-30 m-t-5 m-b-10">View now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="text-center m-t-10"><i class="fa fa-money f-s-50 text-primary"></i>
+                                    <h2 class="m-t-15 m-b-0">&#8358;<%= getDashBoardFields.get_memberShipRenewalFeeInvoices.toLocaleString() %> </h2>
+                                    <p class="f-s-12">Upcoming Membership Fee! (Total)</p><a href="/corp_pending_payment" class="btn btn-primary btn-flat p-l-30 p-r-30 m-t-5 m-b-10">Pay Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="text-center m-t-10"><i class="fa fa-money f-s-50 text-primary"></i>
+                                    <h2 class="m-t-15 m-b-0">&#8358;<%= getDashBoardFields.the_get_EventUnpaidInvoices.toLocaleString() %> </h2>
+                                    <p class="f-s-12">Upcoming Event Fee! (Total)</p><a href="/corp_pending_payment" class="btn btn-primary btn-flat p-l-30 p-r-30 m-t-5 m-b-10">Pay Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="text-center m-t-10"><i class="icon-user f-s-50 text-primary"></i>
+                                    <h2 class="m-t-15 m-b-0"><%=getDashBoardFields.corp_member_list%>  Staff members</h2>
+                                    <p class="f-s-12">Currently active</p><a href="/corp_member_list" class="btn btn-primary btn-flat p-l-30 p-r-30 m-t-5 m-b-10">Add more</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="row page-titles">
+                    <div class="col p-0 m-t-20">
+                        <h1 class="welcome-text-heading">Featured Resource Directories</h1>
+                        <h5 class="welcome-text-subheading">Here are all Your Resource Directories </h5>
+                    </div>
+                </div> -->
+
+                <hr>
+                
+                <div class="row page-titles">
+                    <div class="col p-0 m-t-20">
+                        <h1 class="welcome-text-heading">Featured Events</h1>
+                        <h5 class="welcome-text-subheading">Here are all Your Upcoming Events </h5>
+                    </div>
+                </div>
+                <div class="row">
+                   <% getDashBoardFields.upcomingEvents.upcomingEvents.forEach(element => { %>
+                  <div class="col-lg-4">
+                      <div class="card">
+                          <div class="card-body p-0">
+                              <a href="#">
+                                  <div class="card-bg-img-1">
+                                      <% if (element.images[0]) { %>
+                                      <img src="<%=element.images[0]%>" width="100%" height="150px" />
+                                      <% } %>
+                                      <div class="card-img-overlay dark-overlay-5 text-white">
+                                          <div class="position-absolute left-20 bottom-20"><span class="label label-danger label-flat m-r-5">New</span><span class="label label-primary label-flat">Fee Type: <%=element.type%> </span>
+                                              <h4 class="text-white m-t-20 m-b-10"> <%=element.description%> </h4>
+                                              <div><span class="f-s-16" style="color: white;"> &#128197;<%=Date(element.startDate)%></span> <span class="p-l-10 p-r-10">|</span> <span class="f-s-16"><a href="/corp_event_details?eventId=<%=element.id%>&type=<%=element.type%>" class="btn btn-light">More Details</a></span>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </a>
+                          </div>
+                      </div>
+                  </div>
+                  <%  }); %> 
+                </div>
+                
+            </div>
+            <!-- #/ container -->
+        </div>
+        <!-- #/ content body -->
+
+        <!-- footer -->
+        <!-- BEGIN: Footer-->
+        <%- include('corp_includes/footer.ejs')%>
+    </div>
+
+    <!-- Common JS -->
+    <script src="new_assets/plugins/common/common.min.js"></script>
+    <!-- Custom script -->
+    <script src="new_assets/js/custom.min.js"></script>
+    <!-- Chartjs chart -->
+    <script src="new_assets/assets/plugins/chartjs/Chart.bundle.js"></script>
+    <!-- Custom dashboard script -->
+    <script src="new_assets/js/dashboard-1.js"></script>
+
+    <!-- BEGIN: Scripts -->
+    <%- include('corp_includes/scripts.ejs')%>
+    
+</body>
+
+</html>

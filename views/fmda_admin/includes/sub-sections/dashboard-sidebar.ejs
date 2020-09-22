@@ -1,0 +1,220 @@
+<div class="nk-sidebar">
+    <div class="nk-nav-scroll">
+        <ul class="metismenu" id="menu">
+            <li class="nav-label">Admin Section</li>
+
+            <li><a href="/admin/dashboard"><i class="mdi mdi-view-dashboard"></i> <span class="nav-text">Dashboard</span></a></li>
+
+            <% if(capabilityIds.includes(1) || capabilityIds.includes(2))
+                {
+            %>
+            <li><a class="has-arrow" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-settings"></i> <span class="nav-text">Admin</span></a>
+                <ul aria-expanded="false">
+                    <% if(capabilityIds.includes(1))
+                    {
+                    %>
+                    <li><a href="/admin/create_admin">Create New Admin</a>
+                    </li>
+                    <% 
+                    }
+                    %>
+
+                    <% if(capabilityIds.includes(2))
+                    {
+                    %>
+                    <li><a href="/admin/manage_admin">Manage Admins</a>
+                    </li>
+                    <% 
+                    }
+                    %>
+                </ul>
+            </li>
+            <% 
+                }
+            %>
+
+
+            <% if( capabilityIds.includes(3) || capabilityIds.includes(4)  || capabilityIds.includes(5) === true )
+                {
+            %>
+            <li><a class="has-arrow" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-group"></i> <span class="nav-text">Corporate Members</span></a>
+                <ul aria-expanded="false">
+                    <% if(capabilityIds.includes(3)) { %>
+                    <li><a href="/admin/corporate_member/membership_requests">Corporate Request(s)</a></li>
+                    <%}%>
+                    <% if(capabilityIds.includes(4)) { %>
+                    <li><a href="/admin/corporate_member/verification_request">Verify Corp. Letters</a></li>
+                    <%}%>
+                    <% if(capabilityIds.includes(5)) { %>
+                    <li><a href="/admin/corporate_member/approval_request">Approve Member</a></li>
+                    <%}%>
+                    <% if(capabilityIds.includes(5)) { %>
+                    <li><a href="/admin/corporate_member/approved_members">Manage Members</a></li>
+                    <%}%>
+                </ul>
+            </li>
+            <% 
+                }
+            %>
+
+
+            <% if(capabilityIds.includes(6) || capabilityIds.includes(7) || capabilityIds.includes(23))
+                {
+            %>
+            <li><a class="has-arrow" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account"></i> <span class="nav-text">Individual Members</span></a>
+                <ul aria-expanded="false">
+                    <% if(capabilityIds.includes(23)) { %>
+                    <li><a href="/admin/individual_member/membership_request_list">Membership Requests</a></li>
+                    <%}%>
+                    <% if(capabilityIds.includes(6)) { %>
+                    <li><a href="/admin/individual_member/verification_request">Verify Members</a></li>
+                    <%}%>
+                    <% if(capabilityIds.includes(7)) { %>
+                    <li><a href="/admin/individual_member/approved_members">Manage Members</a></li>
+                    <%}%>
+                </ul>
+            </li>
+            <% 
+                }
+            %>
+
+
+
+            <% if(capabilityIds.includes(8) || capabilityIds.includes(9)  || capabilityIds.includes(10)  || capabilityIds.includes(11))
+                {
+            %>
+            <li><a class="has-arrow" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-cash"></i> <span class="nav-text">Payments</span></a>
+                <ul aria-expanded="false">
+                    <% if(capabilityIds.includes(8)) { %>
+                    <li><a href="/admin/payments/all">All Payments</a></li>
+                    <%}%>
+                    <% if(capabilityIds.includes(9)) { %>
+                    <li><a href="/admin/payments/unprocessed">Unprocessed Payments</a></li>
+                    <%}%>
+                    <% if(capabilityIds.includes(10)) { %>
+                    <li><a href="/admin/payments/approved">Approve Payments</a> </li>
+                    <%}%>
+                    <% if(capabilityIds.includes(11)) { %>
+                    <li><a href="/admin/payments/declined">Declined Payments</a></li>
+                    <%}%>
+                </ul>
+            </li>
+            <% 
+                }
+            %>
+
+
+            <% if(capabilityIds.includes(12))
+                {
+            %>
+            <li><a href="/admin/departments/manage"><i class="mdi mdi-account-multiple"></i><span class="nav-text">Departments</span></a></li>
+            <% 
+                }
+            %>
+
+
+            <% if(capabilityIds.includes(13) || capabilityIds.includes(14))
+                {
+            %>
+            <li><a class="has-arrow" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-multiple"></i> <span class="nav-text">Role Management</span></a>
+                <ul aria-expanded="false">
+                    <% if(capabilityIds.includes(13)) { %>
+                    <li><a href="/admin/roles/manage_roles">Manage Roles</a></li>
+                    <%}%>
+                    <% if(capabilityIds.includes(14)) { %>
+                    <li><a href="/admin/capabilities/manage_capabilities">Manage Capabilities</a></li>
+                    <%}%>
+                </ul>
+            </li>
+            <% 
+                }
+            %>
+
+
+            <% if(capabilityIds.includes(15) || capabilityIds.includes(16)) 
+                { 
+            %>
+            <li><a class="has-arrow" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-bank"></i> <span class="nav-text">Bank Acc Management</span></a>
+                <ul aria-expanded="false">
+                    <% if(capabilityIds.includes(16)) { %>
+                    <li><a href="/admin/bank_accounts/add">Create Bank Account</a></li>
+                    <%}%>
+                    <% if(capabilityIds.includes(1)) { %>
+                    <!--<li><a href="/bank_accounts/manage">Manage Bank Accounts</a></li>-->
+                    <%}%>
+                </ul>
+            </li>
+            <% 
+                }
+            %>
+
+
+            <% if(capabilityIds.includes(1) || capabilityIds.includes(1)) { %>
+            <li><a class="has-arrow" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-calendar-check"></i> <span class="nav-text">Events</span></a>
+                <ul aria-expanded="false">
+                    <% if(capabilityIds.includes(16)) { %>
+                    <li><a href="/admin/events/create">Create Event</a></li>
+                    <%}%>
+                    <% if(capabilityIds.includes(19)) { %>
+                    <li><a href="/admin/events/manage">All Events</a></li>
+                    <%}%>
+                </ul>
+            </li>
+            <% 
+                }
+            %>
+
+
+            <% if(capabilityIds.includes(1) || capabilityIds.includes(20)) { %>
+            <li><a class="has-arrow" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-cash"></i> <span class="nav-text">Dealer Management</span></a>
+                <ul aria-expanded="false">
+                    <% if(capabilityIds.includes(20)) { %>
+                    <li><a href="/admin/dealers/newDealers">New Dealer Request</a></li>
+                    <%}%>
+                    <% if(capabilityIds.includes(21)) { %>
+                    <li><a href="/admin/dealers/dealerList">Dealer List</a></li>
+                    <%}%>
+                </ul>
+            </li>
+            <% 
+                }
+            %>
+
+
+            <% if(capabilityIds.includes(24)) { %>
+            <li><a class="has-arrow" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-cash"></i> <span class="nav-text">Work Groups</span></a>
+                <ul aria-expanded="false">
+                    <% if(capabilityIds.includes(24)) { %>
+                    <li><a href="/admin/workGroup/create_work_group">Create Work Group</a></li>
+                    <%}%>
+                    <% if(capabilityIds.includes(24)) { %>
+                    <li><a href="/admin/workGroup/add_member_to_work_group">Manage Work Group</a></li>
+                    <%}%>
+                    <% if(capabilityIds.includes(24)) { %>
+                    <li><a href="/admin/workGroup/lookup_member_work_group">Search Member Work Group</a></li>
+                    <%}%>
+                </ul>
+            </li>
+            <% 
+                }
+            %>
+
+
+            <% if(capabilityIds.includes(25)) { %>
+            <li><a href="/admin/generateInvoice/annualInvoice"><i class="mdi mdi-widgets"></i> <span class="nav-text">Generate Annual Invoice</span></a></li>
+            <%}%>
+
+
+            <% if(capabilityIds.includes(26)) { %>
+            <li><a href="/admin/resource_management/view_resource_directories"><i class="mdi mdi-folder"></i> <span class="nav-text">Resource Directories</span></a></li>
+            <%}%>
+
+
+            <li><a href="/admin/individual_member/ind_bulk_upload"><i class="mdi mdi-file"></i><span class="nav-text">Individual Bulk Upload</span></a></li>
+            
+            
+
+        </ul>
+    </div>
+    <!-- #/ nk nav scroll -->
+</div>
